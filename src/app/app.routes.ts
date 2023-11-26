@@ -6,5 +6,6 @@ export const routes: Routes = [
         path : '',
         component : InicioComponent,
         title : 'Inicio'
-    }
+    },
+    // Empezar a poner vuestros path aqui abajo:
 ];
