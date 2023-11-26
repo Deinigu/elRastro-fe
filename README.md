@@ -1,6 +1,6 @@
 # elRastro
 ## Descripción
-Aplicación web de compraventa de productos mediante subasta para la asignatura 'Ingeniería Web', impartida en el cuarto curso de la carrera Ingeniería del Software en la Universidad de Málaga. Frontend en proceso de realización usando la tecnología Angular
+Aplicación web de compraventa de productos mediante subasta para la asignatura 'Ingeniería Web', impartida en el cuarto curso de la carrera Ingeniería del Software en la Universidad de Málaga. Frontend en proceso de realización usando la tecnología Angular.
 ## Grupo A4
 - Calvo Díaz, Fernando
 - Colbert Eastgate, Lucas
