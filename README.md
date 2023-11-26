@@ -1,6 +1,12 @@
-# ElRastroFe
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.3.
+# elRastro
+## Descripción
+Aplicación web de compraventa de productos mediante subasta para la asignatura 'Ingeniería Web', impartida en el cuarto curso de la carrera Ingeniería del Software en la Universidad de Málaga. Frontend en proceso de realización usando la tecnología Angular
+## Grupo A4
+- Calvo Díaz, Fernando
+- Colbert Eastgate, Lucas
+- López Reduello, Diego
+- Moya Castillo, Miguel
+- Sánchez Ibáñez, Alba
 
 ## Development server
 
