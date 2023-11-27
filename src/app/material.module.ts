@@ -32,6 +32,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {LayoutModule} from '@angular/cdk/layout';
 
 const modules: any[] = [
   CommonModule,
@@ -65,7 +67,9 @@ const modules: any[] = [
   MatChipsModule,
   MatBadgeModule,
   MatAutocompleteModule,
-  MatButtonToggleModule
+  MatButtonToggleModule,
+  MatGridListModule,
+  LayoutModule,
 ]
 
 @NgModule({
