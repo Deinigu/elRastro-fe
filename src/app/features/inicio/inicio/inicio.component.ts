@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../../../material.module';
+import { ProductService } from '../../../services/product-service.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-inicio',
@@ -8,9 +10,21 @@ import { MaterialModule } from '../../../material.module';
   imports: [CommonModule, MaterialModule],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.css',
+  providers: [ProductService]
 })
-export class InicioComponent {
-  productos = [
+export class InicioComponent implements OnInit{
+
+  constructor(private http: HttpClient, private productService: ProductService){}
+
+  productos : any;
+
+  ngOnInit(): void {
+    this.productService.getAllProducts().subscribe(data => {
+      this.productos = data;
+      console.log(this.productos);
+    })
+  }
+  /*productos = [
     {
       Nombre: 'manolo',
       descripcion: 'soy manolo',
@@ -26,5 +40,5 @@ export class InicioComponent {
       descripcion: 'soy sapo',
       fotoURL: 'https://i.imgur.com/yz6eVNk.jpeg',
     },
-  ];
+  ];*/
 }
