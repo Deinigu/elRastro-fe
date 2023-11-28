@@ -10,5 +10,4 @@ import { MaterialModule } from '../../../material.module';
   styleUrl: './inicio.component.css'
 })
 export class InicioComponent {
-
 }
