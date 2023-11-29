@@ -18,7 +18,7 @@
     <h1>Productos para pujar:</h1>
     <div class="row">
         <!-- Product 1 -->
-        <div class="col-lg-4 col-md-6" *ngFor="let product of productos, let i = index">
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch" *ngFor="let product of productos, let i = index">
             <div class="product zoom-on-hover">
                 <img src={{product.fotoURL}}
                     alt="Product Image">

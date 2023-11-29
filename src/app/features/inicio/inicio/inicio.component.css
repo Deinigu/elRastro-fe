@@ -6,16 +6,26 @@
   padding: 10px;
   margin-bottom: 20px;
   border-radius: 5px;
+  box-shadow: 2px 2px 2px 2px #FFD9A9;
 }
+
 .product img {
   width: 100%;
   height: 300px;
   object-fit: cover;
+  
 }
 
 .product h3 {
     margin-top: 10px;
     text-align: center;
+    font-size: x-large;
+    color: #C54409;
+  
+}
+
+.product p {
+  color: #441506;
 }
 .zoom-on-hover {
     transition: transform 0.5s ease;
@@ -23,4 +33,9 @@
 
 .zoom-on-hover:hover {
     transform: scale(1.07); 
+}
+
+.h1-custom {
+  font-size: xx-large;
+
 }
