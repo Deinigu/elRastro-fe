@@ -12,11 +12,11 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
   styleUrl: './inicio.component.css',
   providers: [ProductService]
 })
-export class InicioComponent implements OnInit{
+export class InicioComponent implements OnInit {
 
-  productos : any[] = [];
+  productos: any[] = [];
 
-  constructor(private http: HttpClient, private productService: ProductService){}
+  constructor(private http: HttpClient, private productService: ProductService) { }
 
 
   ngOnInit(): void {
@@ -25,21 +25,4 @@ export class InicioComponent implements OnInit{
       console.log(this.productos);
     })
   }
-  /*productos = [
-    {
-      Nombre: 'manolo',
-      descripcion: 'soy manolo',
-      fotoURL: 'https://i.imgur.com/PIOafIe.jpeg',
-    },
-    {
-      Nombre: 'paco',
-      descripcion: 'soy paco',
-      fotoURL: 'https://i.imgur.com/EnNBJtR.jpeg',
-    },
-    {
-      Nombre: 'sapo',
-      descripcion: 'soy sapo',
-      fotoURL: 'https://i.imgur.com/yz6eVNk.jpeg',
-    },
-  ];*/
 }

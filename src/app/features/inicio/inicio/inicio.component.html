@@ -1,6 +1,6 @@
 <div class="container">
     <div class="text-center">
-        <h1 class="h1-title"><b>elRastro</b></h1>
+        <h1 class="h1-title"><b>elRastro (maiki esto es temporal no te rayes que vamos a usar tu barra de búsqueda)</b></h1>
     </div>
 </div>
 <div class="container">
@@ -14,14 +14,13 @@
         </form>
     </div>
 </div>
-<div class="container" >
+<div class="container">
     <h1 class="h1-product">Productos</h1>
     <div class="row">
         <!-- Product 1 -->
         <div class="col-lg-4 col-md-6 d-flex align-items-stretch" *ngFor="let product of productos, let i = index">
             <div class="product zoom-on-hover">
-                <img src={{product.fotoURL}}
-                    alt="Product Image">
+                <img src={{product.fotoURL}} alt="Product Image">
                 <h3 class="h3">{{product.Nombre}}</h3>
                 <p>{{product.descripcion}}</p>
             </div>
