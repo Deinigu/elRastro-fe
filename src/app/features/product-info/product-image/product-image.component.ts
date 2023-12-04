@@ -15,9 +15,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProductImageComponent implements OnInit{
   idProducto = "";
-  images = ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkn_De2_tRJfT_qOpxc68YHTRccXcQd9vZBw&usqp=CAU",
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkn_De2_tRJfT_qOpxc68YHTRccXcQd9vZBw&usqp=CAU"
-          ]
+  images = [""];
   constructor(private http: HttpClient, private route: ActivatedRoute, private productService: ProductService){}
 
   ngOnInit(){
@@ -26,6 +24,7 @@ export class ProductImageComponent implements OnInit{
     });
 
     this.productService.getProductInfo(this.idProducto).subscribe(data => {
+      this.images = [data.fotoURL];
     })
   }
 }

@@ -1,13 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
+import { ProductService } from '../../../services/product-service/product.service';
 
 @Component({
   selector: 'app-price',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './price.component.html',
-  styleUrl: './price.component.css'
+  styleUrl: './price.component.css',
+  providers: [ProductService]
 })
-export class PriceComponent {
-  precio = "5.49€";
+export class PriceComponent implements OnInit {
+  precio = "";
+  idProducto = "";
+
+  constructor(private http: HttpClient, private route: ActivatedRoute, private productService: ProductService){}
+
+  ngOnInit(){
+    this.route.params.subscribe(params => {
+      this.idProducto = params['id'];
+    });
+
+    this.productService.getProductInfo(this.idProducto).subscribe(data => {
+      this.precio = data.precio;
+    })
+  }
 }
