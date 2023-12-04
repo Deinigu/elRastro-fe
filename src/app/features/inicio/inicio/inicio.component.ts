@@ -11,19 +11,28 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
   imports: [CommonModule, MaterialModule, HttpClientModule],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.css',
-  providers: [ProductService, PujaService]
+  providers: [ProductService, PujaService],
 })
 export class InicioComponent implements OnInit {
-
   productos: any[] = [];
+  pujas: any[] = [];
 
-  constructor(private http: HttpClient, private productService: ProductService) { }
-
+  constructor(
+    private http: HttpClient,
+    private productService: ProductService,
+    private pujaService: PujaService
+  ) {}
 
   ngOnInit(): void {
-    this.productService.getAllProducts().subscribe(data => {
+    this.productService.getAllProducts().subscribe((data) => {
       this.productos = data;
-      console.log(this.productos);
-    })
+
+      // Loop through each product to fetch related data
+      this.productos.forEach((product) => {
+        this.pujaService.getUltimaPuja(product._id).subscribe((pujaData) => {
+          this.productos.push(pujaData);
+        });
+      });
+    });
   }
 }
