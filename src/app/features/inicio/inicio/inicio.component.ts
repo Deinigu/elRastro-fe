@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../../../material.module';
 import { ProductService } from '../../../services/product-service.service';
+import { PujaService } from '../../../services/puja-service.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
@@ -10,7 +11,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
   imports: [CommonModule, MaterialModule, HttpClientModule],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.css',
-  providers: [ProductService]
+  providers: [ProductService, PujaService]
 })
 export class InicioComponent implements OnInit {
 
