@@ -1,6 +1,7 @@
 <div class="container">
     <div class="text-center">
-        <h1 class="h1-title"><b>elRastro (maiki esto es temporal no te rayes que vamos a usar tu barra de búsqueda)</b></h1>
+        <h1 class="h1-title"><b>elRastro (maiki esto es temporal no te rayes que vamos a usar tu barra de búsqueda)</b>
+        </h1>
     </div>
 </div>
 <div class="container">
@@ -23,10 +24,15 @@
                 <img src={{product.fotoURL}} alt="Product Image">
                 <h3 class="h3">{{product.Nombre}}</h3>
                 <p>{{product.descripcion}}</p>
-                <p>{{product.pujaData}}</p>
-                <p>{{product._id}}</p>
+                <p class="precio"> Puja más alta:
+                    @if (product.valor)
+                    { {{product.valor}} €
+                    } @else {
+                    {{product.precio}} €
+                    }
+                </p>
+
             </div>
         </div>
     </div>
-    
 </div>

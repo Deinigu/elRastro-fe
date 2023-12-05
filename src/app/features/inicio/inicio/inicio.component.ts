@@ -4,6 +4,7 @@ import { MaterialModule } from '../../../material.module';
 import { ProductService } from '../../../services/product-service.service';
 import { PujaService } from '../../../services/puja-service.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Observable, forkJoin, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-inicio',
@@ -25,12 +26,13 @@ export class InicioComponent implements OnInit {
 
   ngOnInit(): void {
     this.productService.getAllProducts().subscribe((data) => {
-      this.productos = data;
+      this.productos = data; // Assuming this.productos is where you store the received products
 
-      // Loop through each product to fetch related data
-      this.productos.forEach((product) => {
-        this.pujaService.getUltimaPuja(product._id).subscribe((pujaData) => {
-          this.productos.push(pujaData);
+      this.productos.forEach((product, index) => {
+        this.pujaService.getUltimaPuja(product._id).subscribe((puja) => {
+          if (puja) {
+            this.productos[index].valor = puja.valor;
+          }
         });
       });
     });

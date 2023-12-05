@@ -3,14 +3,16 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PujaService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http:HttpClient) {}
-
-  getUltimaPuja(idPuja: string): Observable<any> {
-    const url = 'http://localhost:8002/api/pujas/ultima_puja/producto/${idProducto}';
+  getUltimaPuja(idProducto: string): Observable<any> {
+    const url =
+      'http://localhost:8002/api/pujas/ultima_puja/producto/' +
+      idProducto +
+      '/';
     return this.http.get<any>(url);
   }
 }
