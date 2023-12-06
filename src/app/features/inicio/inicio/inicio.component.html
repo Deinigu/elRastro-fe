@@ -18,22 +18,26 @@
 <div class="container">
     <h1 class="h1-product">Productos</h1>
     <div class="row">
-        <!-- Product 1 -->
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch" *ngFor="let product of productos, let i = index">
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch" *ngFor="let product of productos; let i = index">
             <div class="product zoom-on-hover">
-                <img src={{product.fotoURL}} alt="Product Image">
-                <h3 class="h3">{{product.Nombre}}</h3>
-                <p>{{product.descripcion}}</p>
-                <div class="precio">
-                    <p> Puja más alta:
-                        @if (product.valor)
-                        { {{product.valor}} €
-                        } @else {
-                        {{product.precio}} €
-                        }
-                    </p>
+                <img [src]="product.fotoURL" alt="Product Image">
+                <h3 class="h3">{{ product.Nombre }}</h3>
+                <p>{{ product.descripcion }}</p>
+                <div class="d-flex flex-column align-items-center">
+                    <div class="precio">
+                        <h4>
+                            <ng-container *ngIf="product.valor">
+                                {{ product.valor }} €
+                            </ng-container>
+                            <ng-container *ngIf="!product.valor">
+                                {{ product.precio }} €
+                            </ng-container>
+                        </h4>
+                    </div>
+                    <div class="mb-3">
+                        <button class="btn boton-pujar">Pujar</button>
+                    </div>
                 </div>
-
             </div>
         </div>
     </div>
