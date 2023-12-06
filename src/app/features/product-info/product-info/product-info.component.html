@@ -1,45 +1,61 @@
-<br>
-<div class="container text-center">
-    <div class="row">
-      <div class="col">
-        <div class="container rounded-2 border"><!--Imagenes-->
-            <app-product-image data-bs-theme="dark"></app-product-image>
-        </div>
+<style>
+    .custom-vertical-center {
+      display: flex;
+      align-items: center;
+    }
+  
+    .custom-align-items-start {
+      align-items: flex-start;
+    }
+  
+    .custom-align-items-end {
+      align-items: flex-end;
+    }
+  </style>
+  
+  <br>
+  <div class="container text-center h-100">
+      <div class="row h-100">
+          <div class="col custom-vertical-center">
+              <div class="container rounded-2 border"><!--Imagenes-->
+                  <app-product-image data-bs-theme="dark"></app-product-image>
+              </div>
+          </div>
+          <div class="col">
+              <div class="row custom-vertical-center">
+                  <div class="col custom-align-items-start">
+                      <div class="container"><!--Titulo y descripcion-->
+                          <app-product-details></app-product-details>
+                      </div>
+                  </div>
+              </div>
+              <hr>
+              <div class="row custom-vertical-center">
+                  <div class="col">
+                      <div class="container"><!--Precio y botón de pagar-->
+                          <app-price></app-price>
+                      </div>
+                  </div>
+              </div>
+              <hr>
+              <div class="row custom-vertical-center">
+                  <div class="col custom-align-items-end">
+                      <div class="container"><!--Mapa-->
+                          <app-map></app-map>
+                      </div>
+                  </div>
+              </div>
+          </div>
       </div>
-      <div class="col">
-        <div class="row">
-            <div class="col">
-                <div class="container align-items-start"><!--Titulo y descripcion-->
-                    <app-product-details></app-product-details>
-                </div>
-            </div>
-        </div>
-        <hr>
-        <div class="row">
-            <div class="col">
-                <div class="container align-items-center"><!--Precio y botón de pagar-->
-                    <app-price></app-price>
-                </div>
-            </div>
-        </div>
-        <hr>
-        <div class="row">
-            <div class="col">
-                <div class="container align-items-end"><!--Mapa-->
-                    <app-map></app-map>
-                </div>
-            </div>
-        </div>
+  </div>
+  <br>
+  <div class="container text-center">
+      <div class="row">
+          <div class="col">
+              <div class="container"><!--Reseñas-->
+                  <a>Reseñas</a>
+              </div>
+          </div>
       </div>
-    </div>
-</div>
-<br>
-<div class="container text-center">
-    <div class="row">
-        <div class="col">
-            <div class="container"><!--Reseñas-->
-                <a>Reseñas</a>
-            </div>
-        </div>
-    </div>
-</div>
+  </div>
+  
