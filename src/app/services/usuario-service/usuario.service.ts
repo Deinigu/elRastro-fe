@@ -13,4 +13,9 @@ export class UsuarioService {
     const url = 'http://localhost:8003/api/coordenadas/'+idUsuario+"/";
     return this.http.get<any>(url);
   }
+
+  getUsuarioInfo(idUsuario: string): Observable<any> {
+    const url = 'http://localhost:8000/api/usuarios/'+idUsuario+"/";
+    return this.http.get<any>(url);
+  }
 }

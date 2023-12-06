@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import * as L from 'leaflet';
@@ -15,7 +15,7 @@ import { ProductService } from '../../../services/product-service/product.servic
   styleUrl: './map.component.css',
   providers: [UsuarioService, ProductService]
 })
-export class MapComponent {
+export class MapComponent implements OnInit{
   idUsuario = "";
   idProducto = "";
   location = {latitude: 0, longitude: 0};
