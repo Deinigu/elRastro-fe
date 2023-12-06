@@ -22,7 +22,11 @@ export class InicioComponent implements OnInit {
     private http: HttpClient,
     private productService: ProductService,
     private pujaService: PujaService
-  ) {}
+  ) { }
+
+  redirectToProduct(productId: any) {
+    window.location.href = `http://localhost:4200/producto/${productId}`;
+  }
 
   ngOnInit(): void {
     this.productService.getAllProducts().subscribe((data) => {
