@@ -24,13 +24,15 @@
                 <img src={{product.fotoURL}} alt="Product Image">
                 <h3 class="h3">{{product.Nombre}}</h3>
                 <p>{{product.descripcion}}</p>
-                <p class="precio"> Puja más alta:
-                    @if (product.valor)
-                    { {{product.valor}} €
-                    } @else {
-                    {{product.precio}} €
-                    }
-                </p>
+                <div class="precio">
+                    <p> Puja más alta:
+                        @if (product.valor)
+                        { {{product.valor}} €
+                        } @else {
+                        {{product.precio}} €
+                        }
+                    </p>
+                </div>
 
             </div>
         </div>

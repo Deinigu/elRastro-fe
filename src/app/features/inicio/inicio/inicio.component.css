@@ -23,6 +23,15 @@
 
 }
 
+.precio {
+  background-color: white;
+}
+
+.precio p{
+  text-align: center;
+  font-size: large;
+}
+
 .product h3 {
   margin-top: 10px;
   text-align: center;
