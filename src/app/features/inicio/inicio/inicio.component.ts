@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../../../material.module';
-import { ProductService } from '../../../services/product-service.service';
-import { PujaService } from '../../../services/puja-service.service';
+import { ProductService } from '../../../services/product-service/product.service';
+import { PujaService } from '../../../services/puja-service/puja-service.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Observable, forkJoin, switchMap } from 'rxjs';
 
