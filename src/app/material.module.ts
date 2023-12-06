@@ -70,6 +70,7 @@ const modules: any[] = [
   MatButtonToggleModule,
   MatGridListModule,
   LayoutModule,
+  MatFormFieldModule
 ]
 
 @NgModule({
