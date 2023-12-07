@@ -1,0 +1,12 @@
+custom-vertical-center {
+    display: flex;
+    align-items: center;
+  }
+
+custom-align-items-start {
+    align-items: flex-start;
+  }
+
+custom-align-items-end {
+    align-items: flex-end;
+  }
