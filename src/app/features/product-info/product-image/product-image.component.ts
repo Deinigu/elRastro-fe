@@ -15,7 +15,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProductImageComponent implements OnInit{
   idProducto = "";
-  images = [""];
+  images: any[] = [];
   constructor(private http: HttpClient, private route: ActivatedRoute, private productService: ProductService){}
 
   ngOnInit(){
@@ -24,7 +24,7 @@ export class ProductImageComponent implements OnInit{
     });
 
     this.productService.getProductInfo(this.idProducto).subscribe(data => {
-      this.images = [data.fotoURL];
+      this.images = data.fotoURL;
     })
   }
 }
