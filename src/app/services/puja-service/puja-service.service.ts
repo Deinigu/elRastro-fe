@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, catchError } from 'rxjs';
+import { Puja } from '../../interfaces/puja';
 
 @Injectable({
   providedIn: 'root',
@@ -14,5 +15,10 @@ export class PujaService {
       idProducto +
       '/';
     return this.http.get<any>(url);
+  }
+
+  createPuja(puja: Puja): Observable<Puja> {
+    const url = 'http://localhost:8002/api/pujas/create/';
+    return this.http.post<Puja>(url, puja);
   }
 }

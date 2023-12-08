@@ -1,0 +1,21 @@
+<br>
+
+<div *ngIf="success" class="alert alert-success" role="alert">
+    {{ successMessage }}
+</div>
+<div *ngIf="error" class="alert alert-danger" role="alert">
+    {{ errorMessage }}
+</div>
+<form #formularioPujas="ngForm" (ngSubmit) = "placeBid(formularioPujas.value)" class="bid-form">
+    <div class="form-group">
+        <label for="bidAmount">Cantidad a pujar:</label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">€</span>
+            </div>
+            <input name="precio" ngModel type="text" class="form-control" placeholder="{{precio}}">
+        </div>
+    </div>
+    <br>
+    <input type="submit" class="btn btn-primary" value="Pujar">
+</form>
