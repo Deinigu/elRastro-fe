@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="http://localhost:4200/">
+      <img src="https://media.discordapp.net/attachments/1156155168610590731/1179135111422296165/icono_elRastro.png?ex=6578ae25&is=65663925&hm=c10cf66adb937740fb9fdeacdf942cacae87709f0907dfd962f7f027b7c047c0&=&format=webp&width=890&height=890" alt="Logo" width="45" height="45" class="d-inline-block align-text-top">
+      <span id="ttl">elRastro</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-between" id="navbarTogglerDemo02">
+      <form class="d-flex mx-auto" id="busqueda" role="search">
+        <input class="form-control me-2" type="search" placeholder="Busca un producto..." aria-label="Search" style="width: 400px;">
+        <button class="btn" type="submit">Buscar</button>
+      </form>
+      
+      @if(mostrarDropdown){
+        <ul class="nav-item dropdown my-auto me-2 btn">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Mi perfil
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#">Mi información</a></li>
+            <li><a class="dropdown-item" href="#">Mis productos</a></li>
+            <li><a class="dropdown-item" href="#">Mis valoraciones</a></li>
+            <li><a class="dropdown-item" href="#">Mis chats</a></li>
+          </ul>
+        </ul>
+      }@else{
+        <button class="btn me-2" id="inicio">Iniciar sesión</button>
+      }
+    </div>
+  </div>
+</nav>
