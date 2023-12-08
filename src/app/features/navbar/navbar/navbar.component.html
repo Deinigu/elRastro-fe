@@ -8,21 +8,22 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-between" id="navbarTogglerDemo02">
-      <form class="d-flex mx-auto" id="busqueda" role="search">
-        <input class="form-control me-2" type="search" placeholder="Busca un producto..." aria-label="Search" style="width: 400px;">
+      <form #formBusca="ngForm" (ngSubmit)="redirectBusqueda(formBusca.value)" class="d-flex mx-auto" id="busqueda" role="search" >
+        <input name="busca" ngModel class="form-control me-2" type="search" placeholder="Busca un producto..." aria-label="Search" style="width: 400px;">
         <button class="btn" type="submit">Buscar</button>
       </form>
       
       @if(mostrarDropdown){
         <ul class="nav-item dropdown my-auto me-2 btn">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Mi perfil
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Hola, {{nombreUsuario}}
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="#">Mi información</a></li>
-            <li><a class="dropdown-item" href="#">Mis productos</a></li>
-            <li><a class="dropdown-item" href="#">Mis valoraciones</a></li>
-            <li><a class="dropdown-item" href="#">Mis chats</a></li>
+            <li><a class="dropdown-item" (click)="numero(1)" href="usuario/{{idUsuario}}">Mi información</a></li>
+            <li><a class="dropdown-item" (click)="numero(2)" href="usuario/{{idUsuario}}">Mis productos</a></li>
+            <li><a class="dropdown-item" (click)="numero(3)" href="usuario/{{idUsuario}}">Mis valoraciones</a></li>
+            <li><a class="dropdown-item" href="usuario/{{idUsuario}}/chats">Mis chats</a></li>
+            <li><a class="dropdown-item"  href="usuario/{{idUsuario}}">Subir un producto</a></li>
           </ul>
         </ul>
       }@else{
@@ -31,3 +32,5 @@
     </div>
   </div>
 </nav>
+
+<br>
