@@ -23,11 +23,11 @@ export class InicioComponent implements OnInit {
     private http: HttpClient,
     private productService: ProductService,
     private pujaService: PujaService,
-    private router : Router
+    private router: Router
   ) { }
 
   redirectToProduct(productId: any) {
-    this.router.navigate(['/producto',productId]);
+    this.router.navigate(['/producto', productId]);
   }
 
   ngOnInit(): void {
