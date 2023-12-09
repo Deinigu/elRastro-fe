@@ -24,6 +24,7 @@ export class InfoVendedorComponent implements OnInit{
   listaConversacionesUsuario: string[] = [];
   listaConversacionesVendedor: string[] = [];
   idConversacion: string = "";
+  redirigiendo = false;
   
 
   constructor(
@@ -55,40 +56,45 @@ export class InfoVendedorComponent implements OnInit{
       productoId: idProducto,
       chats: []
     };
+    this.conversacionService.getConversacionDe(idUsuario, idVendedor).subscribe(c => {
+      this.router.navigate(['/chats', c]);
+      },
+      (error) => {
+        this.redirigiendo = true;
+        this.conversacionService.createConversacion(conversacion).subscribe(
+          (res) => {
+            console.log(res);
+            //ASIGNARLE LA CONVERSACION A USUARIO Y VENDEDOR
+            this.usuarioService.getUsuarioInfo(idUsuario).subscribe(usuario => {
+              this.listaConversacionesUsuario = usuario.listaConver;
+              this.usuarioService.getUsuarioInfo(idVendedor).subscribe(vendedor => {
+                this.conversacionService.getConversacionDe(idUsuario, idVendedor).subscribe(c => {
+                  this.listaConversacionesVendedor = vendedor.listaConver;
+                  this.idConversacion = c;
+                  
+                  this.listaConversacionesVendedor = [...this.listaConversacionesVendedor, this.idConversacion];
+                  this.listaConversacionesUsuario = [...this.listaConversacionesUsuario, this.idConversacion];
     
-    this.conversacionService.createConversacion(conversacion).subscribe(
-      (res) => {
-        console.log(res);
-        //ASIGNARLE LA CONVERSACION A USUARIO Y VENDEDOR
-        this.usuarioService.getUsuarioInfo(idUsuario).subscribe(usuario => {
-          this.listaConversacionesUsuario = usuario.listaConver;
-          this.usuarioService.getUsuarioInfo(idVendedor).subscribe(vendedor => {
-            this.conversacionService.getConversacionDe(idUsuario, idVendedor).subscribe(c => {
-              this.listaConversacionesVendedor = vendedor.listaConver;
-              this.idConversacion = c;
-              
-              this.listaConversacionesVendedor = [...this.listaConversacionesVendedor, this.idConversacion];
-              this.listaConversacionesUsuario = [...this.listaConversacionesUsuario, this.idConversacion];
-
-              usuario.listaConver = usuario.listaConver;
-              vendedor.listaConver = vendedor.listaConver;
-
-              this.usuarioService.editarPerfil(idUsuario, usuario).subscribe(
-                (res) =>{
-                  console.log(res);
-                  this.usuarioService.editarPerfil(idVendedor, vendedor).subscribe(
-                    (res) => {
+                  usuario.listaConver = usuario.listaConver;
+                  vendedor.listaConver = vendedor.listaConver;
+    
+                  this.usuarioService.editarPerfil(idUsuario, usuario).subscribe(
+                    (res) =>{
                       console.log(res);
-                      this.router.navigate(['/chats', this.idConversacion]);
+                      this.usuarioService.editarPerfil(idVendedor, vendedor).subscribe(
+                        (res) => {
+                          console.log(res);
+                          this.router.navigate(['/chats', this.idConversacion]);
+                        }
+                      );
                     }
                   );
-                }
-              );
-            })
-            
-          })
-       })
-    })
+                })
+                
+              })
+           })
+        })
+      });
   }
 
 }
