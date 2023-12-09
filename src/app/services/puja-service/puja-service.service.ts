@@ -22,3 +22,4 @@ export class PujaService {
     return this.http.post<Puja>(url, puja);
   }
 }
+
