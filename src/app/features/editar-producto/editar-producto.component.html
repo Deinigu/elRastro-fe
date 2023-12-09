@@ -1,0 +1,72 @@
+<div *ngIf="producto_en_proceso" class="container mt-4">
+    <div class="mb-3">
+  
+      <div class="alert alert-info mt-2" role="alert">
+        Editando producto...
+      </div>
+    </div>
+  </div>
+  <div *ngIf="producto_creado" class="container mt-4">
+    <div class="mb-3">
+      <div class="alert alert-success mt-2" role="alert">
+        Producto editado con éxito.
+      </div>
+      <div class="btn" (click)="onButtonVolverClick()">Volver</div>
+    </div>
+  </div>
+  <div *ngIf="error_general" class="container mt-4">
+    <div class="mb-3">
+      <div class="alert alert-danger mt-2" role="alert">
+        Hubo un error inesperado. Inténtelo de nuevo.
+      </div>
+      <div class="btn" (click)="onButtonVolverClick()">Volver</div>
+  
+    </div>
+  </div>
+  
+  <div *ngIf="!producto_creado && !error_general"  class="container mt-4">
+    <form (ngSubmit)="onSubmit()">
+      <br>
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre:</label>
+        <input type="text" id="nombre" [(ngModel)]="producto.Nombre" name="nombre" class="form-control" required>
+      </div>
+  
+      <div class="mb-3">
+        <label for="descripcion" class="form-label">Descripción:</label>
+        <textarea id="descripcion" [(ngModel)]="producto.descripcion" name="descripcion" class="form-control"
+          required></textarea>
+      </div>
+  
+      <div class="mb-3">
+        <label for="precio" class="form-label">Precio inicial:</label>
+        <input type="number" id="precio" [(ngModel)]="producto.precio" name="precio" class="form-control" required>
+      </div>
+  
+      <div class="mb-3">
+        <label for="tagsInput" class="form-label">Etiquetas (separadas por comas):</label>
+        <input type="text" id="tagsInput" [(ngModel)]="tagsInput" name="tagsInput" class="form-control" required>
+      </div>
+  
+      <div class="mb-3">
+        <label for="cierre" class="form-label">Fecha de Cierre:</label>
+        <input type="datetime-local" id="cierre" [(ngModel)]="producto.cierre" name="cierre" class="form-control"
+          required>
+      </div>
+  
+      <div *ngIf="error_empty_field" class="alert alert-danger mt-2" role="alert">
+        Hay uno o más campos vacíos.
+      </div>
+      <div *ngIf="error_precio" class="alert alert-danger mt-2" role="alert">
+        El precio no puede ser 0 o negativo.
+      </div>
+      <div *ngIf="error_fotos" class="alert alert-danger mt-2" role="alert">
+        Debe subir al menos una foto.
+      </div>
+      <div *ngIf="error_fecha" class="alert alert-danger mt-2" role="alert">
+        Hay un error en la fecha. Compruebe que la fecha de cierre sea en el futuro.
+      </div>
+  
+      <button type="submit" class="btn mt-3">Enviar</button>
+    </form>
+  </div>
