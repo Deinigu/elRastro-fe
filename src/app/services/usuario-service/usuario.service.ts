@@ -18,4 +18,10 @@ export class UsuarioService {
     const url = 'http://localhost:8000/api/usuarios/'+idUsuario+"/";
     return this.http.get<any>(url);
   }
+  
+   editarPerfil(idUsuario: string, nuevosDatos: any): Observable<any> {
+    const url = "http://localhost:8000/api/usuarios/update/" + idUsuario + "/";
+    return this.http.put(url, nuevosDatos);
+  }
+
 }

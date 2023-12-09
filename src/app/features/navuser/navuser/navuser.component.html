@@ -1,0 +1,128 @@
+ <!------------------- INFORMACIÓN PERSONAL ---------------------------->
+
+
+<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+	<li [ngbNavItem]="1">
+		<button ngbNavLink>Mi información</button>
+		<ng-template ngbNavContent>
+			<div class="card mb-3">
+				<div class="card-header custom-card-header">
+					<h5 class="card-title custom-card-title">Imagen de perfil</h5>
+				  </div>
+				  <div class="card-body">    
+					<div class="profile-image-container rounded-circle border border-3 border-dark" style="width: 400px; height: 400px; overflow: hidden; background-color: #000;">
+					  <!-- Imagen de perfil -->
+					  <img src={{imagen}} alt="Foto de perfil" class="img-fluid rounded-circle" style="width: 100%; height: 100%; object-fit: cover;">
+					</div>   
+					<!-- Cambiar Imagen  -->
+					<button class="btn btn-custom-color">Cambiar imagen</button>
+				  </div>
+			</div>
+
+			<div class="card mb-3">
+				<div class="card-header custom-card-header">
+				  <h5 class="card-title custom-card-title">Mis datos personales</h5>
+				</div>
+				<div class="card-body">	
+				  <!-- Información del usuario -->
+				  <div class="user-info">
+					<p class="card-text"><span class="highlight-text">Usuario:</span> {{ usuario }}</p>
+					<p class="card-text"><span class="highlight-text">Correo:</span> {{correo}}</p>
+					<p class="card-text"><span class="highlight-text">Teléfono:</span> {{telefono}}</p>
+					<p class="card-text"><span class="highlight-text">Ubicación:</span> {{vivienda}}</p>
+				   </div>
+				  <br>
+				  <!-- Botón de editar -->
+				  <button class="btn btn-custom-color" (click)="editarPerfil()">Editar Perfil</button>
+				</div>
+			  </div>
+			  
+		</ng-template>
+	</li>
+
+ <!------------------- MIS VALORACIONES ---------------------------->
+ 
+ <li [ngbNavItem]="2">
+	<button ngbNavLink>Mis valoraciones ({{ valoraciones.length }})</button>
+	<ng-template ngbNavContent>
+	  <div class="valoraciones-container">
+		<!-- Itera sobre las valoraciones -->
+		<div *ngFor="let valoracion of valoraciones" class="card mb-3">
+		  <div class="card-body">
+			<div class="valoracion-header">
+			  <!-- PRODUCT IMAGE -->
+			  <img *ngIf="valoracion.producto" [src]="valoracion.producto.fotoProducto" alt="Producto Image" class="product-image">
+			  <!-- USER NAME AND RATING -->
+			  <div class="user-info">
+				<h5 class="card-title product-name">{{ valoracion.producto ? valoracion.producto.nombreProducto : 'Producto no disponible' }}</h5>
+				<div class="rating">
+				  <app-stars *ngIf="valoracion.producto" [rating]="valoracion.puntuacion"></app-stars>
+				</div>
+			  </div>
+			</div>
+  
+			<!-- COMMENT -->
+			<p class="card-text mt-2">{{ valoracion.comentario }}</p>
+  
+			<!-- ADDITIONAL DETAILS -->
+			<div class="additional-details">
+			  <p class="card-text mt-2">
+				Por <strong>{{ valoracion.nombreUsuario }}</strong> el {{ valoracion.fecha | date: 'dd/MM/yyyy' }}
+			  </p>
+			</div>
+  
+		  </div>
+		</div>
+	  </div>
+	</ng-template>
+  </li>
+  
+
+
+ <!------------------- MIS PRODUCTOS ---------------------------->
+ <li [ngbNavItem]="3">
+	<button ngbNavLink>Mis productos en venta</button>
+	<ng-template ngbNavContent>
+	  <div class="search-bar">
+		<input type="text" placeholder="Buscar productos...">
+		<button class="btn btn-primary btn-custom-color-buscar">Buscar</button>
+	  </div>
+	  <br>
+	  <div class="row row-cols-1 row-cols-md-2 g-2">
+		<ng-container *ngIf="productosVenta.length > 0; else noProducts">
+		  <div class="col-md-3" *ngFor="let producto of productosVenta">
+			<div class="card mb-4 d-flex flex-column" style="height: 100%;">
+			  <img [src]="producto.fotoProducto" class="card-img-top img-fluid" alt="..." style="height: 200px; object-fit: cover;">
+			  <div class="card-body">
+				<h5 class="card-title">{{ producto.nombreProducto }}</h5>
+				<p class="card-text" style="max-height: 100px; overflow: hidden;">
+				  {{ producto.descripcion }}
+				</p>
+			  </div>
+			  <div class="card-footer mt-auto"> 
+				<small class="text-body-secondary">Precio: ${{ producto.precioPuja }}</small>
+				<br>
+			  </div>
+			</div>
+		  </div>
+		</ng-container>
+	  </div>
+  
+	  <ng-template #noProducts>
+		<p>No hay productos en venta.</p>
+	  </ng-template>
+  
+	  <ng-template #loading>
+		<p>Cargando productos...</p>
+	  </ng-template>
+	</ng-template>
+  </li>
+  
+  
+  
+  
+</ul>
+
+<div [ngbNavOutlet]="nav" class="mt-2"></div>
+
+

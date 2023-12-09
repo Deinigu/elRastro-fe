@@ -1,0 +1,24 @@
+<div class="editar-perfil-container">
+    <div class="content-wrapper">
+      <h2 class="text-center mb-4">Editar Mi Perfil</h2>
+      <form (ngSubmit)="guardarCambios()" class="editar-perfil-form">
+        <div class="mb-3">
+          <label for="nombreUsuario" class="form-label">Nombre de Usuario</label>
+          <input type="text" class="form-control" id="nombreUsuario" [(ngModel)]="nuevosDatos.nombreUsuario" name="nombreUsuario" required>
+        </div>
+  
+        <div class="mb-3">
+          <label for="vivienda" class="form-label">Vivienda</label>
+          <input type="text" class="form-control" id="vivienda" [(ngModel)]="nuevosDatos.vivienda" name="vivienda" required>
+        </div>
+  
+        <div class="mb-3">
+          <label for="telefono" class="form-label">Teléfono</label>
+          <input type="tel" class="form-control" id="telefono" [(ngModel)]="nuevosDatos.telefono" name="telefono" required>
+        </div>
+  
+        <button type="submit" class="btn btn-primary btn-block">Guardar Cambios</button>
+      </form>
+    </div>
+  </div>
+  

@@ -1,0 +1,114 @@
+.btn-custom-color-buscar {
+  background-color: #FE9639;
+  color: white;
+  transition: background-color 0.3s ease;
+  width: 100px; 
+  border:#FE9639;
+}
+
+.btn-custom-color {
+  background-color: #FE9639;
+  color: white;
+  transition: background-color 0.3s ease;
+  width: 120px; 
+  border:#FE9639;
+}
+
+.btn-custom-color:hover {
+  background-color: #C54409;
+  color: white;
+  width: 120px; 
+}
+
+.highlight-text {
+  font-weight: bold;
+  color: #C54409;
+}
+
+.custom-card-header {
+  background-color: rgb(32, 14, 32);
+  color: white;
+  padding: 10px;
+}
+
+.custom-card-header h5 {
+  margin-bottom: 0;
+}
+
+.custom-card-title {
+  margin-left: 5px;
+  font-size: 1.2rem;
+  margin-bottom: 0;
+  color: #ffffff;
+}
+
+.search-bar {
+  margin-top: 20px;
+  display: flex;
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+.valoraciones-container {
+  margin-top: 20px;
+}
+
+.valoracion-header {
+  display: flex;
+  align-items: center;
+}
+
+.product-image {
+  width: 50px; 
+  height: 50px; 
+  object-fit: cover;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.user-info {
+  flex: 1;
+}
+
+.rating {
+  color: gold;
+}
+
+.card {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-text {
+  margin-top: 10px;
+}
+
+.valoracion-card {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.valoracion-card .card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.valoracion-card .card-text {
+  margin-top: 10px;
+}
+
+.card-title.product-name {
+  font-size: 1rem;
+}
