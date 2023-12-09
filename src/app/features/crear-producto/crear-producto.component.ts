@@ -6,6 +6,8 @@ import { ProductService } from '../../services/product-service/product.service';
 import { FormsModule } from '@angular/forms';
 import { ImageService } from '../../services/image-service/image-service.service';
 import { Producto } from '../../interfaces/productos.ts';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-crear-producto',
@@ -25,7 +27,9 @@ export class CrearProductoComponent implements OnInit {
   error_precio: boolean = false;
   error_fotos: boolean = false;
   error_fecha: boolean = false;
-
+  producto_creado: boolean = false;
+  producto_en_proceso: boolean = false;
+  error_general: boolean = false;
 
   producto: Producto = {
     Nombre: '',
@@ -41,11 +45,13 @@ export class CrearProductoComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private productService: ProductService,
-    private imageService: ImageService
+    private imageService: ImageService,
+    private router : Router
   ) { }
 
   ngOnInit(): void {
     this.fotos_subidas = false;
+    this.producto_creado = false;
   }
 
   onSubmit() {
@@ -58,12 +64,13 @@ export class CrearProductoComponent implements OnInit {
     this.error_precio = false;
     this.error_fotos = false;
     this.error_fecha = false;
+    this.error_general = false;
 
     // Get today's date
     const currentDate = new Date();
     if (this.producto.cierre <= currentDate) {
       this.error_fecha = true;
-      return; 
+      return;
     }
     else if (this.producto.Nombre.length == 0 || this.producto.descripcion.length == 0 || this.producto.tags.length == 0) {
       this.error_empty_field = true;
@@ -76,16 +83,25 @@ export class CrearProductoComponent implements OnInit {
 
     else {
       console.log(this.producto);
+      this.producto_en_proceso = true;
 
       this.productService.createProducto(this.producto).subscribe(
         (createdProduct) => {
           console.log('Product created:', createdProduct);
+          this.producto_en_proceso = false;
+          this.producto_creado = true;
         },
         (error) => {
           console.error('Error creating product:', error);
+          this.producto_en_proceso = false;
+          this.error_general = true;
         }
       );
     }
+  }
+
+  onButtonVolverClick() : void {
+    this.router.navigate(['/']);
   }
 
   // Cloudinary

@@ -5,6 +5,7 @@ import { ProductService } from '../../../services/product-service/product.servic
 import { PujaService } from '../../../services/puja-service/puja-service.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Observable, forkJoin, switchMap } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-inicio',
@@ -21,11 +22,12 @@ export class InicioComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private productService: ProductService,
-    private pujaService: PujaService
+    private pujaService: PujaService,
+    private router: Router
   ) { }
 
   redirectToProduct(productId: any) {
-    window.location.href = `http://localhost:4200/producto/${productId}`;
+    this.router.navigate(['/producto', productId]);
   }
 
   ngOnInit(): void {
