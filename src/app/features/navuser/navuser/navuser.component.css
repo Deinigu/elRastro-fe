@@ -112,3 +112,14 @@
 .card-title.product-name {
   font-size: 1rem;
 }
+
+#deleteContent{
+  text-align: center; /* Centra el texto horizontalmente */
+  display: flex;
+  flex-direction:column;
+  align-items: center; /* Centra los elementos verticalmente */
+}
+
+#deleteLabel{
+  text-align: center;
+}
