@@ -28,6 +28,10 @@ export class ProductService {
     const url = 'http://localhost:8001/api/productos/busqueda/' +tags;
     return this.http.get<any>(url);
   }
+  editProducto(idProducto : string, producto: Producto): Observable<any> {
+    const url = "http://localhost:8001/api/productos/update/" + idProducto + "/";
+    return this.http.put(url, producto);
+  }
 }
 
 
