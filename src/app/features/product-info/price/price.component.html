@@ -1,4 +1,11 @@
-<h2>Última puja: {{precio}} €</h2>
+<!--<h2>Última puja: {{precio}} €</h2>-->
+
+    <ng-container *ngIf="producto.valor">
+        <h2>Última puja: <span class="precio">{{ producto.valor }} €</span></h2>
+    </ng-container>
+    <ng-container *ngIf="!producto.valor">
+        <h2>Puja inicial: <span class="precio">{{ producto.precio }} €</span></h2> 
+    </ng-container>
 <a href="puja/{{idProducto}}">
-    <button class="btn btn-warning">Pujar</button>
+    <button class="btn boton-pujar">Pujar</button>
 </a>

@@ -1,10 +1,15 @@
 <div class="container bid-container">
-    <h1 class="text-center">{{nombre}}</h1>
+    <h1 class="text-center">{{producto.Nombre}}</h1>
     <div class="card">
-        <img src="{{image}}" alt="Imagen del producto">
+        <img src="{{producto.fotoURL[0]}}" alt="Imagen del producto">
         <div class="card-body">
-            <h1 class="card-title">Puja más alta actual: {{precio}}</h1>
-            <p class="card-text">{{descripcion}}</p>
+            <ng-container *ngIf="producto.valor">
+                <h1 class="card-title">Puja más alta actual: {{producto.valor}} €</h1>
+            </ng-container>
+            <ng-container *ngIf="!producto.valor">
+                <h1 class="card-title">Puja más alta actual: {{producto.precio}} €</h1>
+            </ng-container>
+            <p class="card-text">{{producto.descripcion}}</p>
         </div>
     </div>
 

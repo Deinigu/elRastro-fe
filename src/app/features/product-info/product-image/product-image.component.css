@@ -1,0 +1,31 @@
+
+.product img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 15% 100%;
+}
+
+.product {
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px 2px #FFD9A9;
+  background-color: #FFEED4;
+  display: flex;
+  flex-direction: column;
+}
+
+#carouselExample {
+  height: 75vh;
+  overflow: hidden;
+  border: none; /* Remove the border of the carousel */
+  display: flex;
+  align-items: center; /* Center items vertically */
+}
+
+.carousel-inner {
+  display: flex;
+}
+
+.carousel-item {
+  background-color: #fe9639; /* Set the background color of the carousel item */
+}

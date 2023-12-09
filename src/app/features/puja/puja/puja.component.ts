@@ -23,6 +23,7 @@ export class PujaComponent implements OnInit {
   nombre : any;
   descripcion : any;
   precio : any;
+  producto : any;
   constructor(private http: HttpClient, private route: ActivatedRoute, private productService: ProductService, private pujaService : PujaService){}
 
   ngOnInit(){
@@ -31,16 +32,12 @@ export class PujaComponent implements OnInit {
     });
 
     this.productService.getProductInfo(this.idProducto).subscribe(data => {
-      this.image = data.fotoURL[0];
-      this.nombre = data.Nombre;
-      this.descripcion = data.descripcion;
+      this.producto = data;
       this.pujaService.getUltimaPuja(this.idProducto).subscribe((puja) => {
-        if (puja) {
-          this.precio = puja.valor;
-        }else{
-          this.precio = data.precio;
+        if(puja){
+          this.producto.valor = puja.valor;
         }
       });
-    })
+    });
   }
 }
