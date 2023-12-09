@@ -14,65 +14,66 @@ import { PujaComponent } from './features/puja/puja/puja.component';
 
 export const routes: Routes = [
     {
-        path : '',
-        component : InicioComponent,
-        title : 'Inicio'
-     },
+        path: '',
+        component: InicioComponent,
+        title: 'Inicio'
+    },
     // Empezar a poner vuestros path aqui abajo:
     {
         path: 'producto/crear',
-        component : CrearProductoComponent,
+        component: CrearProductoComponent,
         title: 'Crear producto'
     },
     {
-        path :'producto/:id',
-        component : ProductInfoComponent,
-        title : 'Información del producto' 
-    }
+        path: 'producto/:id',
+        component: ProductInfoComponent,
+        title: 'Información del producto'
+    },
+    {
 
-        path : 'usuario/:id',
-        component : PerfilUsuarioComponent,
-        title : 'Perfil de usuario'
+        path: 'usuario/:id',
+        component: PerfilUsuarioComponent,
+        title: 'Perfil de usuario'
     },
     {
-        path : 'iniciarsesion',
-        component : LoginComponent,
-        title : 'Inicio de sesión'
+        path: 'iniciarsesion',
+        component: LoginComponent,
+        title: 'Inicio de sesión'
     },
     {
-        path : 'chats/:idChat',
-        component : ChatsComponent,
-        title : 'Chat privado'
+        path: 'chats/:idChat',
+        component: ChatsComponent,
+        title: 'Chat privado'
     },
     {
-        path : 'usuario/:id/chats',
-        component : MischatsComponent,
-        title : 'Mis chats'
+        path: 'usuario/:id/chats',
+        component: MischatsComponent,
+        title: 'Mis chats'
     },
     {
-        path : 'usuario/:id/valoracion',
-        component : ValoracionComponent,
-        title : 'Valoracion'
+        path: 'usuario/:id/valoracion',
+        component: ValoracionComponent,
+        title: 'Valoracion'
     },
     {
-        path : 'usuario/:id/star',
-        component : StarRatingComponent,
-        title : 'EJEMPLO ESTRELLAS'
+        path: 'usuario/:id/star',
+        component: StarRatingComponent,
+        title: 'EJEMPLO ESTRELLAS'
     },
     {
         path: 'editar-perfil/:id',
         component: EditarPerfilComponent,
         title: 'Editar Perfil'
-     },
+    },
 
     {
-        path : 'puja/:id',
-        component : PujaComponent,
-        title : 'Puja por un producto'
+        path: 'puja/:id',
+        component: PujaComponent,
+        title: 'Puja por un producto'
     },
-       {
-        path : 'busqueda/:tags',
-        component : BusquedaComponent,
-        title : 'Busqueda'
-     }
+    {
+        path: 'busqueda/:tags',
+        component: BusquedaComponent,
+        title: 'Busqueda'
+    }
 ];

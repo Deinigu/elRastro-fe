@@ -37,14 +37,18 @@
 }
 
 .boton-pujar{
-  background-color: #fe9639;
-  color: #FFF7ED;
+  background-color: #fc7713;
+  color: white;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2), 0 2px 2px 0 rgba(0,0,0,0.19);
   border-radius: 8px;
   padding: 10px 24px;  
   font-size: 16px;
 }
 
+.boton-pujar:hover{
+  background-color: #b16e3a;
+  color: white;
+}
 .product h3 {
   margin-top: 10px;
   text-align: center;

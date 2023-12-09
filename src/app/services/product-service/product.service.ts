@@ -23,8 +23,8 @@ export class ProductService {
   createProducto(producto: Producto): Observable<Producto> {
     const url = 'http://localhost:8001/api/productos/create/';
     return this.http.post<Producto>(url, producto);
-  
-  getSearchProducts(tags : string) : Observable<any>{
+  }
+  getSearchProducts(tags : string) : Observable<any> {
     const url = 'http://localhost:8001/api/productos/busqueda/' +tags;
     return this.http.get<any>(url);
   }
