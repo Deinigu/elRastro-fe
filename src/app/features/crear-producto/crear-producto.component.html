@@ -1,40 +1,77 @@
-<div>
-  <input type="file" id="fileInput" accept="image/*" multiple (change)="onFileSelected($event)">
-  <button *ngIf="!fotos_subidas" (click)="onButtonClicked()">Subir imágenes</button>
-  <div *ngIf="fotos_subidas" class="alert alert-success" role="alert">
+<div *ngIf="producto_en_proceso" class="container mt-4">
+  <div class="mb-3">
+
+    <div class="alert alert-info mt-2" role="alert">
+      Creando producto...
+    </div>
+  </div>
+</div>
+<div *ngIf="producto_creado" class="container mt-4">
+  <div class="mb-3">
+    <div class="alert alert-success mt-2" role="alert">
+      Producto creado con éxito.
+    </div>
+    <div class="btn" (click)="onButtonVolverClick()">Volver</div>
+  </div>
+</div>
+<div *ngIf="error_general" class="container mt-4">
+  <div class="mb-3">
+    <div class="alert alert-danger mt-2" role="alert">
+      Hubo un error inesperado. Inténtelo de nuevo.
+    </div>
+    <div class="btn" (click)="onButtonVolverClick()">Volver</div>
+
+  </div>
+</div>
+
+<div *ngIf="!producto_creado && !error_general"  class="container mt-4">
+  <label for="fileInput" class="form-label">Subir Imágenes:</label>
+  <input type="file" id="fileInput" accept="image/*" multiple (change)="onFileSelected($event)" class="form-control">
+  <button *ngIf="!fotos_subidas" class="btn  mt-2" (click)="onButtonClicked()">Subir imágenes</button>
+  <div *ngIf="fotos_subidas" class="alert alert-success mt-2" role="alert">
     ¡Fotos subidas!
   </div>
   <form (ngSubmit)="onSubmit()">
-    <label for="nombre">Nombre:</label>
-    <input type="text" id="nombre" [(ngModel)]="producto.Nombre" name="nombre" required><br><br>
+    <div class="mb-3">
+      <label for="nombre" class="form-label">Nombre:</label>
+      <input type="text" id="nombre" [(ngModel)]="producto.Nombre" name="nombre" class="form-control" required>
+    </div>
 
-    <label for="descripcion">Descripción:</label>
-    <textarea id="descripcion" [(ngModel)]="producto.descripcion" name="descripcion" required></textarea><br><br>
+    <div class="mb-3">
+      <label for="descripcion" class="form-label">Descripción:</label>
+      <textarea id="descripcion" [(ngModel)]="producto.descripcion" name="descripcion" class="form-control"
+        required></textarea>
+    </div>
 
-    <label for="precio">Precio:</label>
-    <input type="number" id="precio" [(ngModel)]="producto.precio" name="precio" required><br><br>
+    <div class="mb-3">
+      <label for="precio" class="form-label">Precio inicial:</label>
+      <input type="number" id="precio" [(ngModel)]="producto.precio" name="precio" class="form-control" required>
+    </div>
 
-    <label for="tagsInput">Tags (Separated by commas):</label>
-    <input type="text" id="tagsInput" [(ngModel)]="tagsInput" name="tagsInput" required><br><br>
+    <div class="mb-3">
+      <label for="tagsInput" class="form-label">Etiquetas (separadas por comas):</label>
+      <input type="text" id="tagsInput" [(ngModel)]="tagsInput" name="tagsInput" class="form-control" required>
+    </div>
 
-    <label for="cierre">Fecha de Cierre:</label>
-    <input type="datetime-local" id="cierre" [(ngModel)]="producto.cierre" name="cierre" required><br><br>
+    <div class="mb-3">
+      <label for="cierre" class="form-label">Fecha de Cierre:</label>
+      <input type="datetime-local" id="cierre" [(ngModel)]="producto.cierre" name="cierre" class="form-control"
+        required>
+    </div>
 
-    <div *ngIf="error_empty_field" class="alert alert-danger" role="alert">
+    <div *ngIf="error_empty_field" class="alert alert-danger mt-2" role="alert">
       Hay uno o más campos vacíos.
     </div>
-    <div *ngIf="error_precio" class="alert alert-danger" role="alert">
+    <div *ngIf="error_precio" class="alert alert-danger mt-2" role="alert">
       El precio no puede ser 0 o negativo.
     </div>
-    <div *ngIf="error_fotos" class="alert alert-danger" role="alert">
+    <div *ngIf="error_fotos" class="alert alert-danger mt-2" role="alert">
       Debe subir al menos una foto.
     </div>
-    <div *ngIf="error_fecha" class="alert alert-danger" role="alert">
+    <div *ngIf="error_fecha" class="alert alert-danger mt-2" role="alert">
       Hay un error en la fecha. Compruebe que la fecha de cierre sea en el futuro.
     </div>
-    <button type="submit">Submit</button>
 
+    <button type="submit" class="btn mt-3">Enviar</button>
   </form>
-
-
 </div>
