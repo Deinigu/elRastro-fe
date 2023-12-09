@@ -14,8 +14,9 @@ import { PujaService } from '../../../services/puja-service/puja-service.service
   providers: [ProductService, PujaService]
 })
 export class PriceComponent implements OnInit {
-  precio = "";
-  idProducto = "";
+  producto : any;
+  idProducto : any;
+  ultimaPuja : any;
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private productService: ProductService, private pujaService: PujaService){}
 
@@ -24,14 +25,13 @@ export class PriceComponent implements OnInit {
       this.idProducto = params['id'];
     });
 
-    this.pujaService.getUltimaPuja(this.idProducto).subscribe((puja) => {
-      if (puja) {
-        this.precio = puja.valor;
-      }else{
-        this.productService.getProductInfo(this.idProducto).subscribe(data => {
-          this.precio = data.precio;
-        })
-      }
+    this.productService.getProductInfo(this.idProducto).subscribe(data => {
+      this.producto = data;
+      this.pujaService.getUltimaPuja(this.idProducto).subscribe((puja) => {
+        if(puja){
+          this.producto.valor = puja.valor;
+        }
+      });
     });
   }
 }

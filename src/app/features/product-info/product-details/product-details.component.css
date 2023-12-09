@@ -1,0 +1,15 @@
+.titulo{
+    font-size: x-large;
+    color: #FC7713;
+    text-align: left;
+    font-weight: bolder;
+    text-align: center;
+  }
+
+.descripcion{
+    color: #441506;
+    text-align: justify;
+    margin-left: 5px;
+    margin-right: 5px;
+    text-align: center;
+}

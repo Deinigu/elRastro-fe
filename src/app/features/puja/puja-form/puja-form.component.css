@@ -6,14 +6,6 @@
     font-size: 16px;
   }
 
-.precio{
-    text-align: center;
-    font-size: 22px;
-    color: #C54409;
-    font-weight: 500;
- }
- .texto{
-    text-align: center;
-    font-size: 22px;
-    font-weight: 500;
- }
+  .fondo{
+    background-color: #FFD9A9;
+  }
