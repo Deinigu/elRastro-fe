@@ -21,6 +21,11 @@ export class CrearProductoComponent implements OnInit {
   urls: any[] = [];
   fotos_subidas: boolean = false;
   tagsInput: string = "";
+  error_empty_field: boolean = false;
+  error_precio: boolean = false;
+  error_fotos: boolean = false;
+  error_fecha: boolean = false;
+
 
   producto: Producto = {
     Nombre: '',
@@ -47,16 +52,41 @@ export class CrearProductoComponent implements OnInit {
     this.producto.tags = this.tagsInput.split(',').map(tag => tag.trim());
     this.producto.cierre = new Date(this.producto.cierre);
     this.producto.precio = Number(this.producto.precio);
-    console.log(this.producto);
 
-    this.productService.createProducto(this.producto).subscribe(
-      (createdProduct) => {
-        console.log('Product created:', createdProduct);
-      },
-      (error) => {
-        console.error('Error creating product:', error);
-      }
-    );  }
+    // Reiniciar errores
+    this.error_empty_field = false;
+    this.error_precio = false;
+    this.error_fotos = false;
+    this.error_fecha = false;
+
+    // Get today's date
+    const currentDate = new Date();
+    if (this.producto.cierre <= currentDate) {
+      this.error_fecha = true;
+      return; 
+    }
+    else if (this.producto.Nombre.length == 0 || this.producto.descripcion.length == 0 || this.producto.tags.length == 0) {
+      this.error_empty_field = true;
+    } else if (this.producto.precio <= 0) {
+      this.error_precio = true;
+    }
+    else if (!this.fotos_subidas) {
+      this.error_fotos = true;
+    }
+
+    else {
+      console.log(this.producto);
+
+      this.productService.createProducto(this.producto).subscribe(
+        (createdProduct) => {
+          console.log('Product created:', createdProduct);
+        },
+        (error) => {
+          console.error('Error creating product:', error);
+        }
+      );
+    }
+  }
 
   // Cloudinary
   onFileSelected(event: Event): void {
