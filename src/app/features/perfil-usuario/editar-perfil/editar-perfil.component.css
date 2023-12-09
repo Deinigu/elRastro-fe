@@ -1,15 +1,25 @@
 .editar-perfil-container {
-    max-width: 400px;
-    margin: auto;
-    padding: 40px; 
+    max-width: 100%;
+    padding: 200px;
+    border-radius: 8px;
+    margin: 0 auto;
+    justify-content: center;
+    height: 100vh;
+    align-items: center;
+}
+
+.content-wrapper {
+    max-width: 800px; 
+    padding: 60px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    margin: 0 auto;
 }
 
 .editar-perfil-form {
     text-align: left;
-    margin-top: 1.5rem; 
+    margin-top: 1.5rem;
+    max-width: 100%; 
 }
 
 .form-label {
@@ -27,13 +37,5 @@
 }
 
 .text-center {
-    margin-bottom: 1.5rem; 
-}
-
-body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
+    margin-bottom: 1.5rem;
 }
