@@ -9,8 +9,8 @@ import { StarRatingComponent } from './features/valoracion/star-rating/star-rati
 import { EditarPerfilComponent } from './features/perfil-usuario/editar-perfil/editar-perfil.component';
 import { BusquedaComponent } from './features/navbar/busqueda/busqueda.component';
 import { ProductInfoComponent } from './features/product-info/product-info/product-info.component';
+import { CrearProductoComponent } from './features/crear-producto/crear-producto.component';
 import { PujaComponent } from './features/puja/puja/puja.component';
-
 
 export const routes: Routes = [
     {
@@ -20,6 +20,16 @@ export const routes: Routes = [
      },
     // Empezar a poner vuestros path aqui abajo:
     {
+        path: 'producto/crear',
+        component : CrearProductoComponent,
+        title: 'Crear producto'
+    },
+    {
+        path :'producto/:id',
+        component : ProductInfoComponent,
+        title : 'Información del producto' 
+    }
+
         path : 'usuario/:id',
         component : PerfilUsuarioComponent,
         title : 'Perfil de usuario'
@@ -54,11 +64,6 @@ export const routes: Routes = [
         component: EditarPerfilComponent,
         title: 'Editar Perfil'
      },
-    {
-        path :'producto/:id',
-        component : ProductInfoComponent,
-        title : 'Información del producto' 
-    },
 
     {
         path : 'puja/:id',
