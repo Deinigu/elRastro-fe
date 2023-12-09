@@ -1,0 +1,39 @@
+.editar-perfil-container {
+    max-width: 400px;
+    margin: auto;
+    padding: 40px; 
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.editar-perfil-form {
+    text-align: left;
+    margin-top: 1.5rem; 
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+.btn-primary {
+    background-color: #FC7713;
+    border-color: #FC7713;
+}
+
+.btn-primary:hover {
+    background-color: #C54409;
+    border-color: #C54409;
+}
+
+.text-center {
+    margin-bottom: 1.5rem; 
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}

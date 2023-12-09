@@ -1,0 +1,8 @@
+<div class="star-rating">
+  <span *ngFor="let star of stars; index as i">
+    <div style="display: inline-block; position: relative; width: 24px; margin-right: 10px;">
+      <fa-icon [icon]="star.icon" size="2x" [style]="star.style"></fa-icon>
+      <div style="position: absolute; top: 0; bottom: 0; left: 0; right: 50%;" (click)="configurarValor(i + 1)" (mouseover)="configurarValor(i + 1)"></div>
+    </div>
+  </span>
+</div>

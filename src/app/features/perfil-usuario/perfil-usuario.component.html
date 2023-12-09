@@ -1,0 +1,31 @@
+<br>
+<br>
+<br>
+<div class="profile-container">
+  <div class="profile-header">
+ <!-- IMAGEN -->
+    <div class="profile-image rounded-circle border border-3 border-dark" style="background-color: #000">
+      <img [src]="imagen" alt="Foto de perfil" class="rounded-circle">
+    </div>
+
+    <div class="profile-info">
+      <!-- HEADER CON NOMBRE DE USUARIO, VALORACION EN ESTRELLAS -->
+      <h1>{{nombreUsuario}}</h1> 
+      <div class="reputation">
+        <div class="star-rating">
+          <app-stars [rating]="valoracion"></app-stars>
+        </div>
+        <div class="valoracion-text">
+          <p>({{valoracion}})</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="profile-tabs">
+
+    <app-navuser></app-navuser>
+  </div>
+
+</div>
