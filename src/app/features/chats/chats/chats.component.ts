@@ -32,7 +32,7 @@ interface Mensaje {
 export class ChatsComponent implements OnInit {
   imagen = ["https://i.blogs.es/a13394/totoro/1366_2000.jpg"]
 
-  userId = '65467d3ac0ea2626e6841296';
+  userId = '654c0a5b02d9a04cac884db7';
   conversacion: any; // Asegúrate de que este tipo coincida con la respuesta de tu servicio
   idChat = '';
   vendedor = '';
