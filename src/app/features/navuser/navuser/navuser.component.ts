@@ -39,7 +39,8 @@ interface Producto {
 })
 
 export class NavuserComponent implements OnInit {
-  active = 1;
+  abrir = localStorage.getItem('abrir')
+  active = this.abrir!==null? parseInt(this.abrir) : 1 ;
   imagen = '';
   title = 'Perfil de usuario';
   nombreUsuario = '';
