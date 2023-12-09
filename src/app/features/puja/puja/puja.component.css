@@ -1,0 +1,21 @@
+body {
+    padding-top: 50px;
+  }
+  .bid-container {
+    max-width: 600px;
+    margin: auto;
+  }
+  .bid-form {
+    margin-top: 20px;
+  }
+  .product {
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px 2px #FFD9A9;
+    background-color: #FFEED4;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-body{
+    background-color: #FFD9A9;
+  }

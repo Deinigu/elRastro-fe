@@ -5,23 +5,27 @@ import { ProductService } from '../../../services/product-service/product.servic
 import { PujaService } from '../../../services/puja-service/puja-service.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Observable, forkJoin, switchMap } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
-  selector: 'app-inicio',
+  selector: 'app-busqueda',
   standalone: true,
   imports: [CommonModule, MaterialModule, HttpClientModule],
-  templateUrl: './inicio.component.html',
-  styleUrl: './inicio.component.css',
+  templateUrl: './busqueda.component.html',
+  styleUrl: './busqueda.component.css',
   providers: [ProductService, PujaService],
 })
-export class InicioComponent implements OnInit {
+export class BusquedaComponent {
   productos: any[] = [];
   pujas: any[] = [];
+  tags ="";
 
   constructor(
     private http: HttpClient,
     private productService: ProductService,
-    private pujaService: PujaService
+    private pujaService: PujaService,
+    private route: ActivatedRoute
   ) { }
 
   redirectToProduct(productId: any) {
@@ -29,7 +33,11 @@ export class InicioComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.productService.getAllProducts().subscribe((data) => {
+    this.route.params.subscribe(params => {
+      this.tags = params['tags'];
+    });
+
+    this.productService.getSearchProducts(this.tags).subscribe((data) => {
       this.productos = data; // Assuming this.productos is where you store the received products
 
       this.productos.forEach((product, index) => {
