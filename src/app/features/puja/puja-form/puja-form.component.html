@@ -1,5 +1,4 @@
 <br>
-
 <div *ngIf="success" class="alert alert-success" role="alert">
     {{ successMessage }}
 </div>
@@ -14,10 +13,10 @@
                 <span class="input-group-text">€</span>
             </div>
             <ng-container *ngIf="producto.valor">
-                <input name="precio" w type="text" class="form-control" placeholder="{{producto.valor}}">
+                <input name="precio" ngModel type="text" class="form-control" placeholder="{{producto.valor}}">
             </ng-container>
             <ng-container *ngIf="!producto.valor">
-                <input name="precio" w type="text" class="form-control" placeholder="{{producto.precio}}">
+                <input name="precio" ngModel type="text" class="form-control" placeholder="{{producto.precio}}">
             </ng-container>
         </div>
     </div>

@@ -18,6 +18,7 @@ import { Puja } from '../../../interfaces/puja';
 export class PujaFormComponent implements OnInit {
   idProducto : any;
   precio: any;
+  precioPujar: any;
   successMessage = "Puja creada con éxito."
   errorMessage = "Error. El importe debe superar el de la última puja."
   success = false;
@@ -33,30 +34,30 @@ export class PujaFormComponent implements OnInit {
 
     this.productService.getProductInfo(this.idProducto).subscribe(data => {
       this.producto = data;
+      this.precio = this.producto.precio;
       this.pujaService.getUltimaPuja(this.idProducto).subscribe((puja) => {
         if(puja){
           this.producto.valor = puja.valor;
+          this.precio = puja.valor;
         }
       });
     });
   }
 
   placeBid(precio: {precio: string}){
-
-    if (precio.precio <= this.precio){
+    this.precioPujar = Number(precio.precio);
+    if (this.precioPujar <= this.precio){
       this.showErrorMessage();
     }else{
       const puja: Puja = {
         pujador: '654c0a5b02d9a04cac884db7',
-        valor: Number(precio.precio),
+        valor: this.precioPujar,
         fecha: new Date().toISOString(),
         producto: this.idProducto,
       };
-  
       this.pujaService.createPuja(puja).subscribe(
         (res) => {
           console.log(res);
-  
           this.showSuccessAlert();
         })
     }
