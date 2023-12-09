@@ -1,5 +1,5 @@
 h2 a {
-    color: #007bff; /* Set your desired link color */
+    color: #9c3610; /* Set your desired link color */
     text-decoration: none; /* Remove underline */
   }
 
@@ -7,12 +7,10 @@ h2 a {
     text-decoration: underline; /* Add underline on hover if needed */
   }
 
-btn-primary {
-    background-color: #007bff; /* Set your desired button color */
-    border-color: #007bff; /* Set border color */
-  }
-
-btn-primary:hover {
-    background-color: #0056b3; /* Set hover background color */
-    border-color: #0056b3; /* Set hover border color */
-  }
+.boton-contactar{
+    background-color: #9c3610;
+    color: #FFF7ED;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2), 0 2px 2px 0 rgba(0,0,0,0.19);
+    border-radius: 8px;
+    font-size: 16px;
+}

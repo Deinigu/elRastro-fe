@@ -1,0 +1,19 @@
+.boton-pujar{
+    background-color: #fe9639;
+    color: #FFF7ED;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2), 0 2px 2px 0 rgba(0,0,0,0.19);
+    border-radius: 8px;
+    font-size: 16px;
+  }
+
+.precio{
+    text-align: center;
+    font-size: 22px;
+    color: #C54409;
+    font-weight: 500;
+ }
+ .texto{
+    text-align: center;
+    font-size: 22px;
+    font-weight: 500;
+ }
