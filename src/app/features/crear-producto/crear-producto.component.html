@@ -1,5 +1,27 @@
 <div>
-    <input type="file" id="fileInput" accept="image/*" multiple (change)="onFileSelected($event)">
-    <button (click)="onButtonClicked()">Upload Images</button>
+  <input type="file" id="fileInput" accept="image/*" multiple (change)="onFileSelected($event)">
+  <button *ngIf="!fotos_subidas" (click)="onButtonClicked()">Upload Images</button>
+  <div *ngIf="fotos_subidas" class="alert alert-success" role="alert">
+    ¡Fotos subidas!
   </div>
+  <form (ngSubmit)="onSubmit()">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" [(ngModel)]="producto.Nombre" name="nombre" required><br><br>
   
+    <label for="descripcion">Descripción:</label>
+    <textarea id="descripcion" [(ngModel)]="producto.descripcion" name="descripcion" required></textarea><br><br>
+  
+    <label for="precio">Precio:</label>
+    <input type="number" id="precio" [(ngModel)]="producto.precio" name="precio" required><br><br>
+  
+    <label for="tagsInput">Tags (Separated by commas):</label>
+    <input type="text" id="tagsInput" [(ngModel)]="tagsInput" name="tagsInput"><br><br>
+  
+    <label for="cierre">Fecha de Cierre:</label>
+    <input type="date" id="cierre" [(ngModel)]="producto.cierre" name="cierre" required><br><br>
+
+    <button type="submit">Submit</button>
+  </form>
+  
+  
+</div>

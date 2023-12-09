@@ -3,7 +3,7 @@ export interface Producto {
     descripcion: string;
     fotoURL: Array<string>;
     precio: number;
-    tags:string;
+    tags:Array<string>;
     cierre: Date;
     vendedor: string;
 }
