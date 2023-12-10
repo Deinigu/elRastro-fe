@@ -21,5 +21,10 @@ export class PujaService {
     const url = 'http://localhost:8002/api/pujas/create/';
     return this.http.post<Puja>(url, puja);
   }
+
+  getPujasByUser(idUser: string): Observable<any> {
+    const url = 'http://localhost:8002/api/pujas/usuario/' + idUser + '/';
+    return this.http.get<any>(url);
+  }
 }
 

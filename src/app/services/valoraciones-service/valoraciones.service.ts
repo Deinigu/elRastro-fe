@@ -14,4 +14,13 @@ export class ValoracionesService {
     return this.http.get<any>(url);
   }
 
+  getValoracionesHechas(idUsuario: string): Observable<any> {
+    const url = 'http://localhost:8007/api/valoraciones_hechas/'+idUsuario;
+    return this.http.get<any>(url);
+  }
+
+  crearValoracion(valoracion: any): Observable<any> {
+    const url = 'http://localhost:8007/api/valoracion/';
+    return this.http.post<any>(url, valoracion);
+  }
 }

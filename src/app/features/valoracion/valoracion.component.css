@@ -17,3 +17,8 @@
     color: #fff;
   }
   
+  .btn-valorar-usuario {
+    margin-top: 10px;
+    margin-right: 20px;
+    width: 125px; 
+  }
