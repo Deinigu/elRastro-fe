@@ -25,6 +25,7 @@ export class InfoVendedorComponent implements OnInit{
   listaConversacionesVendedor: string[] = [];
   idConversacion: string = "";
   redirigiendo = false;
+  deshabilitar = false;
   
 
   constructor(
@@ -39,9 +40,9 @@ export class InfoVendedorComponent implements OnInit{
     this.route.params.subscribe(params => {
       this.idProducto = params['id'];
     });
-
     this.productService.getProductInfo(this.idProducto).subscribe(data => {
       this.idVendedor = data.vendedor;
+      this.idVendedor == this.idUsuario ? this.deshabilitar=true : this.deshabilitar=false;
       this.usuarioService.getUsuarioInfo(this.idVendedor).subscribe(data2 => {
         this.vendedor = data2.nombreUsuario;
       })
