@@ -18,17 +18,18 @@ export class HuellaCarbonoService {
   getHuellaCarbono(idUsuario1: string, idUsuario2: string): Observable<any> {
     const cacheKey = `${idUsuario1}-${idUsuario2}`;
     const cachedValue = this.cache[cacheKey];
-    console.log('Contenido del caché al inicializar:', this.cache);
-
+    //console.log('Contenido del caché al inicializar:', this.cache);
+  
     if (cachedValue) {
-      console.log('Valor obtenido de la caché:', cachedValue);
-      return of(cachedValue);
+      //console.log('Valor obtenido de la caché:', cachedValue);
+      return of({ tasa_emisiones: cachedValue });  // Devuelve un objeto con la misma estructura que la respuesta de la API
     } else {
       const url = `http://localhost:8003/api/huella/${idUsuario1}/${idUsuario2}/`;
       return this.http.get<any>(url).pipe(
         // Actualizar la caché y almacenarla en el almacenamiento local
         tap(value => {
-          this.cache[cacheKey] = value.tasa_emisiones;
+          //console.log('Valor obtenido de la API:', value);
+          this.cache[cacheKey] = value.tasa_emisiones;  // Guarda solo tasa_emisiones en la caché
           localStorage.setItem(this.localStorageKey, JSON.stringify(this.cache));
         })
       );

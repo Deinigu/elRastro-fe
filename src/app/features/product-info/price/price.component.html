@@ -6,6 +6,6 @@
     <ng-container *ngIf="!producto.valor">
         <h2>Puja inicial: <span class="precio">{{ producto.precio }} €</span></h2> 
     </ng-container>
-<a href="puja/{{idProducto}}">
-    <button class="btn boton-pujar">Pujar</button>
-</a>
+    <button class="btn boton-pujar" [disabled]="!cierre" (click)="navigateToPuja()">
+        Pujar
+    </button>
