@@ -108,18 +108,20 @@
 							</div>
 							<div class="card-footer mt-auto">
 								<small class="text-body-secondary">Precio: ${{ producto.precioPuja }}</small>
-								<div class="container botones-container">
-									<div class="row">
-										<div class="col">
-											<button class="btn btn-primary btn-editar-y-borrar"
-												(click)="editarProducto(producto)">Editar</button>
-										</div>
-										<div class="col">
-											<button class="btn btn-danger btn-editar-y-borrar"
-												(click)="guardaProd(producto)" data-bs-toggle="modal"
-												data-bs-target="#delete">
-												Eliminar
-											</button>
+								<div *ngIf="miPerfil">
+									<div class="container botones-container">
+										<div class="row">
+											<div class="col">
+												<button class="btn btn-primary btn-editar-y-borrar"
+													(click)="editarProducto(producto)">Editar</button>
+											</div>
+											<div class="col">
+												<button class="btn btn-danger btn-editar-y-borrar"
+													(click)="guardaProd(producto)" data-bs-toggle="modal"
+													data-bs-target="#delete">
+													Eliminar
+												</button>
+											</div>
 										</div>
 									</div>
 								</div>
