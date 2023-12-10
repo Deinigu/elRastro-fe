@@ -34,26 +34,25 @@ export class PujaFormComponent implements OnInit {
   constructor(private http: HttpClient, private route: ActivatedRoute, private productService: ProductService, 
     private pujaService : PujaService, private huellaCarbonoService : HuellaCarbonoService, private router : Router){}
 
-  ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.idProducto = params['id'];
-    });
-
-    this.productService.getProductInfo(this.idProducto).subscribe(data => {
-      this.producto = data;
-      this.precio = this.producto.precio;
-      this.pujaService.getUltimaPuja(this.idProducto).subscribe((puja) => {
-        if(puja){
-          this.producto.valor = puja.valor;
-          this.precio = puja.valor;
-        }
-      this.huellaCarbonoService.getHuellaCarbono(this.idUsuario1, this.producto.vendedor).subscribe(response =>{
-      this.tasa = response.tasa_emisiones;
-    });
+    ngOnInit(): void {
+      this.route.params.subscribe(params => {
+        this.idProducto = params['id'];
       });
-    });
-  }
-
+  
+      this.productService.getProductInfo(this.idProducto).subscribe(data => {
+        this.producto = data;
+        this.precio = this.producto.precio;
+        this.pujaService.getUltimaPuja(this.idProducto).subscribe((puja) => {
+          if(puja){
+            this.producto.valor = puja.valor;
+            this.precio = puja.valor;
+          }
+        this.huellaCarbonoService.getHuellaCarbono(this.idUsuario1, this.producto.vendedor).subscribe(response =>{
+        this.tasa = response.tasa_emisiones;
+      });
+        });
+      });
+    }
   placeBid(precio: {precio: string}){
     this.precioPujar = Number(precio.precio);
     if (this.precioPujar <= this.precio){
