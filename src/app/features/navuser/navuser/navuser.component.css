@@ -2,23 +2,35 @@
   background-color: #FE9639;
   color: white;
   transition: background-color 0.3s ease;
-  width: 100px; 
-  border:#FE9639;
+  width: 100px;
+  border: #FE9639;
 }
 
 .btn-custom-color {
   background-color: #FE9639;
   color: white;
   transition: background-color 0.3s ease;
-  width: 120px; 
-  border:#FE9639;
+  width: 120px;
+  border: #FE9639;
 }
 
 .btn-custom-color:hover {
   background-color: #C54409;
   color: white;
-  width: 120px; 
+  width: 120px;
 }
+
+.botones-container.d-flex {
+  align-items: center;
+  justify-content: center;
+
+}
+.btn-editar-y-borrar {
+  font-size: small;
+  width: 100%;
+  margin-top: 10px;
+}
+
 
 .highlight-text {
   font-weight: bold;
@@ -64,8 +76,8 @@
 }
 
 .product-image {
-  width: 50px; 
-  height: 50px; 
+  width: 50px;
+  height: 50px;
   object-fit: cover;
   border-radius: 5px;
   margin-right: 10px;
@@ -175,4 +187,16 @@
 .custom-no-reviews-message {
   color: #555;
   font-style: italic;
+
+#deleteContent {
+  text-align: center;
+  /* Centra el texto horizontalmente */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Centra los elementos verticalmente */
+}
+
+#deleteLabel {
+  text-align: center;
 }

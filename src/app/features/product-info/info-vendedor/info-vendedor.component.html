@@ -1,3 +1,6 @@
-<h2>Vendedor: <a href="usuario/{{idUsuario}}">{{vendedor}}</a></h2>
-<button class="btn boton-contactar">Contactar</button>
+<h2>Vendedor: <a href="usuario/{{idVendedor}}">{{vendedor}}</a></h2>
+<button (click)="crearConversacion(idUsuario, idVendedor, idProducto)" class="btn boton-contactar" [disabled]="deshabilitar">Contactar</button>
+<div *ngIf="redirigiendo" class="alert alert-success" role="alert">
+    Redirigiendo a la conversación...
+</div>
   

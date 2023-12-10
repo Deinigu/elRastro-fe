@@ -11,6 +11,8 @@ import { BusquedaComponent } from './features/navbar/busqueda/busqueda.component
 import { ProductInfoComponent } from './features/product-info/product-info/product-info.component';
 import { CrearProductoComponent } from './features/crear-producto/crear-producto.component';
 import { PujaComponent } from './features/puja/puja/puja.component';
+import { EditarProductoComponent } from './features/editar-producto/editar-producto.component';
+import { FotoperfilComponent } from './features/fotoperfil/fotoperfil.component';
 
 export const routes: Routes = [
     {
@@ -25,9 +27,20 @@ export const routes: Routes = [
         title: 'Crear producto'
     },
     {
+        path: 'producto/editar/:id',
+        component: EditarProductoComponent,
+        title: 'Información del producto'
+    },
+    {
         path: 'producto/:id',
         component: ProductInfoComponent,
         title: 'Información del producto'
+    },
+    {
+
+        path: 'usuario/cambiarimagen/:id',
+        component: FotoperfilComponent,
+        title: 'Foto de perfil'
     },
     {
 

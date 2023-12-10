@@ -1,27 +1,32 @@
- <!------------------- INFORMACIÓN PERSONAL ---------------------------->
+<!------------------- INFORMACIÓN PERSONAL ---------------------------->
 
 
 <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
 	<li [ngbNavItem]="1">
-		<button ngbNavLink>Información de la cuenta </button>
-		<ng-template ngbNavContent>
-			<div class="card mb-3">
-				<div class="card-header custom-card-header">
-					<h5 class="card-title custom-card-title">Imagen de perfil</h5>
-				  </div>
-				  <div class="card-body">    
-					<div class="profile-image-container rounded-circle border border-3 border-dark" style="width: 400px; height: 400px; overflow: hidden; background-color: #000;">
-					  <!-- Imagen de perfil -->
-					  <img src={{imagen}} alt="Foto de perfil" class="img-fluid rounded-circle" style="width: 100%; height: 100%; object-fit: cover;">
-					</div>   
-					<!-- Cambiar Imagen  -->
-					<button class="btn btn-custom-color">Cambiar imagen</button>
-				  </div>
-			</div>
 
+		<button ngbNavLink>Información personal</button>
+
+		<ng-template ngbNavContent>
+			
+			<div *ngIf="miPerfil">
+				<div class="card mb-3">
+					<div class="card-header custom-card-header">
+						<h5 class="card-title custom-card-title">Imagen de perfil</h5>
+					  </div>
+					  <div class="card-body">    
+						<div class="profile-image-container rounded-circle border border-3 border-dark" style="width: 400px; height: 400px; overflow: hidden; background-color: #000;">
+						  <!-- Imagen de perfil -->
+						  <img src={{imagen}} alt="Foto de perfil" class="img-fluid rounded-circle" style="width: 100%; height: 100%; object-fit: cover;">
+						</div>   
+						<!-- Cambiar Imagen  -->
+						<button class="btn btn-custom-color" (click)="onClickToFotoDePerfil()">Cambiar imagen</button>
+					  </div>
+				</div>
+			</div>
+		
 			<div class="card mb-3">
 				<div class="card-header custom-card-header">
-				  <h5 class="card-title custom-card-title">Mis datos personales</h5>
+				  <h5 class="card-title custom-card-title">Datos personales</h5>
 				</div>
 				<div class="card-body">	
 				  <!-- Información del usuario -->
@@ -33,10 +38,12 @@
 				   </div>
 				  <br>
 				  <!-- Botón de editar -->
-				  <button class="btn btn-custom-color" (click)="editarPerfil()">Editar Perfil</button>
+				  <div *ngIf="miPerfil">
+					<button class="btn btn-custom-color" (click)="editarPerfil()">Editar Perfil</button>
+				  </div>
 				</div>
-			  </div>
-			  
+			</div>
+
 		</ng-template>
 	</li>
 
@@ -162,41 +169,58 @@
 	</ng-template>
   </li>
   
-  
  <!------------------- MIS PRODUCTOS ---------------------------->
  <li [ngbNavItem]="3">
 	<button ngbNavLink>Productos en venta</button>
 	<ng-template ngbNavContent>
-	  <br>
-	  <div class="row row-cols-1 row-cols-md-2 g-2">
-		<ng-container *ngIf="productosVenta.length > 0; else noProducts">
-		  <div class="col-md-3" *ngFor="let producto of productosVenta">
-			<div class="card mb-4 d-flex flex-column" style="height: 100%;">
-			  <img [src]="producto.fotoProducto" class="card-img-top img-fluid" alt="..." style="height: 200px; object-fit: cover;">
-			  <div class="card-body">
-				<h5 class="card-title">{{ producto.nombreProducto }}</h5>
-				<p class="card-text" style="max-height: 100px; overflow: hidden;">
-				  {{ producto.descripcion }}
-				</p>
-			  </div>
-			  <div class="card-footer mt-auto"> 
-				<small class="text-body-secondary">Precio: ${{ producto.precioPuja }}</small>
-				<br>
-			  </div>
+<br>
+			<div class="row row-cols-1 row-cols-md-2 g-2">
+				<ng-container *ngIf="productosVenta.length > 0; else noProducts">
+					<div class="col-md-3" *ngFor="let producto of productosVenta">
+						<div class="card mb-4 d-flex flex-column" style="height: 100%;">
+							<img [src]="producto.fotoProducto" class="card-img-top img-fluid" alt="..."
+								style="height: 200px; object-fit: cover;">
+							<div class="card-body">
+								<h5 class="card-title">{{ producto.nombreProducto }}</h5>
+								<p class="card-text" style="max-height: 100px; overflow: hidden;">
+									{{ producto.descripcion }}
+								</p>
+							</div>
+							<div class="card-footer mt-auto">
+								<small class="text-body-secondary">Precio: ${{ producto.precioPuja }}</small>
+								<div *ngIf="miPerfil">
+									<div class="container botones-container">
+										<div class="row">
+											<div class="col">
+												<button class="btn btn-primary btn-editar-y-borrar"
+													(click)="editarProducto(producto)">Editar</button>
+											</div>
+											<div class="col">
+												<button class="btn btn-danger btn-editar-y-borrar"
+													(click)="guardaProd(producto)" data-bs-toggle="modal"
+													data-bs-target="#delete">
+													Eliminar
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</ng-container>
 			</div>
-		  </div>
-		</ng-container>
-	  </div>
-  
-	  <ng-template #noProducts>
-		<p>No hay productos en venta.</p>
-	  </ng-template>
-  
-	  <ng-template #loading>
-		<p>Cargando productos...</p>
-	  </ng-template>
-	</ng-template>
-  </li>
+
+			<ng-template #noProducts>
+				<p>No hay productos en venta.</p>
+			</ng-template>
+
+			<ng-template #loading>
+				<p>Cargando productos...</p>
+			</ng-template>
+		</ng-template>
+	</li>
+	  
   
  <!------------------- MIS PUJAS ---------------------------->
  <li [ngbNavItem]="4">
@@ -248,25 +272,42 @@
 	  </div>
 	</ng-template>
   </li>
-  
-	
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+    
+    
 </ul>
 
 
+<!-- EL MODAL PARA ELIMINAR -->
+<div class="modal fade" id="delete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+	aria-labelledby="deleteLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 id="deleteLabel">El producto "{{ productoBorrar.nombreProducto }}" será eliminado</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body" id="deleteContent">
+				<h2>¿Estás seguro?</h2>
+				<button class="btn btn-danger" (click)="deleteProd(productoBorrar)" data-bs-toggle="modal"
+					data-bs-target="#ok">ELIMINAR</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade" id="ok" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+	aria-labelledby="deleteLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 id="deleteLabel">Producto eliminado con éxito</h1>
+			</div>
+			<div class="modal-body" id="deleteContent">
+				<button class="btn btn-success" (click)="volver()">Volver</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 <div [ngbNavOutlet]="nav" class="mt-2"></div>
-
-

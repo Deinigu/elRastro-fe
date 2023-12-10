@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../../services/product-service/product.service';
 import { PujaService } from '../../../services/puja-service/puja-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-price',
@@ -16,9 +17,13 @@ import { PujaService } from '../../../services/puja-service/puja-service.service
 export class PriceComponent implements OnInit {
   producto : any;
   idProducto : any;
+  idVendedor : any;
+  idUsuario: string="654c0a5b02d9a04cac884db7";
   ultimaPuja : any;
+  cierre : any;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private productService: ProductService, private pujaService: PujaService){}
+  constructor(private http: HttpClient, private route: ActivatedRoute, private productService: ProductService,
+     private pujaService: PujaService, private router : Router){}
 
   ngOnInit(){
     this.route.params.subscribe(params => {
@@ -27,6 +32,15 @@ export class PriceComponent implements OnInit {
 
     this.productService.getProductInfo(this.idProducto).subscribe(data => {
       this.producto = data;
+      this.idVendedor = this.producto.vendedor;
+      if (this.idVendedor == this.idUsuario) {
+        this.cierre = false;
+      }else{
+        let fechaCierre = new Date(this.producto.cierre);
+        let hoy = new Date();
+        this.cierre = fechaCierre < hoy ? false : true;
+      }
+      
       this.pujaService.getUltimaPuja(this.idProducto).subscribe((puja) => {
         if(puja){
           this.producto.valor = puja.valor;
@@ -34,4 +48,9 @@ export class PriceComponent implements OnInit {
       });
     });
   }
+  navigateToPuja() {
+    if (this.cierre) {
+        this.router.navigate(['/puja', this.idProducto]);
+    }
+}
 }

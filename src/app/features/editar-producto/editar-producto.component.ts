@@ -1,27 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MaterialModule } from '../../material.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../services/product-service/product.service';
-import { FormsModule } from '@angular/forms';
 import { ImageService } from '../../services/image-service/image-service.service';
 import { Producto } from '../../interfaces/productos.ts';
-import { Router } from '@angular/router';
-
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-crear-producto',
+  selector: 'app-editar-producto',
   standalone: true,
-  imports: [CommonModule, FormsModule, MaterialModule, HttpClientModule],
-  templateUrl: './crear-producto.component.html',
-  styleUrl: './crear-producto.component.css',
-  providers: [ProductService, ImageService],
-
+  imports: [CommonModule, FormsModule, HttpClientModule],
+  templateUrl: './editar-producto.component.html',
+  styleUrl: './editar-producto.component.css',
+  providers: [ProductService, ImageService]
 })
-export class CrearProductoComponent implements OnInit {
-  selectedFiles: File[] = [];
-  urls: any[] = [];
-  fotos_subidas: boolean = false;
+export class EditarProductoComponent implements OnInit {
+
+  idProducto = "";
   tagsInput: string = "";
   error_empty_field: boolean = false;
   error_precio: boolean = false;
@@ -30,6 +26,7 @@ export class CrearProductoComponent implements OnInit {
   producto_creado: boolean = false;
   producto_en_proceso: boolean = false;
   error_general: boolean = false;
+  datestring : string = '';
 
   producto: Producto = {
     Nombre: '',
@@ -41,22 +38,36 @@ export class CrearProductoComponent implements OnInit {
     vendedor: '654c0a5b02d9a04cac884db7'
   };
 
-
-  constructor(
-    private http: HttpClient,
+  constructor(private http: HttpClient,
     private productService: ProductService,
     private imageService: ImageService,
-    private router : Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
-  ngOnInit(): void {
-    this.fotos_subidas = false;
-    this.producto_creado = false;
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.idProducto = params['id'];
+    });
+
+    this.productService.getProductInfo(this.idProducto).subscribe(data => {
+        this.producto.Nombre = data.Nombre,
+        this.producto.descripcion = data.descripcion,
+        this.producto.fotoURL = data.fotoURL,
+        this.producto.precio = data.precio,
+        this.producto.tags = data.tags,
+        this.producto.cierre = data.cierre,
+        this.producto.vendedor = data.vendedor
+
+        this.datestring = new Date(data.cierre).toISOString().slice(0, 16);;
+
+        this.tagsInput = this.producto.tags.join(',');
+      });
   }
 
   onSubmit() {
     this.producto.tags = this.tagsInput.split(',').map(tag => tag.trim());
-    this.producto.cierre = new Date(this.producto.cierre);
+    this.producto.cierre = new Date(this.datestring);
     this.producto.precio = Number(this.producto.precio);
 
     // Reiniciar errores
@@ -77,50 +88,26 @@ export class CrearProductoComponent implements OnInit {
     } else if (this.producto.precio <= 0) {
       this.error_precio = true;
     }
-    else if (!this.fotos_subidas) {
-      this.error_fotos = true;
-    }
 
     else {
       console.log(this.producto);
       this.producto_en_proceso = true;
-
-      this.productService.createProducto(this.producto).subscribe(
-        (createdProduct) => {
-          console.log('Product created:', createdProduct);
-          this.producto_en_proceso = false;
-          this.producto_creado = true;
-        },
-        (error) => {
-          console.error('Error creating product:', error);
-          this.producto_en_proceso = false;
-          this.error_general = true;
-        }
-      );
+      this.productService.editProducto(this.idProducto, this.producto)
+        .subscribe(
+          (respuesta) => {
+            console.log('Product edited:', respuesta);
+            this.producto_en_proceso = false;
+            this.producto_creado = true;
+          },
+          (error) => {
+            console.error('Error creating product:', error);
+            this.producto_en_proceso = false;
+            this.error_general = true;
+          });
     }
   }
 
-  onButtonVolverClick() : void {
+  onButtonVolverClick(): void {
     this.router.navigate(['/']);
-  }
-
-  // Cloudinary
-  onFileSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files) {
-      this.selectedFiles = Array.from(input.files);
-    }
-  }
-
-  onButtonClicked(): void {
-    if (this.selectedFiles.length > 0) {
-      this.imageService.uploadImage(this.selectedFiles).subscribe(response => {
-        if (response) {
-          this.urls = response.urls;
-          this.producto.fotoURL = this.urls;
-          this.fotos_subidas = true;
-        }
-      });
-    }
   }
 }
