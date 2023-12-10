@@ -6,6 +6,9 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ProductService } from '../../../services/product-service/product.service';
 import { FormsModule } from '@angular/forms';
 import { Puja } from '../../../interfaces/puja';
+import { HuellaCarbonoService } from '../../../services/huellaCarbono-service/huella-carbono-service.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-puja-form',
@@ -13,7 +16,7 @@ import { Puja } from '../../../interfaces/puja';
   imports: [CommonModule, FormsModule, HttpClientModule],
   templateUrl: './puja-form.component.html',
   styleUrl: './puja-form.component.css',
-  providers: [PujaService]
+  providers: [PujaService, ProductService, HuellaCarbonoService]
 })
 export class PujaFormComponent implements OnInit {
   idProducto : any;
@@ -24,26 +27,32 @@ export class PujaFormComponent implements OnInit {
   success = false;
   error = false;
   producto: any;
+  tasa: any;
+  idUsuario1 = "654c0a5b02d9a04cac884db7"
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private productService: ProductService, private pujaService : PujaService){}
 
-  ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.idProducto = params['id'];
-    });
+  constructor(private http: HttpClient, private route: ActivatedRoute, private productService: ProductService, 
+    private pujaService : PujaService, private huellaCarbonoService : HuellaCarbonoService, private router : Router){}
 
-    this.productService.getProductInfo(this.idProducto).subscribe(data => {
-      this.producto = data;
-      this.precio = this.producto.precio;
-      this.pujaService.getUltimaPuja(this.idProducto).subscribe((puja) => {
-        if(puja){
-          this.producto.valor = puja.valor;
-          this.precio = puja.valor;
-        }
+    ngOnInit(): void {
+      this.route.params.subscribe(params => {
+        this.idProducto = params['id'];
       });
-    });
-  }
-
+  
+      this.productService.getProductInfo(this.idProducto).subscribe(data => {
+        this.producto = data;
+        this.precio = this.producto.precio;
+        this.pujaService.getUltimaPuja(this.idProducto).subscribe((puja) => {
+          if(puja){
+            this.producto.valor = puja.valor;
+            this.precio = puja.valor;
+          }
+        this.huellaCarbonoService.getHuellaCarbono(this.idUsuario1, this.producto.vendedor).subscribe(response =>{
+        this.tasa = response.tasa_emisiones;
+      });
+        });
+      });
+    }
   placeBid(precio: {precio: string}){
     this.precioPujar = Number(precio.precio);
     if (this.precioPujar <= this.precio){
@@ -59,6 +68,7 @@ export class PujaFormComponent implements OnInit {
         (res) => {
           console.log(res);
           this.showSuccessAlert();
+          this.redirectionProduct();
         })
     }
   }
@@ -70,11 +80,15 @@ export class PujaFormComponent implements OnInit {
     }, 3000);
   }
 
-  private showErrorMessage(){
+  public showErrorMessage(){
     this.error = true;
     setTimeout(() => {
       this.error = false;
     }, 3000);
+  }
+
+  public redirectionProduct(){
+    this.router.navigate(['/producto', this.idProducto]);
   }
 
 }
