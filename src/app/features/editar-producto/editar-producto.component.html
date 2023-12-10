@@ -1,18 +1,18 @@
 <div class="container">
-  <h1>Nuevo producto</h1>
+  <h1>Editar producto</h1>
 </div>
 <div *ngIf="producto_en_proceso" class="container mt-4">
   <div class="mb-3">
 
     <div class="alert alert-info mt-2" role="alert">
-      Creando producto...
+      Editando producto...
     </div>
   </div>
 </div>
 <div *ngIf="producto_creado" class="container mt-4">
   <div class="mb-3">
     <div class="alert alert-success mt-2" role="alert">
-      Producto creado con éxito.
+      Producto editado con éxito.
     </div>
     <div class="btn" (click)="onButtonVolverClick()">Volver</div>
   </div>
@@ -27,13 +27,7 @@
   </div>
 </div>
 
-<div *ngIf="!producto_creado && !error_general"  class="container mt-4">
-  <label for="fileInput" class="form-label">Subir Imágenes:</label>
-  <input type="file" id="fileInput" accept="image/*" multiple (change)="onFileSelected($event)" class="form-control">
-  <button *ngIf="!fotos_subidas" class="btn  mt-2" (click)="onButtonClicked()">Subir imágenes</button>
-  <div *ngIf="fotos_subidas" class="alert alert-success mt-2" role="alert">
-    ¡Fotos subidas!
-  </div>
+<div *ngIf="!producto_creado && !error_general" class="container mt-4">
   <form (ngSubmit)="onSubmit()">
     <br>
     <div class="mb-3">
@@ -59,8 +53,7 @@
 
     <div class="mb-3">
       <label for="cierre" class="form-label">Fecha de cierre:</label>
-      <input type="datetime-local" id="cierre" [(ngModel)]="producto.cierre" name="cierre" class="form-control"
-        required>
+      <input type="datetime-local" [(ngModel)]="datestring" name="cierre" class="form-control" required>
     </div>
 
     <div *ngIf="error_empty_field" class="alert alert-danger mt-2" role="alert">

@@ -11,6 +11,7 @@ import { BusquedaComponent } from './features/navbar/busqueda/busqueda.component
 import { ProductInfoComponent } from './features/product-info/product-info/product-info.component';
 import { CrearProductoComponent } from './features/crear-producto/crear-producto.component';
 import { PujaComponent } from './features/puja/puja/puja.component';
+import { EditarProductoComponent } from './features/editar-producto/editar-producto.component';
 
 export const routes: Routes = [
     {
@@ -23,6 +24,11 @@ export const routes: Routes = [
         path: 'producto/crear',
         component: CrearProductoComponent,
         title: 'Crear producto'
+    },
+    {
+        path: 'producto/editar/:id',
+        component: EditarProductoComponent,
+        title: 'Información del producto'
     },
     {
         path: 'producto/:id',
