@@ -1,34 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mis Chats</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
-
-  <div class="container mt-4">
-    <h2 class="mb-4">Mis Chats</h2>
-    <div class="list-group">
-      <a class="list-group-item list-group-item-action chat-item" *ngFor="let conversacion of conversaciones">
-        <div class="d-flex align-items-center">
-          <img [src]="conversacion.fotoURL" class="product-image mr-3">
-          <div>
-            <h4 class="mb-0">{{ conversacion.productoNombre }}</h4>
-            <small class="text-muted mb-2">
-              {{ (conversacion.vendedor && conversacion.vendedor.id === usuarioId) ? 'Usuario Anónimo' : conversacion.vendedor?.nombreUsuario || 'Usuario Anónimo' }}
-            </small>
-            <p class="mb-0">Último mensaje: {{ (conversacion.chats && conversacion.chats[0] && conversacion.ultimoMensaje) || 'Sin mensajes' }}</p>
-          </div>
-          <div class="ml-auto">
-            <button class="btn btn-primary mr-2" (click)="accederChat(conversacion._id)">Acceder</button>
-            <button class="btn btn-danger" (click)="borrarChat(conversacion._id)">Borrar</button>
-          </div>
+<div class="container mt-4">
+  <h2 class="mb-4">Mis Chats</h2>
+  <div class="list-group">
+    <a class="list-group-item list-group-item-action chat-item" *ngFor="let conversacion of conversaciones">
+      <div class="d-flex align-items-center">
+        <img [src]="conversacion.fotoURL" class="product-image mr-3">
+        <div class="ms-2">
+          <h4 class="mb-0">{{ conversacion.productoNombre }}</h4>
+          <small class="text-muted mb-2">
+            {{ (conversacion.vendedor && conversacion.vendedor.id === usuarioId) ? 'Usuario Anónimo' :
+            conversacion.vendedor?.nombreUsuario || 'Usuario Anónimo' }}
+          </small>
+          <p class="mb-0">Último mensaje: {{ (conversacion.chats && conversacion.chats[0] && conversacion.ultimoMensaje)
+            || 'Sin mensajes' }}</p>
         </div>
-      </a>
-    </div>
+        <div class="ms-auto">
+          <button class="btn btn-primary me-2" (click)="accederChat(conversacion._id)">Acceder</button>
+          <button class="btn btn-danger" (click)="borrarChat(conversacion._id)">Borrar</button>
+        </div>
+      </div>
+    </a>
   </div>
-  
-</body>
-</html>
+</div>
