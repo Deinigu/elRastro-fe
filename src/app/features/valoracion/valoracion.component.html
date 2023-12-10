@@ -8,7 +8,7 @@
 </head>
 <body>
   <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary valoracion-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  <button type="button" class="btn btn-success btn-sm btn-valorar-usuario" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
     Valorar usuario
   </button>
   
@@ -21,26 +21,24 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>        
         <div class="modal-body">
-          
-          <!-- AQUÍ VA EL FORMULARIO DE VALORACIÓN -->
-          <app-star-rating [(rating)]="userRating"></app-star-rating>
-          <p>¡Has valorado con: {{userRating}} estrellas!</p>
-           <!-- AQUÍ VA EL FORMULARIO DE VALORACIÓN -->
+        <!-- AQUÍ VA EL FORMULARIO DE VALORACIÓN -->
+        <app-star-rating [(rating)]="userRating"></app-star-rating>
+        <p>¡Vas a valorar con {{userRating}} estrellas!</p>
 
-          <div class="mb-3">
-            <label for="comment">Comentario:</label>
-            <textarea id="comment" class="form-control" rows="3"></textarea>
-          </div>
+        <div class="mb-3">
+          <label for="comment">Comentario:</label>
+          <textarea id="comment" class="form-control" rows="3" [(ngModel)]="comentario"></textarea>
         </div>
+
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary">Enviar Valoración</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="guardarValoracion()">Enviar Valoración</button>
         </div>
+
       </div>
     </div>
   </div>
- 
-  <!-- Bootstrap JS y Popper.js (Requeridos para el funcionamiento de algunos componentes de Bootstrap) -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</div>
+
 </body>
 </html>

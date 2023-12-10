@@ -30,7 +30,7 @@ interface Mensaje {
 })
 
 export class ChatsComponent implements OnInit {
-  imagen = ["https://i.blogs.es/a13394/totoro/1366_2000.jpg"]
+  imagen = "";
 
   userId = '654c0a5b02d9a04cac884db7';
   conversacion: any; // Asegúrate de que este tipo coincida con la respuesta de tu servicio
@@ -73,6 +73,7 @@ export class ChatsComponent implements OnInit {
         this.productoService.getProductInfo(productId).subscribe(productDetails => {
           this.vendedor = productDetails.vendedor;
           this.productoNombre = productDetails.Nombre;
+          this.imagen = productDetails.fotoURL[0];
         });
       }
     });

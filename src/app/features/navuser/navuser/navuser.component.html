@@ -3,7 +3,9 @@
 
 <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
 	<li [ngbNavItem]="1">
+
 		<button ngbNavLink>Información personal</button>
+
 		<ng-template ngbNavContent>
 			
 			<div *ngIf="miPerfil">
@@ -45,55 +47,133 @@
 		</ng-template>
 	</li>
 
-	<!------------------- MIS VALORACIONES ---------------------------->
+ <!------------------- MIS VALORACIONES ---------------------------->
+ <!-- Valoraciones Recibidas -->
+ <li [ngbNavItem]="2">
+	<button ngbNavLink>Valoraciones</button>
+	<ng-template ngbNavContent>
+	  <div class="valoraciones-container">
 
-	<li [ngbNavItem]="2">
-		<button ngbNavLink>Mis valoraciones ({{ valoraciones.length }})</button>
-		<ng-template ngbNavContent>
-			<div class="valoraciones-container">
-				<!-- Itera sobre las valoraciones -->
-				<div *ngFor="let valoracion of valoraciones" class="card mb-3">
-					<div class="card-body">
-						<div class="valoracion-header">
-							<!-- PRODUCT IMAGE -->
-							<img *ngIf="valoracion.producto" [src]="valoracion.producto.fotoProducto"
-								alt="Producto Image" class="product-image">
-							<!-- USER NAME AND RATING -->
-							<div class="user-info">
-								<h5 class="card-title product-name">{{ valoracion.producto ?
-									valoracion.producto.nombreProducto : 'Producto no disponible' }}</h5>
-								<div class="rating">
-									<app-stars *ngIf="valoracion.producto" [rating]="valoracion.puntuacion"></app-stars>
-								</div>
-							</div>
-						</div>
-
-						<!-- COMMENT -->
-						<p class="card-text mt-2">{{ valoracion.comentario }}</p>
-
-						<!-- ADDITIONAL DETAILS -->
-						<div class="additional-details">
-							<p class="card-text mt-2">
-								Por <strong>{{ valoracion.nombreUsuario }}</strong> el {{ valoracion.fecha | date:
-								'dd/MM/yyyy' }}
-							</p>
-						</div>
-
-					</div>
+		<!-- Sección de Valoraciones Pendientes -->
+		<div class="custom-valoraciones-section">
+			<h3 class="custom-section-title">Valoraciones pendientes como comprador</h3>
+		  
+			<div *ngIf="valoracionesPendientes.length > 0; else noPendingReviews" class="custom-card-container">
+			  <!-- Itera sobre las valoraciones pendientes como comprador -->
+			  <div *ngFor="let pujaPendiente of valoracionesPendientes" class="custom-card mb-3">
+				<div class="custom-card-body">
+				  <!-- Muestra la foto del producto -->
+				  <img [src]="pujaPendiente.producto.fotoProducto" alt="Foto del producto" class="custom-product-image">
+				  
+				  <!-- Muestra el nombre del producto -->
+				  <h5 class="custom-card-title custom-product-name">{{ pujaPendiente.producto.nombreProducto }}</h5>
+				  
+				  <!-- Muestra el nombre del vendedor si está disponible -->
+				  <ng-container *ngIf="pujaPendiente.nombreVendedor; else loadingVendedor">
+					<p class="custom-vendedor-info">Vendedor: {{ pujaPendiente.nombreVendedor }}</p>
+				  </ng-container>
+				  
+				  <!-- Agrega el componente app-valoracion para realizar la valoración -->
+				  <app-valoracion
+					[userId]="idUsuario"
+					[vendedorId]="pujaPendiente.producto.vendedor || ''"
+					[productId]="pujaPendiente.producto.id || ''"
+					(valoracionCompletada)="manejarValoracionCompletada($event)"
+				  ></app-valoracion>
 				</div>
+			  </div>
 			</div>
+		  
+			<ng-template #noPendingReviews>
+			  <p class="custom-no-reviews-message">No tienes valoraciones pendientes como comprador.</p>
+			</ng-template>
+		  </div>
+		  
+		  
+		<ng-template #loadingVendedor>
+		<p>Cargando información del vendedor...</p>
 		</ng-template>
-	</li>
+	</div>
+  
 
+		<!-- Sección de Valoraciones Pendientes -->
+		<div class="custom-valoraciones-section">
+			<h3 class="custom-section-title">Valoraciones pendientes como vendedor</h3>
+		  
+			<div *ngIf="valoracionesPendientesVendedor.length > 0; else noPendingReviews2" class="custom-card-container">
+			  <!-- Itera sobre las valoraciones pendientes como comprador -->
+			  <div *ngFor="let pujaPendiente of valoracionesPendientesVendedor" class="custom-card mb-3">
+				<div class="custom-card-body">
+				  <!-- Muestra la foto del producto -->
+				  <img [src]="pujaPendiente.producto.fotoProducto" alt="Foto del producto" class="custom-product-image">
+				  
+				  <!-- Muestra el nombre del producto -->
+				  <h5 class="custom-card-title custom-product-name">{{ pujaPendiente.producto.nombreProducto }}</h5>
+				  
+				  <!-- Muestra el nombre del vendedor si está disponible -->
+				 
+					<p class="custom-vendedor-info">Comprador: {{ pujaPendiente.nommbrepujador }}</p>
+				  
+				  <!-- Agrega el componente app-valoracion para realizar la valoración -->
+				  <app-valoracion
+					[userId]="pujaPendiente.producto.vendedor"
+					[vendedorId]="pujaPendiente.pujador|| ''"
+					[productId]="pujaPendiente.producto.id || ''"
+					(valoracionCompletada)="manejarValoracionCompletada($event)"
+				  ></app-valoracion>
+				</div>
+			  </div>
+			</div>
+		  
+			<ng-template #noPendingReviews2>
+			  <p class="custom-no-reviews-message">No tienes valoraciones pendientes como vendedor.</p>
+			</ng-template>
+		  </div>
+		  
+		  
+		<ng-template #loadingVendedor2>
+		<p>Cargando información del comprador...</p>
+		</ng-template>
+  
+		<!-- Sección de Valoraciones Recibidas -->
+		<div class="valoraciones-section">
+		  <h3 class="section-title">Valoraciones recibidas ({{ valoraciones.length }})</h3>
+		  
+		  <!-- Itera sobre las valoraciones recibidas -->
+		  <div *ngFor="let valoracion of valoraciones" class="card mb-3">
+			<div class="card-body">
+			  <div class="valoracion-header">
+				<!-- PRODUCT IMAGE -->
+				<img *ngIf="valoracion.producto" [src]="valoracion.producto.fotoProducto" alt="Producto Image" class="product-image">
+				<!-- USER NAME AND RATING -->
+				<div class="user-info">
+				  <h5 class="card-title product-name">{{ valoracion.producto ? valoracion.producto.nombreProducto : 'Producto no disponible' }}</h5>
+				  <div class="rating">
+					<app-stars *ngIf="valoracion.producto" [rating]="valoracion.puntuacion"></app-stars>
+				  </div>
+				</div>
+			  </div>
+  
+			  <!-- COMMENT -->
+			  <p class="card-text mt-2">{{ valoracion.comentario }}</p>
+  
+			  <!-- ADDITIONAL DETAILS -->
+			  <div class="additional-details">
+				<p class="card-text mt-2">
+				  Por <strong>{{ valoracion.nombreUsuario }}</strong> el {{ valoracion.fecha | date: 'dd/MM/yyyy' }}
+				</p>
+			  </div>
+			</div>
+		  </div>
+		</div>
+	</ng-template>
+  </li>
+  
  <!------------------- MIS PRODUCTOS ---------------------------->
  <li [ngbNavItem]="3">
 	<button ngbNavLink>Productos en venta</button>
 	<ng-template ngbNavContent>
-	  <div class="search-bar">
-		<input type="text" placeholder="Buscar productos...">
-		<button class="btn btn-primary btn-custom-color-buscar">Buscar</button>
-	  </div>
-			<br>
+<br>
 			<div class="row row-cols-1 row-cols-md-2 g-2">
 				<ng-container *ngIf="productosVenta.length > 0; else noProducts">
 					<div class="col-md-3" *ngFor="let producto of productosVenta">
@@ -140,7 +220,62 @@
 			</ng-template>
 		</ng-template>
 	</li>
+	  
+  
+ <!------------------- MIS PUJAS ---------------------------->
+ <li [ngbNavItem]="4">
+	<button ngbNavLink>Historial de Pujas</button>
+	<ng-template ngbNavContent>
+	  <div class="container mt-4">
+		<div class="row">
+		  <div class="col-md-10 offset-md-1">
+			<ng-container *ngIf="pujas.length > 0; else noBids">
+			  <div class="list-group">
+				<div *ngFor="let puja of pujas">
+				  <div class="card mb-4 d-flex flex-row" [ngClass]="{'border-success': esPujaMasAltaYUsuario(puja), 'border-danger': !esPujaMasAltaYUsuario(puja) && haPasadoFecha(puja.producto.cierre)}">
+					<img [src]="puja.producto.fotoProducto" class="card-img-top img-fluid" alt="Product Image" style="max-width: 200px; object-fit: cover; border-radius: 12px 0 0 12px;">
+					<div class="card-body d-flex flex-column justify-content-between" style="padding: 1.5rem;">
+					  <div>
+						<h5 class="card-title mb-2" style="font-size: 1.5rem; font-weight: bold;">{{ puja.producto.nombreProducto }}</h5>
+						<p class="card-text mt-2"><span style="font-weight: bold;">Vendido por </span>{{ puja.nombreVendedor }}</p>
+						<p class="card-text mb-2">
+						  <span style="font-weight: bold;">Puja realizada el </span>
+						  <span style="color: #007bff; font-weight: bold;">{{ formatDate(puja.fecha) }}</span>
+						</p>
+						<p class="card-text mb-2">
+						  <span style="font-weight: bold;">Valor de la puja: </span>
+						  <span style="color: #28a745; font-weight: bold;">${{ puja.valor }}</span>
+						</p>
+						<p class="card-text mb-2">
+						  <span style="font-weight: bold;">
+							{{ haPasadoFecha(puja.producto.cierre) ? 'Terminó el' : 'Termina el' }}
+						  </span>
+						  {{ formatDate(puja.producto.cierre) }}
+						</p>
+					  </div>
+					</div>
+					<div class="card-text mt-2" *ngIf="esPujaMasAltaYUsuario(puja)" style="color: #28a745; font-weight: bold; margin-bottom: 8px;">
+					  ¡Producto conseguido!
+					</div>
+					<div class="card-text mt-2" *ngIf="!esPujaMasAltaYUsuario(puja) && haPasadoFecha(puja.producto.cierre)" style="color: #dc3545; font-weight: bold; margin-bottom: 8px;">
+					  ¡Esta puja no ha llegado a ser la más alta!
+					</div>
+				  </div>
+				</div>
+			  </div>
+			</ng-container>
+			<ng-template #noBids>
+			  <p class="text-center mt-4">No hay pujas realizadas.</p>
+			</ng-template>
+		  </div>
+		</div>
+	  </div>
+	</ng-template>
+  </li>
+    
+    
 </ul>
+
 
 <!-- EL MODAL PARA ELIMINAR -->
 <div class="modal fade" id="delete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -159,6 +294,7 @@
 		</div>
 	</div>
 </div>
+
 
 <div class="modal fade" id="ok" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
 	aria-labelledby="deleteLabel" aria-hidden="true">
