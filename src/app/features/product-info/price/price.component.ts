@@ -17,6 +17,8 @@ import { Router } from '@angular/router';
 export class PriceComponent implements OnInit {
   producto : any;
   idProducto : any;
+  idVendedor : any;
+  idUsuario: string="654c0a5b02d9a04cac884db7";
   ultimaPuja : any;
   cierre : any;
 
@@ -30,9 +32,15 @@ export class PriceComponent implements OnInit {
 
     this.productService.getProductInfo(this.idProducto).subscribe(data => {
       this.producto = data;
-      let fechaCierre = new Date(this.producto.cierre);
-      let hoy = new Date();
-      this.cierre = fechaCierre < hoy ? false : true;
+      this.idVendedor = this.producto.vendedor;
+      if (this.idVendedor == this.idUsuario) {
+        this.cierre = false;
+      }else{
+        let fechaCierre = new Date(this.producto.cierre);
+        let hoy = new Date();
+        this.cierre = fechaCierre < hoy ? false : true;
+      }
+      
       this.pujaService.getUltimaPuja(this.idProducto).subscribe((puja) => {
         if(puja){
           this.producto.valor = puja.valor;
