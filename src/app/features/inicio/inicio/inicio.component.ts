@@ -7,6 +7,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Observable, forkJoin, switchMap } from 'rxjs';
 import { DatePipe } from '@angular/common';
 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-inicio',
@@ -26,11 +27,12 @@ export class InicioComponent implements OnInit {
     private http: HttpClient,
     private productService: ProductService,
     private pujaService: PujaService,
-    private datePipe: DatePipe 
+    private datePipe: DatePipe, 
+    private router: Router
   ) { }
 
   redirectToProduct(productId: any) {
-    window.location.href = `http://localhost:4200/producto/${productId}`;
+    this.router.navigate(['/producto', productId]);
   }
 
   ngOnInit(): void {

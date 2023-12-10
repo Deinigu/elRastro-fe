@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Producto } from '../../interfaces/productos.ts';
 
 @Injectable({
   providedIn: 'root'
@@ -18,10 +19,22 @@ export class ProductService {
     const url = 'http://localhost:8001/api/productos/';
     return this.http.get<any>(url);
   }
-  
-  getSearchProducts(tags : string) : Observable<any>{
+
+  createProducto(producto: Producto): Observable<Producto> {
+    const url = 'http://localhost:8001/api/productos/create/';
+    return this.http.post<Producto>(url, producto);
+  }
+  getSearchProducts(tags : string) : Observable<any> {
     const url = 'http://localhost:8001/api/productos/busqueda/' +tags;
     return this.http.get<any>(url);
+  }
+  editProducto(idProducto : string, producto: Producto): Observable<any> {
+    const url = "http://localhost:8001/api/productos/update/" + idProducto + "/";
+    return this.http.put(url, producto);
+  }
+  deleteProducto(productoID: string): Observable<any> {
+    const url = 'http://localhost:8001/api/productos/delete/'+productoID;
+    return this.http.delete<any>(url);
   }
 }
 

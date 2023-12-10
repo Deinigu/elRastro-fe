@@ -9,65 +9,84 @@ import { StarRatingComponent } from './features/valoracion/star-rating/star-rati
 import { EditarPerfilComponent } from './features/perfil-usuario/editar-perfil/editar-perfil.component';
 import { BusquedaComponent } from './features/navbar/busqueda/busqueda.component';
 import { ProductInfoComponent } from './features/product-info/product-info/product-info.component';
+import { CrearProductoComponent } from './features/crear-producto/crear-producto.component';
 import { PujaComponent } from './features/puja/puja/puja.component';
-
+import { EditarProductoComponent } from './features/editar-producto/editar-producto.component';
+import { FotoperfilComponent } from './features/fotoperfil/fotoperfil.component';
 
 export const routes: Routes = [
     {
-        path : '',
-        component : InicioComponent,
-        title : 'Inicio'
-     },
+        path: '',
+        component: InicioComponent,
+        title: 'Inicio'
+    },
     // Empezar a poner vuestros path aqui abajo:
     {
-        path : 'usuario/:id',
-        component : PerfilUsuarioComponent,
-        title : 'Perfil de usuario'
+        path: 'producto/crear',
+        component: CrearProductoComponent,
+        title: 'Crear producto'
     },
     {
-        path : 'iniciarsesion',
-        component : LoginComponent,
-        title : 'Inicio de sesión'
+        path: 'producto/editar/:id',
+        component: EditarProductoComponent,
+        title: 'Información del producto'
     },
     {
-        path : 'chats/:idChat',
-        component : ChatsComponent,
-        title : 'Chat privado'
+        path: 'producto/:id',
+        component: ProductInfoComponent,
+        title: 'Información del producto'
     },
     {
-        path : 'usuario/:id/chats',
-        component : MischatsComponent,
-        title : 'Mis chats'
+
+        path: 'usuario/cambiarimagen/:id',
+        component: FotoperfilComponent,
+        title: 'Foto de perfil'
     },
     {
-        path : 'usuario/:id/valoracion',
-        component : ValoracionComponent,
-        title : 'Valoracion'
+
+        path: 'usuario/:id',
+        component: PerfilUsuarioComponent,
+        title: 'Perfil de usuario'
     },
     {
-        path : 'usuario/:id/star',
-        component : StarRatingComponent,
-        title : 'EJEMPLO ESTRELLAS'
+        path: 'iniciarsesion',
+        component: LoginComponent,
+        title: 'Inicio de sesión'
+    },
+    {
+        path: 'chats/:idChat',
+        component: ChatsComponent,
+        title: 'Chat privado'
+    },
+    {
+        path: 'usuario/:id/chats',
+        component: MischatsComponent,
+        title: 'Mis chats'
+    },
+    {
+        path: 'usuario/:id/valoracion',
+        component: ValoracionComponent,
+        title: 'Valoracion'
+    },
+    {
+        path: 'usuario/:id/star',
+        component: StarRatingComponent,
+        title: 'EJEMPLO ESTRELLAS'
     },
     {
         path: 'editar-perfil/:id',
         component: EditarPerfilComponent,
         title: 'Editar Perfil'
-     },
-    {
-        path :'producto/:id',
-        component : ProductInfoComponent,
-        title : 'Información del producto' 
     },
 
     {
-        path : 'puja/:id',
-        component : PujaComponent,
-        title : 'Puja por un producto'
+        path: 'puja/:id',
+        component: PujaComponent,
+        title: 'Puja por un producto'
     },
-       {
-        path : 'busqueda/:tags',
-        component : BusquedaComponent,
-        title : 'Busqueda'
-     }
+    {
+        path: 'busqueda/:tags',
+        component: BusquedaComponent,
+        title: 'Busqueda'
+    }
 ];

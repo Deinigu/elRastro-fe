@@ -17,6 +17,7 @@ interface Valoracion {
   idProducto: string;
   producto: Producto | null; 
   nombreUsuario: string | null;
+
 }
 
 interface Producto {
@@ -38,7 +39,8 @@ interface Producto {
 })
 
 export class NavuserComponent implements OnInit {
-  active = 1;
+  abrir = localStorage.getItem('abrir')
+  active = this.abrir!==null? parseInt(this.abrir) : 1 ;
   imagen = '';
   title = 'Perfil de usuario';
   nombreUsuario = '';
@@ -50,6 +52,17 @@ export class NavuserComponent implements OnInit {
   productosVenta: Producto[] = [];
   correo = '';
   usuario = '';
+  productoBorrar : Producto ={
+    id: '',
+    nombreProducto: '',
+    precioPuja: 0,
+    descripcion: '',
+    fotoProducto: '',
+    vendedor: '',
+  };
+  miPerfil = false;
+  usuarioLogeado = '654c0a5b02d9a04cac884db7';
+  
 
   constructor(
     private route: ActivatedRoute,
@@ -63,6 +76,8 @@ export class NavuserComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.idUsuario = params['id'];
     });
+
+    this.miPerfil = this.idUsuario == this.usuarioLogeado;
 
     this.usuarioService.getUsuarioInfo(this.idUsuario).subscribe((data) => {
       this.usuario = data.nombreUsuario;
@@ -132,4 +147,27 @@ export class NavuserComponent implements OnInit {
   editarPerfil() {
     this.router.navigate(['/editar-perfil', this.idUsuario]);
   }
+
+  guardaProd(prod: Producto){
+    this.productoBorrar=prod;
+  }
+
+  deleteProd(prod: Producto){
+    this.productService.deleteProducto(prod.id).subscribe();
+  }
+
+  volver(){
+    location.reload();
+  }
+
+  editarProducto(prod: Producto)
+  {
+    this.router.navigate(['/producto/editar',prod.id]);
+  }
+
+  
+  onClickToFotoDePerfil() {
+    this.router.navigate(['/usuario/cambiarimagen',this.idUsuario]);
+  }
+
 }
