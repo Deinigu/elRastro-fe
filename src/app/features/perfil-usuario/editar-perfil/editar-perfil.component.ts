@@ -52,8 +52,9 @@ export class EditarPerfilComponent implements OnInit {
     );
   }
   direccionValidator() {
-    return Validators.pattern(/^[\w\s.,\/]+\/\d{5}\/[\w\s.,\/]+$/);
+    return Validators.pattern(/^[\w\s.,\/áéíóúÁÉÍÓÚ]+\/\d{5}\/[\w\s.,\/áéíóúÁÉÍÓÚ]+$/);
   }
+  
 
   guardarCambios() {
     const nuevosDatosFormulario = {
@@ -69,7 +70,7 @@ export class EditarPerfilComponent implements OnInit {
     this.usuarioService.editarPerfil(this.idUsuario, nuevosDatosActualizados)
       .subscribe(
         (respuesta) => {
-          console.log('Perfil actualizado con éxito:', respuesta);
+          alert('¡Usuario actualizado con éxito!');
           this.router.navigate(['/usuario/' + this.idUsuario]);
         },
         (error) => {
