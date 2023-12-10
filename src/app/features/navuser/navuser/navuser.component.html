@@ -101,7 +101,9 @@
 			  </div>
 			  <div class="card-footer mt-auto"> 
 				<small class="text-body-secondary">Precio: ${{ producto.precioPuja }}</small>
-				<br>
+				<button class="btn btn-danger" (click)="guardaProd(producto)" data-bs-toggle="modal" data-bs-target="#delete" style="font-size: smaller; width: 50%; height: 60%; margin-left: 25%;">
+					Eliminar
+				</button>
 			  </div>
 			</div>
 		  </div>
@@ -117,11 +119,36 @@
 	  </ng-template>
 	</ng-template>
   </li>
-  
-  
-  
-  
 </ul>
+
+<!-- EL MODAL PARA ELIMINAR -->
+<div class="modal fade" id="delete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 id="deleteLabel">El producto "{{ productoBorrar.nombreProducto }}" será eliminado</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>        
+        <div class="modal-body" id="deleteContent">
+			<h2>¿Estás seguro?</h2>
+			<button class="btn btn-danger" (click)="deleteProd(productoBorrar)" data-bs-toggle="modal" data-bs-target="#ok">ELIMINAR</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="ok" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 id="deleteLabel">Producto eliminado con éxito</h1>
+        </div>        
+        <div class="modal-body" id="deleteContent">
+			<button class="btn btn-success" (click)="volver()">Volver</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <div [ngbNavOutlet]="nav" class="mt-2"></div>
 

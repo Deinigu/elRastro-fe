@@ -17,6 +17,7 @@ interface Valoracion {
   idProducto: string;
   producto: Producto | null; 
   nombreUsuario: string | null;
+
 }
 
 interface Producto {
@@ -38,7 +39,8 @@ interface Producto {
 })
 
 export class NavuserComponent implements OnInit {
-  active = 1;
+  abrir = localStorage.getItem('abrir')
+  active = this.abrir!==null? parseInt(this.abrir) : 1 ;
   imagen = '';
   title = 'Perfil de usuario';
   nombreUsuario = '';
@@ -50,6 +52,15 @@ export class NavuserComponent implements OnInit {
   productosVenta: Producto[] = [];
   correo = '';
   usuario = '';
+  productoBorrar : Producto ={
+    id: '',
+    nombreProducto: '',
+    precioPuja: 0,
+    descripcion: '',
+    fotoProducto: '',
+    vendedor: '',
+  };
+  
 
   constructor(
     private route: ActivatedRoute,
@@ -132,4 +143,17 @@ export class NavuserComponent implements OnInit {
   editarPerfil() {
     this.router.navigate(['/editar-perfil', this.idUsuario]);
   }
+
+  guardaProd(prod: Producto){
+    this.productoBorrar=prod;
+  }
+
+  deleteProd(prod: Producto){
+    this.productService.deleteProducto(prod.id).subscribe();
+  }
+
+  volver(){
+    location.reload();
+  }
+
 }
