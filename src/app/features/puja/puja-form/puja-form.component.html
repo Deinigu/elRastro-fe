@@ -30,7 +30,7 @@
   <div class="modal fade" id="pujaModal" tabindex="-1" aria-labelledby="pujaModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
+            <div class="modal-header banner">
                 <h5 class="modal-title" id="pujaModalLabel"></h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -40,7 +40,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="redirectionProduct()">Cancelar</button>
-                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" (click)="placeBid(tasa)"> Confirmar Puja</button>
+                <button type="submit" class="btn boton-pujar" data-bs-dismiss="modal" (click)="placeBid(producto.precio)"> Confirmar Puja</button>
             </div>
         </div>
     </div>

@@ -8,6 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { Puja } from '../../../interfaces/puja';
 import { HuellaCarbonoService } from '../../../services/huellaCarbono-service/huella-carbono-service.service';
 import { Router } from '@angular/router';
+import { switchMap, catchError } from 'rxjs/operators';
+import { of, Subscription } from 'rxjs';
 
 
 @Component({
@@ -29,33 +31,51 @@ export class PujaFormComponent implements OnInit {
   producto: any;
   tasa: any;
   idUsuario1 = "654c0a5b02d9a04cac884db7"
+  subscription: any;
 
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private productService: ProductService, 
     private pujaService : PujaService, private huellaCarbonoService : HuellaCarbonoService, private router : Router){}
 
     ngOnInit(): void {
-      this.route.params.subscribe(params => {
-        this.idProducto = params['id'];
-      });
-  
-      this.productService.getProductInfo(this.idProducto).subscribe(data => {
-        this.producto = data;
-        this.precio = this.producto.precio;
-        this.pujaService.getUltimaPuja(this.idProducto).subscribe((puja) => {
-          if(puja){
+      this.route.params.pipe(
+        switchMap(params => {
+          this.idProducto = params['id'];
+          return this.productService.getProductInfo(this.idProducto);
+        }),
+        switchMap(producto => {
+          this.producto = producto;
+          this.precio = this.producto.precio;
+          return this.pujaService.getUltimaPuja(this.idProducto).pipe(
+            catchError(() => of(null))
+          );
+        }),
+        switchMap(puja => {
+          if (puja) {
             this.producto.valor = puja.valor;
             this.precio = puja.valor;
           }
-        this.huellaCarbonoService.getHuellaCarbono(this.idUsuario1, this.producto.vendedor).subscribe(response =>{
+          return this.huellaCarbonoService.getHuellaCarbono(this.idUsuario1, this.producto.vendedor);
+        })
+      ).subscribe(response => {
+        //console.log("RESPONSE", response);
         this.tasa = response.tasa_emisiones;
-      });
-        });
+        //console.log("TASA", this.tasa);
+      }, error => {
+        console.error("Error: ", error);
       });
     }
+
+    ngOnDestroy(): void {
+      if (this.subscription) {
+        this.subscription.unsubscribe();
+      }
+    }
+    
   placeBid(precio: {precio: string}){
+    console.log(precio.precio);
     this.precioPujar = Number(precio.precio);
-    if (this.precioPujar <= this.precio){
+    if (this.precioPujar < this.precio){
       this.showErrorMessage();
     }else{
       const puja: Puja = {
