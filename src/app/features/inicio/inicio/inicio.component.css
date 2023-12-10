@@ -10,7 +10,7 @@
   background-color: #FFEED4;
   display: flex;
   flex-direction: column;
-  height: 620px;
+  height: 650px;
 }
 
 .product img {
@@ -90,4 +90,12 @@
 
 .h1-title {
   font-size: xx-large;
+}
+
+.fecha {
+  font-size: 1.2em;
+  color: #C54409; 
+  font-weight: bold; 
+  text-align: center; 
+  background-color: #FFEED4;
 }
