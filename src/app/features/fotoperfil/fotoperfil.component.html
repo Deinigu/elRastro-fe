@@ -1,0 +1,24 @@
+<div class="container">
+    <h1 class="mb-4">Cambiar foto de perfil</h1>
+    <div class="d-flex flex-wrap align-items-start">
+      <div class="profile-image mb-4 me-4">
+        <img src="{{datos.fotoURL}}" class="img-fluid rounded-circle" alt="Profile Image">
+      </div>
+      <div class="flex-grow-1">
+        <input *ngIf="!foto_subida && !error" type="file" id="fileInput" accept="image/*" (change)="onFileSelected($event)"
+          class="form-control mb-3">
+        <div *ngIf="error_no_hay_imagen" class="alert alert-danger mt-2" role="alert">
+          No hay ninguna imagen seleccionada.
+        </div>
+        <div *ngIf="foto_subida && !error" class="alert alert-success mt-2" role="alert">
+          ¡Foto cambiada con éxito!
+        </div>
+        <div *ngIf="error" class="alert alert-danger mt-2" role="alert">
+          Error inesperado. Inténtelo de nuevo.
+        </div>
+        <button *ngIf="!foto_subida && !error" class="btn btn-custom mt-2 me-2" (click)="onButtonClicked()">Subir imagen</button>
+        <button class="btn btn-custom-2 mt-2" (click)="onButtonVolverClicked()">Volver</button>
+      </div>
+    </div>
+  </div>
+  

@@ -165,4 +165,9 @@ export class NavuserComponent implements OnInit {
     this.router.navigate(['/producto/editar',prod.id]);
   }
 
+  
+  onClickToFotoDePerfil() {
+    this.router.navigate(['/usuario/cambiarimagen',this.idUsuario]);
+  }
+
 }
