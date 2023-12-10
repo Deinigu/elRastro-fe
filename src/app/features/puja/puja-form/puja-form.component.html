@@ -21,5 +21,28 @@
         </div>
     </div>
     <br>
-    <input type="submit" class="btn boton-pujar" value="Pujar">
+    <!-- Botón que abre el modal -->
+    <button type="button" class="btn boton-pujar" data-bs-toggle="modal" data-bs-target="#pujaModal">
+    Pujar
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="pujaModal" tabindex="-1" aria-labelledby="pujaModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="pujaModalLabel"></h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="lead">¿Estás seguro de que quieres hacer esta puja?</p>
+                <p>Se le aplicará una tasa de <strong>{{tasa}}€</strong></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="redirectionProduct()">Cancelar</button>
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" (click)="placeBid(tasa)"> Confirmar Puja</button>
+            </div>
+        </div>
+    </div>
+    </div>
 </form>

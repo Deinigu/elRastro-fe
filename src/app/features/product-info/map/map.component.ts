@@ -39,16 +39,23 @@ export class MapComponent implements OnInit{
   }
 
   private initMap(location: { latitude: number; longitude: number }): void {
-    const map = L.map('map').setView([location.latitude, location.longitude], 30);
+    const map = L.map('map').setView([location.latitude, location.longitude], 200);
   
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 15,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'  
     }).addTo(map);
   
-    L.marker([location.latitude, location.longitude])
+    /*L.marker([location.latitude, location.longitude])
       .addTo(map)
-      .openPopup();
+      .openPopup();*/
+
+      L.circle([location.latitude, location.longitude], {
+        color: 'red',
+        fillColor: '#f03',
+        fillOpacity: 0.5,
+        radius: 500
+      }).addTo(map);
   }
   
 }
