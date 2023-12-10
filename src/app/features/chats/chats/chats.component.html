@@ -1,0 +1,22 @@
+<div class="container mt-4">
+  <div class="chat-container">
+    <div class="chat-header">
+      <img [src]="imagen" alt="Producto 1" style="max-width: 150px; border-radius: 8px; margin-right: 20px;">
+      {{ productoNombre }}
+    </div>
+    <div class="chat-messages">
+      <div *ngFor="let mensaje of conversacion?.chats" class="message"
+        [ngClass]="{' sent': mensaje.userId === userId, ' received': mensaje.userId !== userId}">
+        <strong>{{ mensaje.userId === userId ? 'Tú' : (mensaje.userId === vendedor ? 'Vendedor' : 'Usuario Anónimo')
+          }}:</strong> {{ mensaje.texto }}
+      </div>
+    </div>
+    <div class="message-input">
+      <div class="input-group">
+        <textarea [(ngModel)]="mensajeNuevo" class="form-control" rows="2"
+          placeholder="Escribe tu mensaje..."></textarea>
+          <button (click)="enviarMensaje()" class="btn btn-custom">Enviar</button>
+      </div>
+    </div>
+  </div>
+</div>

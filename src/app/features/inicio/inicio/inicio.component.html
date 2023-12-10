@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 col-md-6" *ngFor="let product of productos; let i = index">
+            <div class="row">
+                <div class="col-12" >
+                    <div class="product zoom-on-hover d-flex flex-column">
+                        <img [src]="product.fotoURL[0]" alt="Product Image">
+                        <h3 class="h3">{{ product.Nombre }}</h3>
+                        <div class="wrapper">
+                            <p>{{ product.descripcion }}</p>
+                        </div>
+                        <div class="flex-grow-1"></div>
+                        <p class="fecha">Tiempo restante: {{ mostrarTiempoRestante(product.tiempoRestante) }}</p>
+                        <div class="d-flex flex-column align-items-center">
+                            <div class="precio">
+                                <h4>
+                                    <ng-container *ngIf="product.valor">
+                                        {{ product.valor }} €
+                                    </ng-container>
+                                    <ng-container *ngIf="!product.valor">
+                                        {{ product.precio }} €
+                                    </ng-container>
+                                </h4>
+                            </div>
+                            <div class="mb-3">
+                                <button class="btn boton-pujar" (click)="redirectToProduct(product._id)">Pujar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

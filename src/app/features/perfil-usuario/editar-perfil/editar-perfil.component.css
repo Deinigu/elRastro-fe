@@ -1,0 +1,41 @@
+.editar-perfil-container {
+    max-width: 100%;
+    padding: 200px;
+    border-radius: 8px;
+    margin: 0 auto;
+    justify-content: center;
+    height: 100vh;
+    align-items: center;
+}
+
+.content-wrapper {
+    max-width: 800px; 
+    padding: 60px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+}
+
+.editar-perfil-form {
+    text-align: left;
+    margin-top: 1.5rem;
+    max-width: 100%; 
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+.btn-primary {
+    background-color: #FC7713;
+    border-color: #FC7713;
+}
+
+.btn-primary:hover {
+    background-color: #C54409;
+    border-color: #C54409;
+}
+
+.text-center {
+    margin-bottom: 1.5rem;
+}

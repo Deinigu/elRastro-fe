@@ -1,0 +1,24 @@
+.valoracion-btn {
+    background-color: orange;
+    border-color: orange;
+    color: white;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    outline: none; 
+  }
+  
+  .valoracion-btn:hover,
+  .valoracion-btn:active,
+  .valoracion-btn:focus {
+    background-color: #ff9800;
+    border-color: #ff9800;
+    color: #fff;
+  }
+  
+  .btn-valorar-usuario {
+    margin-top: 10px;
+    margin-right: 20px;
+    width: 125px; 
+  }

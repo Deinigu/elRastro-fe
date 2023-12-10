@@ -1,0 +1,48 @@
+<br>
+<div *ngIf="success" class="alert alert-success" role="alert">
+    {{ successMessage }}
+</div>
+<div *ngIf="error" class="alert alert-danger" role="alert">
+    {{ errorMessage }}
+</div>
+<form #formularioPujas="ngForm" (ngSubmit) = "placeBid(formularioPujas.value)" class="bid-form">
+    <div class="form-group">
+        <label for="bidAmount">Cantidad a pujar:</label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">€</span>
+            </div>
+            <ng-container *ngIf="producto.valor">
+                <input name="precio" ngModel type="text" class="form-control" placeholder="{{producto.valor}}">
+            </ng-container>
+            <ng-container *ngIf="!producto.valor">
+                <input name="precio" ngModel type="text" class="form-control" placeholder="{{producto.precio}}">
+            </ng-container>
+        </div>
+    </div>
+    <br>
+    <!-- Botón que abre el modal -->
+    <button type="button" class="btn boton-pujar" data-bs-toggle="modal" data-bs-target="#pujaModal">
+    Pujar
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="pujaModal" tabindex="-1" aria-labelledby="pujaModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header banner">
+                <h5 class="modal-title" id="pujaModalLabel"></h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="lead">¿Estás seguro de que quieres hacer esta puja?</p>
+                <p>Se le aplicará una tasa de <strong>{{tasa}}€</strong></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="redirectionProduct()">Cancelar</button>
+                <button type="submit" class="btn boton-pujar" data-bs-dismiss="modal" (click)="placeBid(producto.precio)"> Confirmar Puja</button>
+            </div>
+        </div>
+    </div>
+    </div>
+</form>
