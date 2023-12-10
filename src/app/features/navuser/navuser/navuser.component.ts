@@ -156,4 +156,9 @@ export class NavuserComponent implements OnInit {
     location.reload();
   }
 
+  editarProducto(prod: Producto)
+  {
+    this.router.navigate(['/producto/editar',prod.id]);
+  }
+
 }
