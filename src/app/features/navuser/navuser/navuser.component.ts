@@ -87,6 +87,7 @@ export class NavuserComponent implements OnInit {
     descripcion: '',
     fotoProducto: '',
     vendedor: '',
+    cierre: '',
   };
   miPerfil = false;
   usuarioLogeado = '654c0a5b02d9a04cac884db7';
