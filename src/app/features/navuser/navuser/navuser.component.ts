@@ -60,6 +60,8 @@ export class NavuserComponent implements OnInit {
     fotoProducto: '',
     vendedor: '',
   };
+  miPerfil = false;
+  usuarioLogeado = '654c0a5b02d9a04cac884db7';
   
 
   constructor(
@@ -74,6 +76,8 @@ export class NavuserComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.idUsuario = params['id'];
     });
+
+    this.miPerfil = this.idUsuario == this.usuarioLogeado;
 
     this.usuarioService.getUsuarioInfo(this.idUsuario).subscribe((data) => {
       this.usuario = data.nombreUsuario;

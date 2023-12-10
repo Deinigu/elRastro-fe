@@ -3,39 +3,42 @@
 
 <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
 	<li [ngbNavItem]="1">
-		<button ngbNavLink>Mi información</button>
+		<button ngbNavLink>Información personal</button>
 		<ng-template ngbNavContent>
-			<div class="card mb-3">
-				<div class="card-header custom-card-header">
-					<h5 class="card-title custom-card-title">Imagen de perfil</h5>
-				</div>
-				<div class="card-body">
-					<div class="profile-image-container rounded-circle border border-3 border-dark"
-						style="width: 400px; height: 400px; overflow: hidden; background-color: #000;">
-						<!-- Imagen de perfil -->
-						<img src={{imagen}} alt="Foto de perfil" class="img-fluid rounded-circle"
-							style="width: 100%; height: 100%; object-fit: cover;">
-					</div>
-					<!-- Cambiar Imagen  -->
-					<button class="btn btn-custom-color">Cambiar imagen</button>
+			
+			<div *ngIf="miPerfil">
+				<div class="card mb-3">
+					<div class="card-header custom-card-header">
+						<h5 class="card-title custom-card-title">Imagen de perfil</h5>
+					  </div>
+					  <div class="card-body">    
+						<div class="profile-image-container rounded-circle border border-3 border-dark" style="width: 400px; height: 400px; overflow: hidden; background-color: #000;">
+						  <!-- Imagen de perfil -->
+						  <img src={{imagen}} alt="Foto de perfil" class="img-fluid rounded-circle" style="width: 100%; height: 100%; object-fit: cover;">
+						</div>   
+						<!-- Cambiar Imagen  -->
+						<button class="btn btn-custom-color">Cambiar imagen</button>
+					  </div>
 				</div>
 			</div>
-
+		
 			<div class="card mb-3">
 				<div class="card-header custom-card-header">
-					<h5 class="card-title custom-card-title">Mis datos personales</h5>
+				  <h5 class="card-title custom-card-title">Datos personales</h5>
 				</div>
-				<div class="card-body">
-					<!-- Información del usuario -->
-					<div class="user-info">
-						<p class="card-text"><span class="highlight-text">Usuario:</span> {{ usuario }}</p>
-						<p class="card-text"><span class="highlight-text">Correo:</span> {{correo}}</p>
-						<p class="card-text"><span class="highlight-text">Teléfono:</span> {{telefono}}</p>
-						<p class="card-text"><span class="highlight-text">Ubicación:</span> {{vivienda}}</p>
-					</div>
-					<br>
-					<!-- Botón de editar -->
+				<div class="card-body">	
+				  <!-- Información del usuario -->
+				  <div class="user-info">
+					<p class="card-text"><span class="highlight-text">Usuario:</span> {{ usuario }}</p>
+					<p class="card-text"><span class="highlight-text">Correo:</span> {{correo}}</p>
+					<p class="card-text"><span class="highlight-text">Teléfono:</span> {{telefono}}</p>
+					<p class="card-text"><span class="highlight-text">Ubicación:</span> {{vivienda}}</p>
+				   </div>
+				  <br>
+				  <!-- Botón de editar -->
+				  <div *ngIf="miPerfil">
 					<button class="btn btn-custom-color" (click)="editarPerfil()">Editar Perfil</button>
+				  </div>
 				</div>
 			</div>
 
@@ -82,16 +85,14 @@
 		</ng-template>
 	</li>
 
-
-
-	<!------------------- MIS PRODUCTOS ---------------------------->
-	<li [ngbNavItem]="3">
-		<button ngbNavLink>Mis productos en venta</button>
-		<ng-template ngbNavContent>
-			<div class="search-bar">
-				<input type="text" placeholder="Buscar productos...">
-				<button class="btn btn-primary btn-custom-color-buscar">Buscar</button>
-			</div>
+ <!------------------- MIS PRODUCTOS ---------------------------->
+ <li [ngbNavItem]="3">
+	<button ngbNavLink>Productos en venta</button>
+	<ng-template ngbNavContent>
+	  <div class="search-bar">
+		<input type="text" placeholder="Buscar productos...">
+		<button class="btn btn-primary btn-custom-color-buscar">Buscar</button>
+	  </div>
 			<br>
 			<div class="row row-cols-1 row-cols-md-2 g-2">
 				<ng-container *ngIf="productosVenta.length > 0; else noProducts">
