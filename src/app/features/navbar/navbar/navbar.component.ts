@@ -35,14 +35,6 @@ export class NavbarComponent {
     this.router.navigate(['/']);
   }
 
-  redirectBusqueda(busqueda: { busca: string }) {
-    if (busqueda.busca === '') {
-      this.router.navigate(['/']); // Navigate to the default search route if input is empty
-    } else {
-      this.router.navigate(['/busqueda', busqueda.busca]);
-    }
-  }
-
   ngOnInit() {
     // this.route.params.subscribe(params => {
     //   this.idUsuario = params['id'];
@@ -58,6 +50,19 @@ export class NavbarComponent {
       });
 
       this.mostrarDropdown = true;
+    }
+  }
+
+  redirectBusqueda(busqueda: { busca: string }) {
+    if (busqueda.busca === '') {
+      this.router.navigate(['/']); // Navigate to the default search route if input is empty
+    }  else {
+      this.router.navigate(['/busqueda', busqueda.busca]).then(() => {
+        // Reload the current route to refresh the component
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          this.router.navigate(['/busqueda', busqueda.busca]);
+        });
+      });
     }
   }
 
