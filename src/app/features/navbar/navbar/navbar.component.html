@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
-    <a class="navbar-brand" href="http://localhost:4200/">
+    <a class="navbar-brand" (click)="redirectInicio()">
       <img src="https://res.cloudinary.com/dx4oicqhy/image/upload/v1701960080/elRastro_cloudinary_folder/icono.png" alt="Logo" width="45" height="45" class="d-inline-block align-text-top">
       <span id="ttl">elRastro</span>
     </a>
@@ -9,7 +9,7 @@
     </button>
     <div class="collapse navbar-collapse justify-content-between" id="navbarTogglerDemo02">
       <form #formBusca="ngForm" (ngSubmit)="redirectBusqueda(formBusca.value)" class="d-flex mx-auto" id="busqueda" role="search" >
-        <input name="busca" ngModel class="form-control me-2" type="search" placeholder="Busca un producto..." aria-label="Search" style="width: 400px;">
+        <input name="busca" ngModel class="form-control me-2" type="search" [placeholder]="tags ? tags : 'Busca un producto...'" aria-label="Search" style="width: 400px;">
         <button class="btn" type="submit">Buscar</button>
       </form>
       
