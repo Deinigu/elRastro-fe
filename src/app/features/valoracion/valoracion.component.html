@@ -1,26 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Valorar Usuario</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
-  <!-- Button trigger modal -->
-  <button type="button" class="btn btn-success btn-sm btn-valorar-usuario" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-    Valorar usuario
-  </button>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5 valoracion-title" id="staticBackdropLabel">¡Valora al usuario!</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>        
-        <div class="modal-body">
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-success btn-sm btn-valorar-usuario" data-bs-toggle="modal"
+  data-bs-target="#staticBackdrop">
+  Valorar usuario
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 valoracion-title" id="staticBackdropLabel">¡Valora al usuario!</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
         <!-- AQUÍ VA EL FORMULARIO DE VALORACIÓN -->
         <app-star-rating [(rating)]="userRating"></app-star-rating>
         <p>¡Vas a valorar con {{userRating}} estrellas!</p>
@@ -32,13 +25,11 @@
 
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="guardarValoracion()">Enviar Valoración</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="guardarValoracion()">Enviar
+            Valoración</button>
         </div>
 
       </div>
     </div>
   </div>
 </div>
-
-</body>
-</html>
