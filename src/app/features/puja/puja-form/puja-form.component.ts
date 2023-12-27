@@ -10,12 +10,13 @@ import { HuellaCarbonoService } from '../../../services/huellaCarbono-service/hu
 import { Router } from '@angular/router';
 import { switchMap, catchError } from 'rxjs/operators';
 import { of, Subscription } from 'rxjs';
+import { PaypalComponent } from '../../paypal/paypal.component';
 
 
 @Component({
   selector: 'app-puja-form',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule],
+  imports: [CommonModule, FormsModule, HttpClientModule, PaypalComponent],
   templateUrl: './puja-form.component.html',
   styleUrl: './puja-form.component.css',
   providers: [PujaService, ProductService, HuellaCarbonoService]
@@ -93,7 +94,7 @@ export class PujaFormComponent implements OnInit {
     }
   }
 
-  private showSuccessAlert() {
+  private showSuccessAlert(): void {
     this.success = true;
     setTimeout(() => {
       this.success = false;

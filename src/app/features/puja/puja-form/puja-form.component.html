@@ -39,8 +39,9 @@
                 <p>Se le aplicará una tasa de <strong>{{tasa}}€</strong></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="redirectionProduct()">Cancelar</button>
-                <button type="submit" class="btn boton-pujar" data-bs-dismiss="modal" (click)="placeBid(producto.precio)"> Confirmar Puja</button>
+                <!--<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="redirectionProduct()">Cancelar</button>
+                <button type="submit" class="btn boton-pujar" data-bs-dismiss="modal" (click)="placeBid(producto.precio)"> Confirmar Puja</button>-->
+                <app-paypal></app-paypal>
             </div>
         </div>
     </div>
