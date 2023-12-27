@@ -46,7 +46,7 @@ export class UsuarioService {
   }
 
   editarPerfil(idUsuario: string, nuevosDatos: any): Observable<any> {
-    const url = 'http://localhost:8000/api/usuarios/update/' + idUsuario + '/';
+    const url = 'http://localhost:8000/api/usuarios/' + idUsuario + '/';
     return this.http.put(url, nuevosDatos);
   }
 }

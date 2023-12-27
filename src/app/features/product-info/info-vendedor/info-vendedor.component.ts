@@ -57,7 +57,7 @@ export class InfoVendedorComponent implements OnInit{
       productoId: idProducto,
       chats: []
     };
-    this.conversacionService.getConversacionDe(idUsuario, idVendedor).subscribe(c => {
+    this.conversacionService.getConversacionDe(idUsuario, idVendedor,idProducto).subscribe(c => {
       this.router.navigate(['/chats', c]);
       },
       (error) => {
@@ -69,15 +69,19 @@ export class InfoVendedorComponent implements OnInit{
             this.usuarioService.getUsuarioInfo(idUsuario).subscribe(usuario => {
               this.listaConversacionesUsuario = usuario.listaConver;
               this.usuarioService.getUsuarioInfo(idVendedor).subscribe(vendedor => {
-                this.conversacionService.getConversacionDe(idUsuario, idVendedor).subscribe(c => {
+                this.conversacionService.getConversacionDe(idUsuario, idVendedor,idProducto).subscribe(c => {
                   this.listaConversacionesVendedor = vendedor.listaConver;
                   this.idConversacion = c;
+
+                  console.log(this.idConversacion);
                   
-                  this.listaConversacionesVendedor = [...this.listaConversacionesVendedor, this.idConversacion];
-                  this.listaConversacionesUsuario = [...this.listaConversacionesUsuario, this.idConversacion];
+                  this.listaConversacionesVendedor.push(this.idConversacion)
+                  this.listaConversacionesUsuario.push(this.idConversacion)
     
                   usuario.listaConver = usuario.listaConver;
                   vendedor.listaConver = vendedor.listaConver;
+
+                  console.log(usuario.listaConver);
     
                   this.usuarioService.editarPerfil(idUsuario, usuario).subscribe(
                     (res) =>{
