@@ -6,17 +6,21 @@ import { UsuarioService } from '../../../services/usuario-service/usuario.servic
 import { ActivatedRoute, Router, Params, NavigationEnd } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { filter } from 'rxjs';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
+import { OauthService } from '../../../services/oauth-service/oauth-service.service';
+import { OauthComponent } from '../../oauth/oauth.component';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, FormsModule],
+  imports: [CommonModule, HttpClientModule, FormsModule, OauthComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
-  providers: [UsuarioService, ProductService],
+  providers: [UsuarioService, ProductService, OauthService],
 })
 export class NavbarComponent {
   constructor(
+    private authService: SocialAuthService,
     private http: HttpClient,
     private route: ActivatedRoute,
     private productService: ProductService,
@@ -68,5 +72,14 @@ export class NavbarComponent {
 
   numero(n: number) {
     localStorage.setItem('abrir', n.toString()); //PRUEBAS
+  }
+
+  signOut(): void{
+    this.authService.signOut();
+    localStorage.removeItem("token");
+    localStorage.removeItem("email");
+    localStorage.removeItem("name");
+    localStorage.removeItem("photoUrl");
+    location.reload();
   }
 }
