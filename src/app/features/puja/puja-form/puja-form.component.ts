@@ -12,13 +12,12 @@ import { switchMap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { PaypalComponent } from '../../paypal/paypal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { PujaModalComponent } from '../puja-modal/puja-modal.component';
 
 
 @Component({
   selector: 'app-puja-form',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule, PaypalComponent, PujaModalComponent],
+  imports: [CommonModule, FormsModule, HttpClientModule, PaypalComponent],
   templateUrl: './puja-form.component.html',
   styleUrl: './puja-form.component.css',
   providers: [PujaService, ProductService, HuellaCarbonoService]
