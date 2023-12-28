@@ -29,30 +29,34 @@ export class NavbarComponent {
   ) {
   }
 
-  idUsuario = '654c0a5b02d9a04cac884db7';
+  idUsuario = '';
   idProducto = '';
   mostrarDropdown = false;
   nombreUsuario = '';
   tags = '';
+  loggedIn : any;
+  token = localStorage.getItem("token");
 
   redirectInicio() {
     this.router.navigate(['/']);
   }
 
   ngOnInit() {
-    // this.route.params.subscribe(params => {
-    //   this.idUsuario = params['id'];
-    //   console.log(this.idUsuario);
-    // });
     this.route.params.subscribe((params: Params) => {
       this.tags = params['tags'];
     });
 
-    if (this.idUsuario !== '') {
+    if(this.token!=null && this.token!=undefined){
+      this.loggedIn = true;
+      console.log(this.token);
+    }
+
+    //ESTO HAY Q CAMBIARLO A QUE BUSQUE POR TOKEN
+    if (this.loggedIn) {
+      this.idUsuario = '654c0a5b02d9a04cac884db7'
       this.usuarioService.getUsuarioInfo(this.idUsuario).subscribe((data) => {
         this.nombreUsuario = data.nombreUsuario;
       });
-
       this.mostrarDropdown = true;
     }
   }

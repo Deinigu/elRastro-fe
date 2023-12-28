@@ -13,15 +13,16 @@ import { NavbarComponent } from './features/navbar/navbar/navbar.component';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'parcial3_fe';
+  title = 'Elrastro';
   loggedIn : any;
   token = localStorage.getItem("token");
 
   ngOnInit(): void {
 
-    if(this.token!=null && this.token!=undefined){
-      this.loggedIn = true;
-    }
+    // if(this.token!=null && this.token!=undefined){
+    //   this.loggedIn = true;
+    //   console.log(this.token);
+    // }
   }
 }
 
