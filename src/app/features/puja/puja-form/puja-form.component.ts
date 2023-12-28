@@ -9,14 +9,16 @@ import { Puja } from '../../../interfaces/puja';
 import { HuellaCarbonoService } from '../../../services/huellaCarbono-service/huella-carbono-service.service';
 import { Router } from '@angular/router';
 import { switchMap, catchError } from 'rxjs/operators';
-import { of, Subscription } from 'rxjs';
+import { of } from 'rxjs';
 import { PaypalComponent } from '../../paypal/paypal.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { PujaModalComponent } from '../puja-modal/puja-modal.component';
 
 
 @Component({
   selector: 'app-puja-form',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule, PaypalComponent],
+  imports: [CommonModule, FormsModule, HttpClientModule, PaypalComponent, PujaModalComponent],
   templateUrl: './puja-form.component.html',
   styleUrl: './puja-form.component.css',
   providers: [PujaService, ProductService, HuellaCarbonoService]
@@ -36,7 +38,8 @@ export class PujaFormComponent implements OnInit {
 
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private productService: ProductService, 
-    private pujaService : PujaService, private huellaCarbonoService : HuellaCarbonoService, private router : Router){}
+    private pujaService : PujaService, private huellaCarbonoService : HuellaCarbonoService, private router : Router,
+    private modalService: NgbModal){}
 
     ngOnInit(): void {
       this.route.params.pipe(
@@ -73,10 +76,8 @@ export class PujaFormComponent implements OnInit {
       }
     }
     
-  placeBid(precio: {precio: string}){
-    console.log(precio.precio);
-    this.precioPujar = Number(precio.precio);
-    if (this.precioPujar < this.precio){
+  placeBid(){
+    if (!(this.precioPujar > this.precio)){
       this.showErrorMessage();
     }else{
       const puja: Puja = {
@@ -91,6 +92,12 @@ export class PujaFormComponent implements OnInit {
           this.showSuccessAlert();
           this.redirectionProduct();
         })
+    }
+  }
+  confirmar(){
+    if (!(this.precioPujar > this.precio)){
+      this.showErrorMessage();
+      console.log("error");
     }
   }
 
@@ -110,6 +117,14 @@ export class PujaFormComponent implements OnInit {
 
   public redirectionProduct(){
     this.router.navigate(['/producto', this.idProducto]);
+  }
+
+  public guardarValor(precio: {precio: string}){
+    if (precio.precio != undefined && precio.precio != null && Number(precio.precio) > this.precio){
+      this.precioPujar = precio.precio;
+      this.error = false;
+    }
+    
   }
 
 }
