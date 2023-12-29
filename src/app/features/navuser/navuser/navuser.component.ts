@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { ValoracionComponent } from '../../valoracion/valoracion.component';
+import { PaypalComponent } from '../../paypal/paypal.component';
 interface Valoracion {
   idUsuario: string;
   idValorado: string;
@@ -38,6 +39,7 @@ interface Puja {
   valor: number;
   producto: Producto;
   fecha: string;
+  pagado: boolean;
   nombreVendedor: string | null;
   nombreComprador: string | null;
   nommbrepujador: string | null;
@@ -46,7 +48,7 @@ interface Puja {
 @Component({
   selector: 'app-navuser',
   standalone: true,
-  imports: [CommonModule, NgbNavModule, StarsComponent, HttpClientModule, ValoracionComponent],
+  imports: [CommonModule, NgbNavModule, StarsComponent, HttpClientModule, ValoracionComponent, PaypalComponent],
   templateUrl: './navuser.component.html',
   styleUrls: ['./navuser.component.css'],
   providers: [UsuarioService, ProductService, ValoracionesService, PujaService],

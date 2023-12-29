@@ -23,7 +23,7 @@ export class PaypalComponent implements OnInit{
   producto : any;
   precio : any;
   successMessage = "Autorizando la transacción..."
-  @Input() precioPujar: any;
+  @Input() puja: any;
   @Input() tasa: any;
 
   constructor(private productService: ProductService, private route: ActivatedRoute, private pujaService : PujaService, private modalService: NgbModal){}
@@ -32,9 +32,8 @@ export class PaypalComponent implements OnInit{
 
     this.initConfig();
 
-    this.route.params.subscribe(params => {
-      this.idProducto = params['id'];
-    });
+    this.idProducto = this.puja.producto;
+   
 
     this.productService.getProductInfo(this.idProducto).subscribe(data => {
       this.producto = data;
@@ -59,22 +58,22 @@ export class PaypalComponent implements OnInit{
             reference_id: 'producto',
             amount: {
               currency_code: 'EUR',
-              value: this.precioPujar,
+              value: this.puja.valor,
               breakdown: {
                 item_total: {
                   currency_code: 'EUR',
-                  value: this.precioPujar
+                  value: this.puja.valor
                 }
               }
             },
             items: [
               {
-                name: this.producto.Nombre,
+                name: 'Producto',
                 quantity: '1',
                 category: 'DIGITAL_GOODS',
                 unit_amount: {
                   currency_code: 'EUR',
-                  value: this.precioPujar,
+                  value: this.puja.valor,
                 },
               }
             ],
@@ -87,22 +86,22 @@ export class PaypalComponent implements OnInit{
             reference_id: 'huella',
             amount: {
               currency_code: 'EUR',
-              value: '0.2',
+              value: this.puja.tasa,
               breakdown: {
                 item_total: {
                   currency_code: 'EUR',
-                  value: '0.2'
+                  value: this.puja.tasa
                 }
               }
             },
             items: [
               {
-                name: 'Producto',
+                name: 'Tasa huella carbono',
                 quantity: '1',
                 category: 'DIGITAL_GOODS',
                 unit_amount: {
                   currency_code: 'EUR',
-                  value: '0.2',
+                  value: this.puja.tasa,
                 },
               }
             ],
@@ -130,10 +129,15 @@ export class PaypalComponent implements OnInit{
       onClientAuthorization: (data) => {
         console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
         this.showSuccess = false;
-        this.placeBid();
-        alert('Puja realizada con éxito.');
-        //window.location.reload(); 
-        //this.modalService.open('#successModal');
+        console.log("PUJAJJAJJAJAJAJAJ", this.puja._id);
+        alert('Pago realizado con éxito.');
+        
+        ///this.puja.pagado = true;
+        this.pujaService.putPujaPagada(this.puja._id).subscribe(
+          (res) => {
+            console.log(res);
+          })
+        location.reload();
       },
       onCancel: (data, actions) => {
         console.log('OnCancel', data, actions);
@@ -143,7 +147,7 @@ export class PaypalComponent implements OnInit{
       },
       onClick: (data, actions) => {
         console.log('onClick', data, actions);
-        console.log(this.precioPujar);
+        console.log(this.puja);
       },
     };
   }
@@ -151,9 +155,11 @@ export class PaypalComponent implements OnInit{
   placeBid(){
     const puja: Puja = {
       pujador: '654c0a5b02d9a04cac884db7',
-      valor: this.precioPujar,
+      valor: this.puja.valor,
       fecha: new Date().toISOString(),
       producto: this.idProducto,
+      tasa: this.tasa,
+      pagado: false
     };
     this.pujaService.createPuja(puja).subscribe(
       (res) => {

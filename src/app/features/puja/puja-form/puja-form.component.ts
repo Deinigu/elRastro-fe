@@ -84,6 +84,8 @@ export class PujaFormComponent implements OnInit {
         valor: this.precioPujar,
         fecha: new Date().toISOString(),
         producto: this.idProducto,
+        tasa: this.tasa,
+        pagado: false
       };
       this.pujaService.createPuja(puja).subscribe(
         (res) => {

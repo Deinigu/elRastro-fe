@@ -42,25 +42,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="redirectionProduct()">Cancelar</button>
-                <button type="button" class="btn boton-pujar" data-bs-dismiss="modal" [attr.data-bs-toggle]="error ? null : 'modal'" [attr.data-bs-target]="error ? null : '#pagoModal'" > Confirmar Puja</button>
+                <button type="button" class="btn boton-pujar" data-bs-dismiss="modal" (click)="placeBid()" > Confirmar Puja</button>
                 <!--<app-paypal [precioPujar] = precioPujar [tasa] = tasa></app-paypal>-->
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="pagoModal" tabindex="-1" aria-labelledby="pagoModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header banner">
-                <h5 class="modal-title" id="pujaModalLabel"></h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p class="lead">Método de pago</p>
-            </div>
-            <div class="modal-footer">
-                <app-paypal [precioPujar] = precioPujar [tasa] = tasa></app-paypal>
             </div>
         </div>
     </div>
