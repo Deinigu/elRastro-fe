@@ -18,13 +18,19 @@ export class PujaService {
   }
 
   createPuja(puja: Puja): Observable<Puja> {
-    const url = 'http://localhost:8002/api/pujas/create/';
+    const url = 'http://localhost:8002/api/pujas/';
     return this.http.post<Puja>(url, puja);
   }
 
   getPujasByUser(idUser: string): Observable<any> {
     const url = 'http://localhost:8002/api/pujas/usuario/' + idUser + '/';
     return this.http.get<any>(url);
+  }
+
+  putPujaPagada(idPuja: string): Observable<any> {
+    const url = 'http://localhost:8002/api/pujas/pagada/';
+    const body = { idPuja: idPuja };
+    return this.http.put<any>(url, body);
   }
 }
 
