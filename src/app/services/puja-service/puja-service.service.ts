@@ -18,7 +18,7 @@ export class PujaService {
   }
 
   createPuja(puja: Puja): Observable<Puja> {
-    const url = 'http://localhost:8002/api/pujas/create/';
+    const url = 'http://localhost:8002/api/pujas/';
     return this.http.post<Puja>(url, puja);
   }
 
