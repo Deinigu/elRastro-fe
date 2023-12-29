@@ -36,6 +36,7 @@ export class NavbarComponent {
   tags = '';
   loggedIn : any;
   token = localStorage.getItem("token");
+  email = localStorage.getItem("email");
 
   redirectInicio() {
     this.router.navigate(['/']);
@@ -48,13 +49,13 @@ export class NavbarComponent {
 
     if(this.token!=null && this.token!=undefined){
       this.loggedIn = true;
-      console.log(this.token);
     }
 
     //ESTO HAY Q CAMBIARLO A QUE BUSQUE POR TOKEN
-    if (this.loggedIn) {
-      this.idUsuario = '654c0a5b02d9a04cac884db7'
-      this.usuarioService.getUsuarioInfo(this.idUsuario).subscribe((data) => {
+    if (this.loggedIn && this.email!=null) {
+      this.usuarioService.getUsuarioInfoPorMail(this.email).subscribe((data) => {
+        this.idUsuario = data._id;
+        localStorage.setItem('iduser', this.idUsuario);
         this.nombreUsuario = data.nombreUsuario;
       });
       this.mostrarDropdown = true;
@@ -84,6 +85,7 @@ export class NavbarComponent {
     localStorage.removeItem("email");
     localStorage.removeItem("name");
     localStorage.removeItem("photoUrl");
+    localStorage.removeItem('iduser');
     location.reload();
   }
 }

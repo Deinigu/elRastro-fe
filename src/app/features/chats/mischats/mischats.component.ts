@@ -43,7 +43,7 @@ interface Mensaje {
 
 export class MischatsComponent implements OnInit {
   imagen = ["https://i.blogs.es/a13394/totoro/1366_2000.jpg"]
-  usuarioId = '';
+  usuarioId :any;
   conversaciones: Conversation[] = []; 
   conversacion: any;
   idChat = '';
@@ -60,9 +60,8 @@ export class MischatsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.usuarioId = params['id'];
-    });
+
+    this.usuarioId = localStorage.getItem('iduser');
 
     this.conversacionService.getAllConversaciones(this.usuarioId).subscribe(data => {
       this.conversaciones = data;

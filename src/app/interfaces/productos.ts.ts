@@ -5,5 +5,5 @@ export interface Producto {
     precio: number;
     tags:Array<string>;
     cierre: Date;
-    vendedor: string;
+    vendedor: any;
 }

@@ -90,9 +90,7 @@ export class NavuserComponent implements OnInit {
     cierre: '',
   };
   miPerfil = false;
-  usuarioLogeado = '654c0a5b02d9a04cac884db7';
-  
-
+  usuarioLogeado = localStorage.getItem('iduser');
 
   constructor(
     private route: ActivatedRoute,

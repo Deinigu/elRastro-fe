@@ -32,7 +32,7 @@ interface Mensaje {
 export class ChatsComponent implements OnInit {
   imagen = "";
 
-  userId = '654c0a5b02d9a04cac884db7';
+  userId : any;
   conversacion: any; // Asegúrate de que este tipo coincida con la respuesta de tu servicio
   idChat = '';
   vendedor = '';
@@ -50,6 +50,7 @@ export class ChatsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.userId = localStorage.getItem('iduser');
     this.route.params.subscribe(params => {
       this.idChat = params['idChat'];
     });

@@ -1,5 +1,5 @@
 export interface Puja {
-    pujador: string;
+    pujador: any;
     valor: number;
     fecha: string;
     producto: string;

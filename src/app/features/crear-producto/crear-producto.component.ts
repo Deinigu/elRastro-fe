@@ -38,7 +38,7 @@ export class CrearProductoComponent implements OnInit {
     precio: 0,
     tags: [],
     cierre: new Date(),
-    vendedor: '654c0a5b02d9a04cac884db7'
+    vendedor: ''
   };
 
 
@@ -50,6 +50,7 @@ export class CrearProductoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.producto.vendedor = localStorage.getItem('iduser');
     this.fotos_subidas = false;
     this.producto_creado = false;
   }
