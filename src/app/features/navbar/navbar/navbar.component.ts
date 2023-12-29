@@ -51,12 +51,13 @@ export class NavbarComponent {
       this.loggedIn = true;
     }
 
-    //ESTO HAY Q CAMBIARLO A QUE BUSQUE POR TOKEN
     if (this.loggedIn && this.email!=null) {
       this.usuarioService.getUsuarioInfoPorMail(this.email).subscribe((data) => {
         this.idUsuario = data._id;
         localStorage.setItem('iduser', this.idUsuario);
         this.nombreUsuario = data.nombreUsuario;
+      }, (error) => {
+        this.router.navigate(['/usuario/crear']);
       });
       this.mostrarDropdown = true;
     }

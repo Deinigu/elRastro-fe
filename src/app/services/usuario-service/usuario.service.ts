@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import { Usuario } from '../../interfaces/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -53,5 +54,10 @@ export class UsuarioService {
   editarPerfil(idUsuario: string, nuevosDatos: any): Observable<any> {
     const url = 'http://localhost:8000/api/usuarios/' + idUsuario + '/';
     return this.http.put(url, nuevosDatos);
+  }
+
+  createUsuario(usuario: Usuario): Observable<Usuario> {
+    const url = 'http://localhost:8000/api/usuarios/';
+    return this.http.post<Usuario>(url, usuario);
   }
 }

@@ -24,6 +24,7 @@ export class ProductService {
     const url = 'http://localhost:8001/api/productos/';
     return this.http.post<Producto>(url, producto);
   }
+  
   getSearchProducts(tags : string) : Observable<any> {
     const url = 'http://localhost:8001/api/productos/busqueda/' +tags;
     return this.http.get<any>(url);

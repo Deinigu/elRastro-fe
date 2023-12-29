@@ -1,0 +1,74 @@
+@if(not_iniciado){
+<div class="container">
+    <h1>Nuevo usuario</h1>
+  </div>
+  <div *ngIf="usuario_en_proceso" class="container mt-4">
+    <div class="mb-3">
+  
+      <div class="alert alert-info mt-2" role="alert">
+        Creando usuario...
+      </div>
+    </div>
+  </div>
+  <div *ngIf="usuario_creado" class="container mt-4">
+    <div class="mb-3">
+      <div class="alert alert-success mt-2" role="alert">
+        Usuario creado con éxito.
+      </div>
+      <div class="btn" (click)="onButtonVolverClick()">Volver</div>
+    </div>
+  </div>
+  <div *ngIf="error_general" class="container mt-4">
+    <div class="mb-3">
+      <div class="alert alert-danger mt-2" role="alert">
+        Hubo un error inesperado. Inténtelo de nuevo.
+      </div>
+      <div class="btn" (click)="onButtonVolverClick()">Volver</div>
+  
+    </div>
+  </div>
+  
+  <div *ngIf="!usuario_creado && !error_general"  class="container mt-4">
+    <label for="fileInput" class="form-label">Subir foto de perfil:</label>
+    <input type="file" id="fileInput" accept="image/*" (change)="onFileSelected($event)" class="form-control">
+    <button *ngIf="!fotos_subidas" class="btn  mt-2" (click)="onButtonClicked()">Subir imágen</button>
+    <div *ngIf="fotos_subidas" class="alert alert-success mt-2" role="alert">
+      ¡Foto subida!
+    </div>
+    <form (ngSubmit)="onSubmit()">
+      <br>
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre de usuario:</label>
+        <input type="text" id="nombre" [(ngModel)]="usuario.nombreUsuario" name="nombre" class="form-control" required>
+      </div>
+  
+      <div class="mb-3">
+        <label for="vivienda" class="form-label">Dirección:</label>
+        <input type="text" id="vivienda" [(ngModel)]="usuario.vivienda" name="vivienda" class="form-control" placeholder="Para dirección concreta usar localización formato Google"
+          required>
+      </div>
+  
+      <div class="mb-3">
+        <label for="telefono" class="form-label">Teléfono:</label>
+        <input type="text" id="precio" [(ngModel)]="usuario.telefono" name="telefono" class="form-control" required>
+      </div>
+  
+      <div *ngIf="error_empty_field" class="alert alert-danger mt-2" role="alert">
+        Hay uno o más campos vacíos.
+      </div>
+      <div *ngIf="error_telefono" class="alert alert-danger mt-2" role="alert">
+        El número de teléfono tiene un formato incorrecto.
+      </div>
+      <div *ngIf="error_fotos" class="alert alert-danger mt-2" role="alert">
+        Debe subir una foto.
+      </div>
+      <button type="submit" class="btn mt-3">Enviar</button>
+    </form>
+  </div>
+}@else{
+    <div class="container">
+        <div class="alert alert-danger mt-2" role="alert">
+          <h1>Ya tienes tu cuenta creada</h1>
+        </div>
+    </div>
+}

@@ -30,6 +30,7 @@ export class CrearProductoComponent implements OnInit {
   producto_creado: boolean = false;
   producto_en_proceso: boolean = false;
   error_general: boolean = false;
+  iniciado : boolean = false;
 
   producto: Producto = {
     Nombre: '',
@@ -50,9 +51,12 @@ export class CrearProductoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.producto.vendedor = localStorage.getItem('iduser');
-    this.fotos_subidas = false;
-    this.producto_creado = false;
+    if(localStorage.getItem('token')!=null){
+      this.iniciado=true;
+      this.producto.vendedor = localStorage.getItem('iduser');
+      this.fotos_subidas = false;
+      this.producto_creado = false;
+    }
   }
 
   onSubmit() {
