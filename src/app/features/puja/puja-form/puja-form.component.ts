@@ -97,6 +97,8 @@ export class PujaFormComponent implements OnInit {
     if (!(this.precioPujar > this.precio)){
       this.showErrorMessage();
       console.log("error");
+    }else{
+      this.error=false;
     }
   }
 
@@ -109,9 +111,9 @@ export class PujaFormComponent implements OnInit {
 
   public showErrorMessage(){
     this.error = true;
-    setTimeout(() => {
+    /*setTimeout(() => {
       this.error = false;
-    }, 3000);
+    }, 3000);*/
   }
 
   public redirectionProduct(){

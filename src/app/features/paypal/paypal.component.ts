@@ -5,6 +5,7 @@ import { ProductService } from '../../services/product-service/product.service';
 import { ActivatedRoute } from '@angular/router';
 import { PujaService } from '../../services/puja-service/puja-service.service';
 import { Puja } from '../../interfaces/puja';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-paypal',
@@ -12,7 +13,7 @@ import { Puja } from '../../interfaces/puja';
   imports: [CommonModule, NgxPayPalModule],
   templateUrl: './paypal.component.html',
   styleUrl: './paypal.component.css',
-  providers: [ProductService, PujaService]
+  providers: [ProductService, PujaService, NgbActiveModal]
 })
 export class PaypalComponent implements OnInit{
 
@@ -21,10 +22,11 @@ export class PaypalComponent implements OnInit{
   idProducto : any;
   producto : any;
   precio : any;
+  successMessage = "Autorizando la transacción..."
   @Input() precioPujar: any;
   @Input() tasa: any;
 
-  constructor(private productService: ProductService, private route: ActivatedRoute, private pujaService : PujaService){}
+  constructor(private productService: ProductService, private route: ActivatedRoute, private pujaService : PujaService, private modalService: NgbModal){}
 
   ngOnInit(): void {
 
@@ -119,6 +121,7 @@ export class PaypalComponent implements OnInit{
         layout: 'horizontal'
       },
       onApprove: (data, actions) => {
+        this.showSuccess = true;
         console.log('onApprove - transaction was approved, but not authorized', data, actions);
         actions.order.get().then((details: any) => {
           console.log('onApprove - you can get full order details inside onApprove: ', details);
@@ -126,8 +129,11 @@ export class PaypalComponent implements OnInit{
       },
       onClientAuthorization: (data) => {
         console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
-        this.showSuccess = true;
+        this.showSuccess = false;
         this.placeBid();
+        alert('Puja realizada con éxito.');
+        //window.location.reload(); 
+        //this.modalService.open('#successModal');
       },
       onCancel: (data, actions) => {
         console.log('OnCancel', data, actions);
