@@ -73,12 +73,16 @@ export class InfoVendedorComponent implements OnInit{
                 this.conversacionService.getConversacionDe(idUsuario, idVendedor,idProducto).subscribe(c => {
                   this.listaConversacionesVendedor = vendedor.listaConver;
                   this.idConversacion = c;
+
+                  console.log(this.idConversacion);
                   
                   this.listaConversacionesVendedor.push(this.idConversacion);
                   this.listaConversacionesUsuario.push(this.idConversacion);
     
                   usuario.listaConver = usuario.listaConver;
                   vendedor.listaConver = vendedor.listaConver;
+
+                  console.log(usuario.listaConver);
     
                   this.usuarioService.editarPerfil(idUsuario, usuario).subscribe(
                     (res) =>{

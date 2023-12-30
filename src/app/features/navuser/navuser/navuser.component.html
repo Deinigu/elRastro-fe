@@ -244,7 +244,7 @@
 						</p>
 						<p class="card-text mb-2">
 						  <span style="font-weight: bold;">Valor de la puja: </span>
-						  <span style="color: #28a745; font-weight: bold;">${{ puja.valor }}</span>
+						  <span style="color: #28a745; font-weight: bold;">{{ puja.valor }}€</span>
 						</p>
 						<p class="card-text mb-2">
 						  <span style="font-weight: bold;">
@@ -256,6 +256,8 @@
 					</div>
 					<div class="card-text mt-2" *ngIf="esPujaMasAltaYUsuario(puja)" style="color: #28a745; font-weight: bold; margin-bottom: 8px;">
 					  ¡Producto conseguido!
+					  <p *ngIf="!puja.pagado">Proceda al pago</p> 
+					  <app-paypal *ngIf="!puja.pagado" [puja]="puja" [tasa]="0.2"></app-paypal>
 					</div>
 					<div class="card-text mt-2" *ngIf="!esPujaMasAltaYUsuario(puja) && haPasadoFecha(puja.producto.cierre)" style="color: #dc3545; font-weight: bold; margin-bottom: 8px;">
 					  ¡Esta puja no ha llegado a ser la más alta!

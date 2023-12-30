@@ -78,6 +78,22 @@ export class NavbarComponent {
 
   numero(n: number) {
     localStorage.setItem('abrir', n.toString()); //PRUEBAS
+    this.router.navigate(['usuario',this.idUsuario]).then(() => {
+      // Reload the current route to refresh the component
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['usuario',this.idUsuario]);
+      });
+    });;
+  }
+
+  onClickGoToChats()
+  {
+    this.router.navigate(['usuario',this.idUsuario,'chats']);
+  }
+
+  onClickGoToCrearProducto()
+  {
+    this.router.navigate(['producto/crear']);
   }
 
   signOut(): void{

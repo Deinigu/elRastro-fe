@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { ValoracionComponent } from '../../valoracion/valoracion.component';
+import { PaypalComponent } from '../../paypal/paypal.component';
 interface Valoracion {
   idUsuario: string;
   idValorado: string;
@@ -38,6 +39,7 @@ interface Puja {
   valor: number;
   producto: Producto;
   fecha: string;
+  pagado: boolean;
   nombreVendedor: string | null;
   nombreComprador: string | null;
   nommbrepujador: string | null;
@@ -46,7 +48,7 @@ interface Puja {
 @Component({
   selector: 'app-navuser',
   standalone: true,
-  imports: [CommonModule, NgbNavModule, StarsComponent, HttpClientModule, ValoracionComponent],
+  imports: [CommonModule, NgbNavModule, StarsComponent, HttpClientModule, ValoracionComponent, PaypalComponent],
   templateUrl: './navuser.component.html',
   styleUrls: ['./navuser.component.css'],
   providers: [UsuarioService, ProductService, ValoracionesService, PujaService],
@@ -132,21 +134,23 @@ export class NavuserComponent implements OnInit {
                 this.pujas[index].nombreVendedor = dataUsuario.nombreUsuario;
         
                 this.pujas[index].producto = producto;
-                console.log("NOMBRE PRODUCTO: ", puja.producto.nombreProducto);
         
                 this.pujasService.getUltimaPuja(this.pujas[index].producto.id).subscribe((pujaInfo: any) => {
                   const fechaCierreUtc = new Date(producto.cierre).getTime();
                   const ahoraUtc = new Date().getTime();
         
                   if (fechaCierreUtc < ahoraUtc && pujaInfo.valor == puja.valor) {
-                    const existeValoracion = this.existeValoracionAnteriorComprador(puja.producto.id, this.idUsuario);
-                    if (!existeValoracion) {
-                      this.valoracionesPendientes.push(this.pujas[index]);
-                    } else {
-                      // Eliminar la puja del array si ya existe una valoración anterior
-                      this.valoracionesPendientes = this.valoracionesPendientes.filter((valoracion: any) => valoracion.id !== this.pujas[index]._id);
-                    
-                    }
+                    this.valoracionesService.getValoracionesHechas(this.idUsuario).subscribe((valoraciones: any) => {
+                      this.valoracionesHechas = valoraciones;
+                      console.log("VALORACIONES HECHAS: ", this.valoracionesHechas);
+                      const existeValoracion = this.existeValoracionAnteriorComprador(puja.producto.id, this.idUsuario);
+                      if (!existeValoracion) {
+                        this.valoracionesPendientes.push(this.pujas[index]);
+                      } else {
+                        // Eliminar la puja del array si ya existe una valoración anterior
+                        this.valoracionesPendientes = this.valoracionesPendientes.filter((valoracion: any) => valoracion.id !== this.pujas[index]._id);            
+                      }
+                    });
                   }
                 });
               });
@@ -179,6 +183,8 @@ export class NavuserComponent implements OnInit {
                   pujaInfo.producto = productoDetallado;
                   this.pujadorInfo = pujaInfo.pujador;
         
+
+
                   const existeValoracion = this.existeValoracionAnteriorVendedor(pujaInfo.producto.id, pujaInfo.pujador);
         
                   if (!existeValoracion) {

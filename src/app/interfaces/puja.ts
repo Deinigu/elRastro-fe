@@ -3,4 +3,6 @@ export interface Puja {
     valor: number;
     fecha: string;
     producto: string;
+    tasa: number;
+    pagado: boolean;
 }
