@@ -48,6 +48,11 @@ export class CrearUsuarioComponent {
   ) { }
 
   ngOnInit(): void {
+
+    if(localStorage.getItem('token')==null){
+      this.router.navigate(['/']);
+    }
+
     this.usuarioService.getUsuarioInfoPorMail(this.usuario.correo).subscribe((data) => {
       this.not_iniciado=false;
     }, (error) => {

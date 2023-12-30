@@ -113,6 +113,9 @@ export class NavuserComponent implements OnInit {
     
     this.route.params.subscribe((params) => {
       this.idUsuario = params['id'];
+      if(this.idUsuario==''){
+        this.router.navigate(['/usuario/crear']);
+      }
     });
    
         // OBTENGO PUJAS

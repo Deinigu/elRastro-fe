@@ -25,6 +25,7 @@ export class OauthComponent{
       this.loggedIn = (user != null);
       if (user && user.idToken) {
         this.oauthService.verifyToken(user);
+        this.router.navigate(['/']);
       }
     });
   }
