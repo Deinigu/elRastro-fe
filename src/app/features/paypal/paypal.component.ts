@@ -129,7 +129,6 @@ export class PaypalComponent implements OnInit{
       onClientAuthorization: (data) => {
         console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
         this.showSuccess = false;
-        console.log("PUJAJJAJJAJAJAJAJ", this.puja._id);
         alert('Pago realizado con éxito.');
         
         ///this.puja.pagado = true;
