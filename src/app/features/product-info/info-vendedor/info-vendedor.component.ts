@@ -20,7 +20,7 @@ export class InfoVendedorComponent implements OnInit{
   vendedor: string = "";
   idVendedor: string="";
   idProducto : string = "";
-  idUsuario: string="654c0a5b02d9a04cac884db7";
+  idUsuario : any;
   listaConversacionesUsuario: string[] = [];
   listaConversacionesVendedor: string[] = [];
   idConversacion: string = "";
@@ -47,6 +47,7 @@ export class InfoVendedorComponent implements OnInit{
         this.vendedor = data2.nombreUsuario;
       })
     })
+    this.idUsuario = localStorage.getItem('iduser');
   }
 
   crearConversacion(idUsuario: string, idVendedor: string, idProducto: string){
@@ -75,8 +76,8 @@ export class InfoVendedorComponent implements OnInit{
 
                   console.log(this.idConversacion);
                   
-                  this.listaConversacionesVendedor.push(this.idConversacion)
-                  this.listaConversacionesUsuario.push(this.idConversacion)
+                  this.listaConversacionesVendedor.push(this.idConversacion);
+                  this.listaConversacionesUsuario.push(this.idConversacion);
     
                   usuario.listaConver = usuario.listaConver;
                   vendedor.listaConver = vendedor.listaConver;

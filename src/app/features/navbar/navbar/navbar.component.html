@@ -25,13 +25,15 @@
             <li><a class="dropdown-item" (click)="numero(4)" >Mis pujas</a></li>
             <li><a class="dropdown-item" (click)="onClickGoToChats()" >Mis chats</a></li>
             <li><a class="dropdown-item" (click)="onClickGoToCrearProducto()" >Subir un producto</a></li>
+            <li><a class="dropdown-item" (click)="signOut()">Cerrar sesión</a></li>
           </ul>
         </ul>
       }@else{
-        <button class="btn me-2" id="inicio">Iniciar sesión</button>
+        <app-oauth></app-oauth>
       }
     </div>
   </div>
 </nav>
 
 <br>
+

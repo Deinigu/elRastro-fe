@@ -32,7 +32,7 @@ export class PujaFormComponent implements OnInit {
   error = false;
   producto: any;
   tasa: any;
-  idUsuario1 = "654c0a5b02d9a04cac884db7"
+  idUsuario1 : any;
   subscription: any;
 
 
@@ -41,6 +41,7 @@ export class PujaFormComponent implements OnInit {
     private modalService: NgbModal){}
 
     ngOnInit(): void {
+      this.idUsuario1 = localStorage.getItem('iduser');
       this.route.params.pipe(
         switchMap(params => {
           this.idProducto = params['id'];
@@ -80,7 +81,7 @@ export class PujaFormComponent implements OnInit {
       this.showErrorMessage();
     }else{
       const puja: Puja = {
-        pujador: '654c0a5b02d9a04cac884db7',
+        pujador: localStorage.getItem('iduser'),
         valor: this.precioPujar,
         fecha: new Date().toISOString(),
         producto: this.idProducto,

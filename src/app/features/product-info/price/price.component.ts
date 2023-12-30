@@ -18,7 +18,7 @@ export class PriceComponent implements OnInit {
   producto : any;
   idProducto : any;
   idVendedor : any;
-  idUsuario: string="654c0a5b02d9a04cac884db7";
+  idUsuario: any;
   ultimaPuja : any;
   cierre : any;
 
@@ -47,6 +47,9 @@ export class PriceComponent implements OnInit {
         }
       });
     });
+
+    this.idUsuario = localStorage.getItem('iduser');
+
   }
   navigateToPuja() {
     if (this.cierre) {
