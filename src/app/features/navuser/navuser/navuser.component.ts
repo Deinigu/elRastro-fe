@@ -136,21 +136,23 @@ export class NavuserComponent implements OnInit {
                 this.pujas[index].nombreVendedor = dataUsuario.nombreUsuario;
         
                 this.pujas[index].producto = producto;
-                console.log("NOMBRE PRODUCTO: ", puja.producto.nombreProducto);
         
                 this.pujasService.getUltimaPuja(this.pujas[index].producto.id).subscribe((pujaInfo: any) => {
                   const fechaCierreUtc = new Date(producto.cierre).getTime();
                   const ahoraUtc = new Date().getTime();
         
                   if (fechaCierreUtc < ahoraUtc && pujaInfo.valor == puja.valor) {
-                    const existeValoracion = this.existeValoracionAnteriorComprador(puja.producto.id, this.idUsuario);
-                    if (!existeValoracion) {
-                      this.valoracionesPendientes.push(this.pujas[index]);
-                    } else {
-                      // Eliminar la puja del array si ya existe una valoración anterior
-                      this.valoracionesPendientes = this.valoracionesPendientes.filter((valoracion: any) => valoracion.id !== this.pujas[index]._id);
-                    
-                    }
+                    this.valoracionesService.getValoracionesHechas(this.idUsuario).subscribe((valoraciones: any) => {
+                      this.valoracionesHechas = valoraciones;
+                      console.log("VALORACIONES HECHAS: ", this.valoracionesHechas);
+                      const existeValoracion = this.existeValoracionAnteriorComprador(puja.producto.id, this.idUsuario);
+                      if (!existeValoracion) {
+                        this.valoracionesPendientes.push(this.pujas[index]);
+                      } else {
+                        // Eliminar la puja del array si ya existe una valoración anterior
+                        this.valoracionesPendientes = this.valoracionesPendientes.filter((valoracion: any) => valoracion.id !== this.pujas[index]._id);            
+                      }
+                    });
                   }
                 });
               });
@@ -183,6 +185,8 @@ export class NavuserComponent implements OnInit {
                   pujaInfo.producto = productoDetallado;
                   this.pujadorInfo = pujaInfo.pujador;
         
+
+
                   const existeValoracion = this.existeValoracionAnteriorVendedor(pujaInfo.producto.id, pujaInfo.pujador);
         
                   if (!existeValoracion) {
