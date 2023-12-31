@@ -99,3 +99,23 @@
   text-align: center; 
   background-color: #FFEED4;
 }
+
+.map-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Esto hará que el contenedor ocupe toda la altura de la pantalla */
+}
+
+.map-frame {
+  position: relative; /* Cambia esto a relative */
+  border: 2px solid black;
+  height: 50%;
+  width: 30%;
+  margin-top: -400px;
+}
+
+#map {
+  height: 100%;
+}
+
