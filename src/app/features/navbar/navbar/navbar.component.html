@@ -19,19 +19,21 @@
             Hola, {{nombreUsuario}}
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" (click)="numero(1)" href="usuario/{{idUsuario}}">Mi información</a></li>
-            <li><a class="dropdown-item" (click)="numero(2)" href="usuario/{{idUsuario}}">Mis valoraciones</a></li>
-            <li><a class="dropdown-item" (click)="numero(3)" href="usuario/{{idUsuario}}">Mis productos</a></li>
-            <li><a class="dropdown-item" (click)="numero(4)" href="usuario/{{idUsuario}}">Mis pujas</a></li>
-            <li><a class="dropdown-item" href="usuario/{{idUsuario}}/chats">Mis chats</a></li>
-            <li><a class="dropdown-item"  href="producto/crear">Subir un producto</a></li>
+            <li><a class="dropdown-item" (click)="numero(1)" >Mi información</a></li>
+            <li><a class="dropdown-item" (click)="numero(2)" >Mis valoraciones</a></li>
+            <li><a class="dropdown-item" (click)="numero(3)" >Mis productos</a></li>
+            <li><a class="dropdown-item" (click)="numero(4)" >Mis pujas</a></li>
+            <li><a class="dropdown-item" (click)="onClickGoToChats()" >Mis chats</a></li>
+            <li><a class="dropdown-item" (click)="onClickGoToCrearProducto()" >Subir un producto</a></li>
+            <li><a class="dropdown-item" (click)="signOut()">Cerrar sesión</a></li>
           </ul>
         </ul>
       }@else{
-        <button class="btn me-2" id="inicio">Iniciar sesión</button>
+        <app-oauth></app-oauth>
       }
     </div>
   </div>
 </nav>
 
 <br>
+

@@ -22,6 +22,7 @@ export class InicioComponent implements OnInit {
   
   productos: any[] = [];
   pujas: any[] = [];
+  productosActualizados: any[] = [];
 
   constructor(
     private http: HttpClient,
@@ -38,6 +39,25 @@ export class InicioComponent implements OnInit {
   ngOnInit(): void {
     this.productService.getAllProducts().subscribe((data) => {
       this.productos = data;
+      this.productosActualizados = this.productos.filter(product => {
+        let fechaCierre = new Date(product.cierre);
+        let now = new Date();
+        return fechaCierre < now;
+      });
+
+      this.productosActualizados.forEach(product => {
+        if (product.pujas.length === 0) {
+          product.precio = parseFloat((product.precio * 0.9).toFixed(2));
+          let fechaCierre = new Date(product.cierre);
+          fechaCierre.setDate(fechaCierre.getDate() + 7);
+          product.cierre = fechaCierre.toISOString();
+          this.productService.editProducto(product._id, product).subscribe((data) => {
+            this.productService.getAllProducts().subscribe((data) => {
+              this.productos = data;
+            }) 
+          });
+        }
+      });       
 
       this.productos.forEach((product, index) => {
         let fecha = new Date(product.cierre);

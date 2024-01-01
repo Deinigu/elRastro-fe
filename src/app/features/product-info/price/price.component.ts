@@ -18,7 +18,7 @@ export class PriceComponent implements OnInit {
   producto : any;
   idProducto : any;
   idVendedor : any;
-  idUsuario: string="654c0a5b02d9a04cac884db7";
+  idUsuario: any;
   ultimaPuja : any;
   cierre : any;
 
@@ -30,10 +30,12 @@ export class PriceComponent implements OnInit {
       this.idProducto = params['id'];
     });
 
+    this.idUsuario = localStorage.getItem('iduser');
+
     this.productService.getProductInfo(this.idProducto).subscribe(data => {
       this.producto = data;
       this.idVendedor = this.producto.vendedor;
-      if (this.idVendedor == this.idUsuario) {
+      if (this.idVendedor == this.idUsuario || this.idUsuario==null) {
         this.cierre = false;
       }else{
         let fechaCierre = new Date(this.producto.cierre);
@@ -47,6 +49,7 @@ export class PriceComponent implements OnInit {
         }
       });
     });
+
   }
   navigateToPuja() {
     if (this.cierre) {

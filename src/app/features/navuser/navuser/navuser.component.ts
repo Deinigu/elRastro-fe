@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { ValoracionComponent } from '../../valoracion/valoracion.component';
+import { PaypalComponent } from '../../paypal/paypal.component';
 interface Valoracion {
   idUsuario: string;
   idValorado: string;
@@ -38,6 +39,7 @@ interface Puja {
   valor: number;
   producto: Producto;
   fecha: string;
+  pagado: boolean;
   nombreVendedor: string | null;
   nombreComprador: string | null;
   nommbrepujador: string | null;
@@ -46,7 +48,7 @@ interface Puja {
 @Component({
   selector: 'app-navuser',
   standalone: true,
-  imports: [CommonModule, NgbNavModule, StarsComponent, HttpClientModule, ValoracionComponent],
+  imports: [CommonModule, NgbNavModule, StarsComponent, HttpClientModule, ValoracionComponent, PaypalComponent],
   templateUrl: './navuser.component.html',
   styleUrls: ['./navuser.component.css'],
   providers: [UsuarioService, ProductService, ValoracionesService, PujaService],
@@ -62,6 +64,7 @@ export class NavuserComponent implements OnInit {
   title = 'Perfil de usuario';
   nombreUsuario = '';
   idUsuario = '';
+  idLogged : any;
   valoracion = 0;
   vivienda = '';
   telefono = '';
@@ -69,6 +72,7 @@ export class NavuserComponent implements OnInit {
   productosVenta: Producto[] = [];
   correo = '';
   usuario = '';
+  loggeado = false;
 
   pujas: Puja[] = [];
   productosGanados: Map<string, number> = new Map<string, number>();
@@ -76,6 +80,7 @@ export class NavuserComponent implements OnInit {
   valoracionesPendientesVendedor: Puja[] = [];
   valoracionesRecibidas: Valoracion[] = [];
   valoracionesHechas: Valoracion[] = [];
+  existeValoracion = false;
 
   misProductos: Producto[] | undefined;
   pujadorInfo = '';
@@ -90,9 +95,7 @@ export class NavuserComponent implements OnInit {
     cierre: '',
   };
   miPerfil = false;
-  usuarioLogeado = '654c0a5b02d9a04cac884db7';
-  
-
+  usuarioLogeado = localStorage.getItem('iduser');
 
   constructor(
     private route: ActivatedRoute,
@@ -110,11 +113,19 @@ export class NavuserComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.idLogged= localStorage.getItem('iduser');
     
     this.route.params.subscribe((params) => {
       this.idUsuario = params['id'];
+      if(this.idUsuario==''){
+        this.router.navigate(['/usuario/crear']);
+      }
+      if(this.idLogged == this.idUsuario){
+        this.loggeado=true;
+      }
     });
-   
+
         // OBTENGO PUJAS
         this.pujasService.getPujasByUser(this.idUsuario).subscribe((dataPujas: any) => {
           this.pujas = dataPujas;
@@ -129,26 +140,31 @@ export class NavuserComponent implements OnInit {
                 vendedor: dataProducto.vendedor,
                 cierre: dataProducto.cierre,
               };
-        
               this.usuarioService.getUsuarioInfo(producto.vendedor).subscribe((dataUsuario: any) => {
                 this.pujas[index].nombreVendedor = dataUsuario.nombreUsuario;
         
                 this.pujas[index].producto = producto;
-                console.log("NOMBRE PRODUCTO: ", puja.producto.nombreProducto);
-        
                 this.pujasService.getUltimaPuja(this.pujas[index].producto.id).subscribe((pujaInfo: any) => {
                   const fechaCierreUtc = new Date(producto.cierre).getTime();
                   const ahoraUtc = new Date().getTime();
-        
+
                   if (fechaCierreUtc < ahoraUtc && pujaInfo.valor == puja.valor) {
-                    const existeValoracion = this.existeValoracionAnteriorComprador(puja.producto.id, this.idUsuario);
-                    if (!existeValoracion) {
-                      this.valoracionesPendientes.push(this.pujas[index]);
-                    } else {
-                      // Eliminar la puja del array si ya existe una valoración anterior
-                      this.valoracionesPendientes = this.valoracionesPendientes.filter((valoracion: any) => valoracion.id !== this.pujas[index]._id);
-                    
-                    }
+                      this.valoracionesService.getValoracionesHechas(this.idUsuario).subscribe((valoraciones: any) => {
+                      this.valoracionesHechas = valoraciones;
+                      console.log("VALORACIONES HECHAS: ", this.valoracionesHechas);
+
+                      for(let i =0; i< this.valoracionesHechas.length; i++){
+                        if(this.valoracionesHechas[i].idProducto == this.pujas[index].producto.id && this.valoracionesHechas[i].idUsuario == this.idUsuario){
+                          this.existeValoracion = true;
+                        }
+                      }
+                      if (!this.existeValoracion) {
+                        this.valoracionesPendientes.push(this.pujas[index]);
+                      } else {
+                        // Eliminar la puja del array si ya existe una valoración anterior
+                        this.valoracionesPendientes = this.valoracionesPendientes.filter((valoracion: any) => valoracion.id !== this.pujas[index]._id);            
+                      }
+                    });
                   }
                 });
               });
@@ -180,15 +196,20 @@ export class NavuserComponent implements OnInit {
                   pujaInfo.nommbrepujador = dataUsuario.nombreUsuario;
                   pujaInfo.producto = productoDetallado;
                   this.pujadorInfo = pujaInfo.pujador;
-        
-                  const existeValoracion = this.existeValoracionAnteriorVendedor(pujaInfo.producto.id, pujaInfo.pujador);
-        
-                  if (!existeValoracion) {
-                    this.valoracionesPendientesVendedor.push(pujaInfo);
-                  } else {
-                    // Eliminar la puja del array si ya existe una valoración anterior
-                    this.valoracionesPendientesVendedor = this.valoracionesPendientesVendedor.filter((valoracion: any) => valoracion.id !== pujaInfo._id);
-                  }
+
+                  
+                  this.valoracionesService.getValoracionesHechas(this.idUsuario).subscribe((valoraciones: any) => {
+                    this.valoracionesHechas = valoraciones;
+                    console.log("VALORACIONES HECHAS: ", this.valoracionesHechas);
+
+                    const existeValoracion = this.valoracionesHechas.some(valoracion => valoracion.idProducto === pujaInfo.producto.id && valoracion.idValorado === pujaInfo.pujador);
+                    if (!existeValoracion) {
+                      this.valoracionesPendientesVendedor.push(pujaInfo);
+                    } else {
+                      // Eliminar la puja del array si ya existe una valoración anterior
+                      this.valoracionesPendientesVendedor = this.valoracionesPendientesVendedor.filter((valoracion: any) => valoracion.id !== pujaInfo._id);
+                    }
+                  })
                 });
                 });
               });
@@ -337,15 +358,6 @@ export class NavuserComponent implements OnInit {
     const ahoraUtc = new Date().getTime();
     return fechaCierreUtc < ahoraUtc;
   }
-
-      // Función para verificar si existe una valoración anterior del usuario para este producto y vendedor
-      existeValoracionAnteriorComprador(productId: string, usuarioId: string): boolean {
-        return this.valoracionesHechas.some(valoracion => valoracion.idProducto === productId && valoracion.idUsuario === usuarioId);
-      }
-
-      existeValoracionAnteriorVendedor(productId: string, usuarioId: string): boolean {
-        return this.valoracionesHechas.some(valoracion => valoracion.idProducto === productId && valoracion.idValorado === usuarioId);
-      }
       
     
 

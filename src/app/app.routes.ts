@@ -13,6 +13,9 @@ import { CrearProductoComponent } from './features/crear-producto/crear-producto
 import { PujaComponent } from './features/puja/puja/puja.component';
 import { EditarProductoComponent } from './features/editar-producto/editar-producto.component';
 import { FotoperfilComponent } from './features/fotoperfil/fotoperfil.component';
+import { CrearUsuarioComponent } from './features/crear-usuario/crear-usuario.component';
+import { PaypalComponent } from './features/paypal/paypal.component';
+
 
 export const routes: Routes = [
     {
@@ -41,6 +44,12 @@ export const routes: Routes = [
         path: 'usuario/cambiarimagen/:id',
         component: FotoperfilComponent,
         title: 'Foto de perfil'
+    },
+    {
+
+        path: 'usuario/crear',
+        component: CrearUsuarioComponent,
+        title: 'Crear un usuario'
     },
     {
 
@@ -88,5 +97,10 @@ export const routes: Routes = [
         path: 'busqueda/:tags',
         component: BusquedaComponent,
         title: 'Busqueda'
-    }
+    },
+    {
+        path: 'paypal',
+        component: PaypalComponent,
+        title: 'Paypal'
+    },
 ];

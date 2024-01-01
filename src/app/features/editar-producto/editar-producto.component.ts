@@ -35,7 +35,7 @@ export class EditarProductoComponent implements OnInit {
     precio: 0,
     tags: [],
     cierre: new Date(),
-    vendedor: '654c0a5b02d9a04cac884db7'
+    vendedor: ''
   };
 
   constructor(private http: HttpClient,
