@@ -42,7 +42,7 @@ export class InfoVendedorComponent implements OnInit{
     });
     this.productService.getProductInfo(this.idProducto).subscribe(data => {
       this.idVendedor = data.vendedor;
-      this.idVendedor == this.idUsuario ? this.deshabilitar=true : this.deshabilitar=false;
+      this.idVendedor == this.idUsuario || this.idUsuario==null ? this.deshabilitar=true : this.deshabilitar=false;
       this.usuarioService.getUsuarioInfo(this.idVendedor).subscribe(data2 => {
         this.vendedor = data2.nombreUsuario;
       })

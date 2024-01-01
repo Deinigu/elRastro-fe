@@ -12,17 +12,18 @@ import { NavbarComponent } from './features/navbar/navbar/navbar.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
+
+
+
 export class AppComponent {
+
+  urlCrear = false;
+
   title = 'Elrastro';
   loggedIn : any;
   token = localStorage.getItem("token");
 
   ngOnInit(): void {
-
-    // if(this.token!=null && this.token!=undefined){
-    //   this.loggedIn = true;
-    //   console.log(this.token);
-    // }
   }
 }
 
