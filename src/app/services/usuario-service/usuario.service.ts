@@ -23,7 +23,7 @@ export class UsuarioService {
         observer.complete();
       });
     } else {
-      const url = 'http://localhost:8003/api/coordenadas/' + idUsuario + '/';
+      const url = 'http://51.21.137.60:8003/api/coordenadas/' + idUsuario + '/';
       return this.http.get<any>(url).pipe(
         // Actualizar la caché y almacenarla en el almacenamiento local
         tap(data => {
@@ -42,22 +42,22 @@ export class UsuarioService {
   }
 
   getUsuarioInfo(idUsuario: string): Observable<any> {
-    const url = 'http://localhost:8000/api/usuarios/' + idUsuario + '/';
+    const url = 'http://51.21.137.60:8000/api/usuarios/' + idUsuario + '/';
     return this.http.get<any>(url);
   }
 
   getUsuarioInfoPorMail(email: string): Observable<any> {
-    const url = 'http://localhost:8000/api/usuarios/email/' + email + '/';
+    const url = 'http://51.21.137.60:8000/api/usuarios/email/' + email + '/';
     return this.http.get<any>(url);
   }
 
   editarPerfil(idUsuario: string, nuevosDatos: any): Observable<any> {
-    const url = 'http://localhost:8000/api/usuarios/' + idUsuario + '/';
+    const url = 'http://51.21.137.60:8000/api/usuarios/' + idUsuario + '/';
     return this.http.put(url, nuevosDatos);
   }
 
   createUsuario(usuario: Usuario): Observable<Usuario> {
-    const url = 'http://localhost:8000/api/usuarios/';
+    const url = 'http://51.21.137.60:8000/api/usuarios/';
     return this.http.post<Usuario>(url, usuario);
   }
 }

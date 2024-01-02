@@ -11,27 +11,27 @@ export class ConversacionService {
   constructor(private http:HttpClient) {}
 
   getConversacionInfo(idChat: string): Observable<any> {
-      const url = 'http://localhost:8006/api/conversacion/'+ idChat + "/";
+      const url = 'http://51.21.137.60:8006/api/conversacion/'+ idChat + "/";
       return this.http.get<any>(url);
   }    
 
   getAllConversaciones(usuarioId: string) : Observable<any> {
-    const url = 'http://localhost:8006/api/conversaciones/' + usuarioId +"/";
+    const url = 'http://51.21.137.60:8006/api/conversaciones/' + usuarioId +"/";
     return this.http.get<any>(url);
   }
 
   enviarMensaje(idChat: string, nuevoMensaje: any): Observable<any> {
-    const url = 'http://localhost:8006/api/conversacion/' + idChat + '/chat/';
+    const url = 'http://51.21.137.60:8006/api/conversacion/' + idChat + '/chat/';
     return this.http.post<any>(url, nuevoMensaje);
   }
 
   createConversacion(conversacion: Conversacion): Observable<Conversacion> {
-    const url = 'http://localhost:8006/api/conversaciones/';
+    const url = 'http://51.21.137.60:8006/api/conversaciones/';
     return this.http.post<Conversacion>(url, conversacion);
   }
 
   getConversacionDe(usuario1: string, usuario2: string, productoId: string) : Observable<any> {
-    const url = 'http://localhost:8006/api/conversacion/get/' + usuario1 + "/" + usuario2 + "/productos/" + productoId + "/";
+    const url = 'http://51.21.137.60:8006/api/conversacion/get/' + usuario1 + "/" + usuario2 + "/productos/" + productoId + "/";
     return this.http.get<any>(url);
   }
   

@@ -24,7 +24,7 @@ export class HuellaCarbonoService {
       //console.log('Valor obtenido de la caché:', cachedValue);
       return of({ tasa_emisiones: cachedValue });  // Devuelve un objeto con la misma estructura que la respuesta de la API
     } else {
-      const url = `http://localhost:8003/api/huella/${idUsuario1}/${idUsuario2}/`;
+      const url = `http://51.21.137.60:8003/api/huella/${idUsuario1}/${idUsuario2}/`;
       return this.http.get<any>(url).pipe(
         // Actualizar la caché y almacenarla en el almacenamiento local
         tap(value => {
