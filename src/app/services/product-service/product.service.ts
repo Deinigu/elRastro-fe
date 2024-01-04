@@ -12,30 +12,30 @@ export class ProductService {
 
   getProductInfo(idProducto: string): Observable<any> {
 
-    const url = 'http://51.21.137.60:8001/api/productos/'+idProducto + '/';
+    const url = 'https://13.38.223.212:8001/api/productos/'+idProducto + '/';
     return this.http.get<any>(url);
   }
 
   getAllProducts() : Observable<any> {
-    const url = 'http://51.21.137.60:8001/api/productos/';
+    const url = 'https://13.38.223.212:8001/api/productos/';
     return this.http.get<any>(url);
   }
 
   createProducto(producto: Producto): Observable<Producto> {
-    const url = 'http://51.21.137.60:8001/api/productos/';
+    const url = 'https://13.38.223.212:8001/api/productos/';
     return this.http.post<Producto>(url, producto);
   }
   
   getSearchProducts(tags : string) : Observable<any> {
-    const url = 'http://51.21.137.60:8001/api/productos/busqueda/' +tags;
+    const url = 'https://13.38.223.212:8001/api/productos/busqueda/' +tags;
     return this.http.get<any>(url);
   }
   editProducto(idProducto : string, producto: Producto): Observable<any> {
-    const url = "http://51.21.137.60:8001/api/productos/" + idProducto + "/";
+    const url = "https://13.38.223.212:8001/api/productos/" + idProducto + "/";
     return this.http.put(url, producto);
   }
   deleteProducto(productoID: string): Observable<any> {
-    const url = 'http://51.21.137.60:8001/api/productos/'+productoID + "/";
+    const url = 'https://13.38.223.212:8001/api/productos/'+productoID + "/";
     return this.http.delete<any>(url);
   }
 }
